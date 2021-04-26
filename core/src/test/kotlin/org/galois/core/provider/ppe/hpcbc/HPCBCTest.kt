@@ -1,9 +1,6 @@
 package org.galois.core.provider.ppe.hpcbc
 
 import org.galois.core.provider.ppe.PPETest
-import org.galois.crypto.provider.ppe.hpcbc.HPCBCParameterSpec
-import org.galois.crypto.provider.ppe.hpcbc.HPCBCSecretKey
-import org.galois.crypto.provider.ppe.hpcbc.HPCBC_ALGORITHM_NAME
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.RepeatedTest
 import java.util.*

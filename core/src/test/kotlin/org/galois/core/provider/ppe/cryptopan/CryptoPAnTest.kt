@@ -1,8 +1,6 @@
 package org.galois.core.provider.ppe.cryptopan
 
 import org.galois.core.provider.ppe.PPETest
-import org.galois.crypto.provider.ppe.cryptopan.CRYPTOPAN_ALGORITHM_NAME
-import org.galois.crypto.provider.ppe.cryptopan.CryptoPAnSecretKey
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.RepeatedTest
 import java.net.InetAddress

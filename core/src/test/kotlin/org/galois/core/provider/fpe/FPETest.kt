@@ -1,7 +1,6 @@
 package org.galois.core.provider.fpe
 
-import algorithm.GaloisTest
-import org.galois.crypto.provider.fpe.FPEParameterSpec
+import org.galois.core.provider.GaloisTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.RepeatedTest
 import javax.crypto.Cipher
@@ -34,6 +33,7 @@ abstract class FPETest : GaloisTest() {
         c.init(Cipher.ENCRYPT_MODE, key, parameterSpec)
         val encrypted = c.doFinal(x.toByteArray())
 
+        println(parameterSpec.radix)
         c.init(Cipher.DECRYPT_MODE, key, parameterSpec)
         val decrypted = c.doFinal(encrypted)
 

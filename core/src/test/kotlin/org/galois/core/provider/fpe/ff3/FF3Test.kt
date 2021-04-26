@@ -1,9 +1,6 @@
 package org.galois.core.provider.fpe.ff3
 
 import org.galois.core.provider.fpe.FPETest
-import org.galois.crypto.provider.fpe.ff3.FF3ParameterSpec
-import org.galois.crypto.provider.fpe.ff3.FF3SecretKey
-import org.galois.crypto.provider.fpe.ff3.FF3_ALGORITHM_NAME
 import java.util.*
 
 class FF3Test : FPETest() {

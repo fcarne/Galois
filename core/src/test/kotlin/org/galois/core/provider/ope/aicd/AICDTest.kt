@@ -1,8 +1,6 @@
 package org.galois.core.provider.ope.aicd
 
 import org.galois.core.provider.ope.OPETest
-import org.galois.crypto.provider.ope.aicd.AICDSecretKey
-import org.galois.crypto.provider.ope.aicd.AICD_ALGORITHM_NAME
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.RepeatedTest
 import java.math.BigInteger

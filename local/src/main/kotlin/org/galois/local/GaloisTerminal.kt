@@ -7,10 +7,10 @@ import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.runBlocking
-import org.galois.crypto.engine.GaloisEngine
-import org.galois.crypto.engine.Mode
-import org.galois.crypto.engine.TaxonomyTree
-import org.galois.crypto.provider.GaloisJCE
+import org.galois.core.engine.GaloisEngine
+import org.galois.core.engine.Mode
+import org.galois.core.engine.TaxonomyTree
+import org.galois.core.provider.GaloisJCE
 import picocli.CommandLine
 import tech.tablesaw.api.Table
 import java.io.File
@@ -66,7 +66,7 @@ class GaloisTerminal {
         val computedDatasetFile = File(config.outputDir, config.outputFilename)
         computedDataset.write().csv(computedDatasetFile)
 
-        val configOutput = engine.tidyConfiguration();
+        val configOutput = engine.tidyConfiguration()
         configOutput.encryptionDetails.forEach {
             it.params.taxonomyTree?.let { taxonomyTree ->
                 val taxonomyOutputFile = File(config.outputDir, taxonomyTree.outputFilename)

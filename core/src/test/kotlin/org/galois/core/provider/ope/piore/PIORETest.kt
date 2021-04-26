@@ -1,8 +1,6 @@
 package org.galois.core.provider.ope.piore
 
 import org.galois.core.provider.ope.OPETest
-import org.galois.crypto.provider.ope.piore.PIORESecretKey
-import crypto.provider.ope.piore.PIORE_ALGORITHM_NAME
 import java.util.*
 
 class PIORETest : OPETest() {

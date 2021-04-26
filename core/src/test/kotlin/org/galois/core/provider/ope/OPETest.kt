@@ -1,6 +1,6 @@
 package org.galois.core.provider.ope
 
-import algorithm.GaloisTest
+import org.galois.core.provider.GaloisTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.RepeatedTest
 import java.math.BigInteger

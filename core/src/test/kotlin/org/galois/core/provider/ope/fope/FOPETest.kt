@@ -1,8 +1,6 @@
 package org.galois.core.provider.ope.fope
 
 import org.galois.core.provider.ope.OPETest
-import org.galois.crypto.provider.ope.fope.FOPESecretKey
-import org.galois.crypto.provider.ope.fope.FOPE_ALGORITHM_NAME
 import java.util.*
 import kotlin.math.ceil
 import kotlin.math.pow

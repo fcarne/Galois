@@ -1,8 +1,12 @@
-package algorithm
+package org.galois.core.provider
 
-import org.galois.crypto.provider.GaloisJCE
-import org.junit.jupiter.api.*
-import javax.crypto.*
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.RepeatedTest
+import org.junit.jupiter.api.TestInstance
+import javax.crypto.Cipher
+import javax.crypto.KeyGenerator
+import javax.crypto.SecretKey
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 abstract class GaloisTest {
