@@ -1,0 +1,67 @@
+{
+  "input": "sample.csb",
+  "output_dir": "/",
+  "output_filename": "sample_2.csv",
+  "mode": "encrypt",
+  "encryption_details": [
+    {
+      "column_name": "native-country",
+      "cipher": "Blowfish",
+      "params": {
+        "tweak": "293854290582058",
+        "taxonomy_tree": {
+          "output_filename": "taxonomy.json",
+          "tree": {
+            "cat": "parent",
+            "subcats": [
+              {
+                "cat": "son",
+                "subcats": {
+                  "cat": "grandchild s1",
+                  "subcats": null
+                }
+              },
+              {
+                "cat": "daughter",
+                "subcats": {
+                  "cat": "grandchild d1",
+                  "subcats": [
+                    {
+                      "cat": "daughter gc_d1",
+                      "subcats": null
+                    },
+                    {
+                      "cat": "daughter2 gc_d1",
+                      "subcats": null
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "key_size": 2
+      }
+    },
+    {
+      "column_name": "age",
+      "cipher": "FF3",
+      "params": {
+        "fanout": 2,
+        "accuracy": 2,
+        "digits": 3
+      }
+    },
+    {
+      "column_name": "education-num",
+      "cipher": "CryptoPAn",
+      "params": {
+        "hide-mark": "+"
+      }
+    },
+    {
+      "column_name": "workclass",
+      "cipher": "CryptoPAn"
+    }
+  ]
+}

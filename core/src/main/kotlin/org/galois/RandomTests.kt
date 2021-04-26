@@ -1,0 +1,12 @@
+package org.galois
+
+import crypto.provider.GaloisJCE
+
+fun main() {
+    providerAlgorithms()
+}
+
+fun providerAlgorithms() {
+    GaloisJCE.add()
+    GaloisJCE.supportedAlgorithms.forEach { println(it) }
+}
