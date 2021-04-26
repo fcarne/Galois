@@ -1,6 +1,6 @@
 package org.galois.crypto.provider.fpe.dff
 
-import crypto.provider.GaloisJCE
+import org.galois.crypto.provider.GaloisJCE
 import java.security.*
 import java.security.spec.AlgorithmParameterSpec
 import javax.crypto.KeyGeneratorSpi

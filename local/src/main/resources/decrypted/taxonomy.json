@@ -1,0 +1,100 @@
+{
+  "cat" : "World",
+  "subcats" : [ {
+    "cat" : "Europe",
+    "subcats" : [ {
+      "cat" : "?"
+    }, {
+      "cat" : "Yugoslavia"
+    }, {
+      "cat" : "Greece"
+    }, {
+      "cat" : "Ireland"
+    }, {
+      "cat" : "Hungary"
+    }, {
+      "cat" : "Holand-Netherlands"
+    }, {
+      "cat" : "Scotland"
+    }, {
+      "cat" : "England"
+    }, {
+      "cat" : "Germany"
+    }, {
+      "cat" : "Italy"
+    }, {
+      "cat" : "Poland"
+    }, {
+      "cat" : "Portugal"
+    }, {
+      "cat" : "France"
+    } ]
+  }, {
+    "cat" : "North-America",
+    "subcats" : [ {
+      "cat" : "United-States"
+    }, {
+      "cat" : "Cuba"
+    }, {
+      "cat" : "Jamaica"
+    }, {
+      "cat" : "Mexico"
+    }, {
+      "cat" : "Puerto-Rico"
+    }, {
+      "cat" : "Canada"
+    }, {
+      "cat" : "Haiti"
+    }, {
+      "cat" : "Honduras"
+    }, {
+      "cat" : "Guatemala"
+    }, {
+      "cat" : "Dominican-Republic"
+    }, {
+      "cat" : "El-Salvador"
+    }, {
+      "cat" : "Outlying-US(Guam-USVI-etc)"
+    }, {
+      "cat" : "Nicaragua"
+    }, {
+      "cat" : "Trinadad&Tobago"
+    } ]
+  }, {
+    "cat" : "South-America",
+    "subcats" : [ {
+      "cat" : "Columbia"
+    }, {
+      "cat" : "Ecuador"
+    }, {
+      "cat" : "Peru"
+    }, {
+      "cat" : "South"
+    } ]
+  }, {
+    "cat" : "Asia",
+    "subcats" : [ {
+      "cat" : "Vietnam"
+    }, {
+      "cat" : "India"
+    }, {
+      "cat" : "Hong"
+    }, {
+      "cat" : "China"
+    }, {
+      "cat" : "Japan"
+    }, {
+      "cat" : "Philippines"
+    }, {
+      "cat" : "Iran"
+    }, {
+      "cat" : "Cambodia"
+    }, {
+      "cat" : "Thailand"
+    }, {
+      "cat" : "Laos"
+    }, {
+      "cat" : "Taiwan"
+    } ]
+  } ]
+}

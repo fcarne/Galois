@@ -1,4 +1,4 @@
-package crypto.provider
+package org.galois.crypto.provider
 
 import org.galois.crypto.provider.description.AlgorithmDescription
 import crypto.provider.ope.piore.*
@@ -22,18 +22,14 @@ object GaloisJCE : Provider(
     "GaloisJCE",
     "2.0",
     "Galois Provider (implements FastOPE, PIOre,  CommonDivisor, TYM, " +
-            "Crypto-PAN - Lucent's extension, ESAE HPCBC+, NIST FF3 and FF2 addendum DFF)"
+            "Crypto-PAN - Lucent's extension, ESAE HPCBC+, NIST FF3, FF2 addendum DFF, AES ECB Mode and Blowfish ECB Mode)"
 ) {
     val random = SecureRandom()
 
     val opeAlgorithms = listOf(AICD_ALGORITHM_NAME, FOPE_ALGORITHM_NAME, PIORE_ALGORITHM_NAME)
-
     val ppeAlgorithms = listOf(CRYPTOPAN_ALGORITHM_NAME, HPCBC_ALGORITHM_NAME)
-
     val fpeAlgorithms = listOf(DFF_ALGORITHM_NAME, FF3_ALGORITHM_NAME)
-
     val symmetricAlgorithms = listOf("AES", "Blowfish")
-
     val supportedAlgorithms = opeAlgorithms + ppeAlgorithms + fpeAlgorithms + symmetricAlgorithms
 
     init {
@@ -144,6 +140,6 @@ object GaloisJCE : Provider(
         return description
     }
 
-    fun getDescription() = supportedAlgorithms.map { getDescription(it) }
+    fun getDescription() = supportedAlgorithms.sorted().map { getDescription(it) }
 
 }

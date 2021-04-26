@@ -41,10 +41,7 @@ data class EncryptionParams(
     @get:[JsonIgnore JsonAnyGetter] @JsonAnySetter var cipherSpecific: MutableMap<String, Any> = HashMap()
 )
 
-data class TaxonomyTree(
-    val outputFilename: String,
-    @get:JsonIgnore @set:JsonProperty var tree: TaxonomyNode
-)
+data class TaxonomyTree(val outputFilename: String, var tree: TaxonomyNode)
 
 data class TaxonomyNode(
     var cat: String,

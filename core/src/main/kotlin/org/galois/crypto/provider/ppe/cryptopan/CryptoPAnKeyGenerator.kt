@@ -1,6 +1,6 @@
 package org.galois.crypto.provider.ppe.cryptopan
 
-import crypto.provider.GaloisJCE
+import org.galois.crypto.provider.GaloisJCE
 import java.security.*
 import java.security.spec.AlgorithmParameterSpec
 import javax.crypto.KeyGenerator

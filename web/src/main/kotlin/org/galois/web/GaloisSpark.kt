@@ -1,4 +1,4 @@
-package org.galois
+package org.galois.web
 
 import spark.Spark.*
 

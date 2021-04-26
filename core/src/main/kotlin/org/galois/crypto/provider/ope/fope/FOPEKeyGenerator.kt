@@ -1,6 +1,6 @@
 package org.galois.crypto.provider.ope.fope
 
-import crypto.provider.GaloisJCE
+import org.galois.crypto.provider.GaloisJCE
 import java.math.BigDecimal
 import java.security.*
 import java.security.spec.AlgorithmParameterSpec

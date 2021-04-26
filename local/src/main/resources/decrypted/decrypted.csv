@@ -1,0 +1,10 @@
+age,workclass,ip-address,sex,native-country
+39,State-gov,192.168.125.158,Male,United-States
+50,Self-emp-not-inc,192.169.200.126,Male,Italy
+38,Private,192.169.19.56,Male,United-States
+53,Private,192.168.240.163,Male,United-States
+28,Private,192.168.25.102,Female,Cuba
+37,Private,192.168.199.159,Female,United-States
+49,Private,192.168.46.179,Female,Jamaica
+52,Self-emp-not-inc,192.168.81.65,Male,France
+31,Private,192.168.215.181,Female,United-States

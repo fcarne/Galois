@@ -1,6 +1,6 @@
 package crypto.provider.ope.piore
 
-import crypto.provider.GaloisJCE
+import org.galois.crypto.provider.GaloisJCE
 import org.galois.crypto.provider.ope.piore.PIOREParameterSpec
 import org.galois.crypto.provider.ope.piore.PIORESecretKey
 import java.security.*

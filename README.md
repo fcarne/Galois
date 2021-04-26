@@ -1,0 +1,2 @@
+# Galois - Crypto for Anonymization
+This repository implements some Order-Preserving and Prefix-Preserving Encryption algorithms. This tool is meant to perform encryption and decryption over large data sets, preserving the properties of the chosen columns. Well-known symmetric encryption algorithms are also supported.

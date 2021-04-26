@@ -8,7 +8,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.galois.crypto.engine.EngineConfiguration
 import org.galois.crypto.engine.GaloisEngine
 import org.galois.crypto.engine.Mode
-import crypto.provider.GaloisJCE
+import org.galois.crypto.provider.GaloisJCE
 import kotlinx.coroutines.runBlocking
 import tech.tablesaw.api.Table
 import java.io.File

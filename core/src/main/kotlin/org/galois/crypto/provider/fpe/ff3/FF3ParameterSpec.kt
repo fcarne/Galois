@@ -1,6 +1,6 @@
 package org.galois.crypto.provider.fpe.ff3
 
-import crypto.provider.GaloisJCE
+import org.galois.crypto.provider.GaloisJCE
 import org.galois.crypto.provider.fpe.FPEParameterSpec
 import org.galois.crypto.provider.description.ParameterDescription
 import kotlin.math.*

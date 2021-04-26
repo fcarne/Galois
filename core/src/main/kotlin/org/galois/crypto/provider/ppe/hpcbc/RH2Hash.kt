@@ -1,6 +1,6 @@
 package org.galois.crypto.provider.ppe.hpcbc
 
-import crypto.provider.GaloisJCE
+import org.galois.crypto.provider.GaloisJCE
 import org.galois.crypto.provider.util.FluentBitSet
 import java.security.SecureRandom
 import java.util.*

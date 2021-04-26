@@ -1,6 +1,6 @@
 package algorithm
 
-import crypto.provider.GaloisJCE
+import org.galois.crypto.provider.GaloisJCE
 import org.junit.jupiter.api.*
 import javax.crypto.*
 

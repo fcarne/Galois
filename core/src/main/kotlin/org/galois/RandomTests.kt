@@ -1,6 +1,6 @@
 package org.galois
 
-import crypto.provider.GaloisJCE
+import org.galois.crypto.provider.GaloisJCE
 
 fun main() {
     providerAlgorithms()

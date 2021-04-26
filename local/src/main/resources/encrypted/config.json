@@ -1,0 +1,28 @@
+{
+  "input" : "/media/federico/Data_Hdd/Università/Tesi/Galois/local/src/main/resources/encrypted/encrypted.csv",
+  "output_dir" : "/media/federico/Data_Hdd/Università/Tesi/Galois/local/src/main/resources/decrypted/",
+  "output_filename" : "decrypted.csv",
+  "mode" : "decrypt",
+  "encryption_details" : [ {
+    "column_name" : "native-country",
+    "cipher" : "AES",
+    "key" : "I3f91QJXyvUNe5x/Y2DFPw==",
+    "params" : {
+      "taxonomy_tree" : {
+        "output_filename" : "taxonomy.json",
+        "tree" : "/media/federico/Data_Hdd/Università/Tesi/Galois/local/src/main/resources/encrypted/taxonomy.json"
+      }
+    }
+  }, {
+    "column_name" : "age",
+    "cipher" : "FastOPE",
+    "key" : "QZ5bP0Xu+3s/wFTlxqvp/D+6+FM6hHcEB6PIwfhXMoQ="
+  }, {
+    "column_name" : "ip-address",
+    "cipher" : "CryptoPAn",
+    "key" : "3K0Sk8rHwyvsh0Zra2IfJNCiTqv5RmIBWtzvBBZ1JkU=",
+    "params" : {
+      "ip" : 4
+    }
+  } ]
+}

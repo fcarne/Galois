@@ -1,6 +1,6 @@
 package org.galois.crypto.provider.ope.aicd
 
-import crypto.provider.GaloisJCE
+import org.galois.crypto.provider.GaloisJCE
 import java.math.BigInteger
 import java.security.*
 import java.security.spec.AlgorithmParameterSpec

@@ -1,6 +1,6 @@
 package org.galois.crypto.engine
 
-import crypto.provider.GaloisJCE
+import org.galois.crypto.provider.GaloisJCE
 import crypto.provider.decodeHex
 import org.galois.crypto.provider.fpe.FPEParameterSpec
 import org.galois.crypto.provider.fpe.dff.DFFParameterSpec
@@ -41,7 +41,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
 
     init {
         GaloisJCE.add()
-        this.configuration = configuration.clone()
+        this.configuration = configuration
 
         val columns = configuration.encryptionDetails.map { it.columnName }
 
@@ -81,7 +81,6 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
 
         result
     }
-
 
 
     private suspend fun columnDoFinal(detail: EncryptionDetail, column: Column<*>): Column<*> = coroutineScope {
@@ -280,6 +279,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                 in GaloisJCE.fpeAlgorithms -> it.params.cipherSpecific.keys.retainAll(listOf("radix", "tweak"))
             }
         }
+        configuration.mode = if (configuration.mode == Mode.ENCRYPT) Mode.DECRYPT else Mode.ENCRYPT
 
         return configuration
     }
