@@ -14,10 +14,10 @@ class AlgorithmDescription(val name: String) {
     } ?: ""
 
     class Parameter(
-        private val field: String,
-        private val description: String,
+        val field: String,
+        val description: String,
         val conditionType: ParameterDescription.ConditionType,
-        private val condition: String
+        val condition: String
     ) {
         override fun toString() = " - $field: $description. Condition: ${formatCondition()}"
 

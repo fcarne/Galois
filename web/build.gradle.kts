@@ -9,6 +9,8 @@ plugins {
 dependencies {
     implementation(project(":core"))
     implementation("com.sparkjava:spark-core:2.9.3")
+    implementation("com.sparkjava:spark-template-freemarker:2.7.1")
+
 }
 
 application {
