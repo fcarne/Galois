@@ -69,6 +69,7 @@ class GaloisTerminal {
         val configOutput = engine.tidyConfiguration()
         configOutput.encryptionDetails.forEach {
             it.params.taxonomyTree?.let { taxonomyTree ->
+                taxonomyTree as LocalTaxonomyTree
                 val taxonomyOutputFile = File(config.outputDir, taxonomyTree.outputFilename)
                 mapper.writeValue(taxonomyOutputFile, taxonomyTree.tree)
             }
@@ -77,7 +78,7 @@ class GaloisTerminal {
         configOutput as LocalEngineConfiguration
         configOutput.input = computedDatasetFile.absolutePath
 
-        SimpleModule().addSerializer(TaxonomyTree::class.java, LocalTaxonomyTreeSerializer(configOutput.outputDir))
+        SimpleModule().addSerializer(LocalTaxonomyTree::class.java, LocalTaxonomyTreeSerializer(configOutput.outputDir))
             .also { mapper.registerModule(it) }
 
         val configOutputFile = File(config.outputDir, configFile.name)

@@ -9,11 +9,11 @@ class AICDParameterSpec(m: Long = 256) : AlgorithmParameterSpec {
     @ParameterDescription(
         "The upper limit of the input domain",
         ParameterDescription.ConditionType.LOWER_LIMIT,
-        "0"
+        "1"
     )
     var m: Long = 256
         set(value) {
-            require(value > 1) { "M must be in positive, was $value" }
+            require(value > 0) { "M must be in positive, was $value" }
             field = value
         }
 

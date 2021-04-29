@@ -1,7 +1,7 @@
 {
-  "input" : "/media/federico/Data_Hdd/Università/Tesi/Galois/local/src/main/resources/decrypted/encrypted.csv",
+  "input" : "/media/federico/Data_Hdd/Università/Tesi/Galois/local/src/main/resources/decrypted/decrypted.csv",
   "output_dir" : "/media/federico/Data_Hdd/Università/Tesi/Galois/local/src/main/resources/decrypted/",
-  "output_filename" : "encrypted.csv",
+  "output_filename" : "decrypted.csv",
   "mode" : "encrypt",
   "encryption_details" : [ {
     "column_name" : "native-country",

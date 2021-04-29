@@ -69,7 +69,13 @@ object GaloisJCE : Provider(
     fun add() = Security.addProvider(this)
 
     fun getDescription(algorithm: String): AlgorithmDescription {
-        val description = AlgorithmDescription(algorithm)
+        val family = when (algorithm) {
+            in opeAlgorithms -> "OPE"
+            in fpeAlgorithms -> "FPE"
+            in ppeAlgorithms -> "PPE"
+            else -> "SYM"
+        }
+        val description = AlgorithmDescription(algorithm, family)
         val parameterClass: KClass<*>? = when (algorithm) {
             AICD_ALGORITHM_NAME -> {
                 description.keySizes = AICDSecretKey.KEY_SIZES
@@ -127,7 +133,7 @@ object GaloisJCE : Provider(
                     "ip",
                     "The ip version (if the input represents ip-addresses)",
                     ParameterDescription.ConditionType.DISTINCT_VALUES,
-                    "[4, 6]"
+                    "4, 6"
                 )
             )
             description.parameters?.add(

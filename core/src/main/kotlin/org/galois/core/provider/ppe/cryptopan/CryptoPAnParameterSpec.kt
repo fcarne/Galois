@@ -7,7 +7,7 @@ class CryptoPAnParameterSpec(maxLength: Int = 16) : AlgorithmParameterSpec {
     @ParameterDescription(
         "The maximum length of the input string (in bytes)",
         ParameterDescription.ConditionType.LOWER_LIMIT,
-        "0"
+        "1"
     )
     var maxLength = 16
         set(value) {

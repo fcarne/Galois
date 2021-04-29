@@ -8,7 +8,7 @@ class FOPEParameterSpec(tau: Int = 16, d: Byte = 8) : AlgorithmParameterSpec {
     @ParameterDescription(
         "The minimum distance between two encrypted values",
         ParameterDescription.ConditionType.LOWER_LIMIT,
-        "1"
+        "2"
     )
     var tau: Int = 16
         set(value) {
@@ -19,7 +19,7 @@ class FOPEParameterSpec(tau: Int = 16, d: Byte = 8) : AlgorithmParameterSpec {
     @ParameterDescription(
         "The binary logarithm of the upper bound of the domain",
         ParameterDescription.ConditionType.RANGE,
-        "0..127"
+        "1..127"
     )
     var d: Byte = 8
         set(value) {

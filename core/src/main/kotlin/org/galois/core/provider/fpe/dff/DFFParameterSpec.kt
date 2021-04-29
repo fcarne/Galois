@@ -13,7 +13,7 @@ class DFFParameterSpec(radix: Int = 10, tweak: ByteArray? = null) : FPEParameter
     @ParameterDescription(
         "The tweak needed to encrypt/decrypt. It is represented by a hexadecimal string of maximum $MAX_T_LENGTH bytes",
         ParameterDescription.ConditionType.REGEX,
-        "^(?:[A-Fa-f\\d]{2}){1,13}\$"
+        "^(?:[0-9a-fA-F]{2}){1,13}\$"
     )
     override var tweak: ByteArray? = null
         set(value) {

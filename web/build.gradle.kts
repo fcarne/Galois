@@ -8,12 +8,12 @@ plugins {
 
 dependencies {
     implementation(project(":core"))
-    implementation("com.sparkjava:spark-core:2.9.3")
-    implementation("com.sparkjava:spark-template-freemarker:2.7.1")
+    implementation("io.ktor:ktor-server-netty:1.5.3")
+    implementation("io.ktor:ktor-jackson:1.5.3")
 
 }
 
 application {
     // Define the main class for the application.
-    mainClass.set("org.galois.web.GaloisSparkKt")
+    mainClass.set("org.galois.web.GaloisUIKt")
 }

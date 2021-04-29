@@ -269,7 +269,10 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
 
     fun tidyConfiguration(): EngineConfiguration {
         configuration.encryptionDetails.forEach {
-            if (configuration.mode == Mode.DECRYPT) it.key = null
+            if (configuration.mode == Mode.DECRYPT) {
+                it.key = null
+                it.params.keySize = null
+            }
             when (it.cipher) {
                 in GaloisJCE.opeAlgorithms + GaloisJCE.symmetricAlgorithms -> it.params.cipherSpecific.clear()
                 CRYPTOPAN_ALGORITHM_NAME -> it.params.cipherSpecific.keys.retainAll(
