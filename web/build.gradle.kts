@@ -10,7 +10,6 @@ dependencies {
     implementation(project(":core"))
     implementation("io.ktor:ktor-server-netty:1.5.3")
     implementation("io.ktor:ktor-jackson:1.5.3")
-
 }
 
 application {

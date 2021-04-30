@@ -29,11 +29,7 @@ import java.util.zip.ZipOutputStream
 
 
 fun main() {
-    val props = System.getProperties()
-    props.setProperty("io.ktor.development", "true")
-    embeddedServer(
-        Netty, port = 8080, host = "127.0.0.1", watchPaths = listOf("classes", "resources")
-    ) {
+    embeddedServer(Netty, port = 8080, host = "127.0.0.1") {
         install(ContentNegotiation) {
             jackson {
                 enable(SerializationFeature.INDENT_OUTPUT)
@@ -42,7 +38,7 @@ fun main() {
             }
         }
 
-        install(CallLogging) { level = Level.DEBUG }
+        install(CallLogging) { level = Level.INFO }
 
 
         routing {
@@ -82,9 +78,15 @@ fun main() {
                 } catch (e: IllegalArgumentException) {
                     System.err.println(e.message)
                     call.response.status(HttpStatusCode.UnprocessableEntity)
+                    e.message?.let { call.respondText(it) }
                 } catch (e: JsonParseException) {
                     System.err.println(e.message)
                     call.response.status(HttpStatusCode.UnprocessableEntity)
+                    e.message?.let { call.respondText(it) }
+                } catch (e: JsonParseException) {
+                    System.err.println(e.message)
+                    call.response.status(HttpStatusCode.BadRequest)
+                    e.message?.let { call.respondText(it) }
                 }
             }
 

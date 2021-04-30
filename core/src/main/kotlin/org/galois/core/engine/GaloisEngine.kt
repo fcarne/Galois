@@ -231,8 +231,8 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                 val parameterSpec = CryptoPAnParameterSpec()
                 parameterSpec.maxLength =
                     when (ipMode) {
-                        4 -> 4
-                        6 -> 16
+                        "4" -> 4
+                        "6" -> 16
                         else -> detail.params.cipherSpecific["max_length"] as? Int
                             ?: column.maxByOrNull { (it as String).length } as Int
                     }
