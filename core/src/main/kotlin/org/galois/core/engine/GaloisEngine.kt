@@ -85,16 +85,18 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
 
     private suspend fun columnDoFinal(detail: EncryptionDetail, column: Column<*>): Column<*> = coroutineScope {
         val computedColumn = StringColumn.create(column.name())
-        val cipher = initCipher(detail, column)
+        val (secretKey, parameters) = getKeyAndParameters(detail, column)
+        val cipher = getCipher(detail.cipher, secretKey, parameters)
 
-        val computedTaxonomy = detail.params.taxonomyTree?.let { async { taxonomyTreeDoFinal(it, detail, column) } }
+        val computedTaxonomy =
+            detail.params.taxonomyTree?.let { async { taxonomyTreeDoFinal(it, detail, secretKey, parameters) } }
 
         column.forEach { value ->
             val cell = value.toString()
 
-            val input = valueToByteArray(cell, detail)
+            val input = plaintextToByteArray(cell, detail)
             val output = cipher.doFinal(input)
-            computedColumn.append(byteArrayToValue(output, detail))
+            computedColumn.append(byteArrayToCiphertext(output, detail))
         }
 
         computedTaxonomy?.await()
@@ -102,48 +104,52 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
         computedColumn
     }
 
-
-    private fun taxonomyTreeDoFinal(taxonomyTree: TaxonomyTree, detail: EncryptionDetail, column: Column<*>) {
-        val cipher = initCipher(detail, column)
-        taxonomyNodeDoFinal(taxonomyTree.tree, cipher, detail)
+    private fun taxonomyTreeDoFinal(
+        taxonomyTree: TaxonomyTree,
+        detail: EncryptionDetail,
+        secretKey: SecretKey,
+        parameters: AlgorithmParameterSpec?
+    ) {
+        val cipher = getCipher(detail.cipher, secretKey, parameters)
+        taxonomyNodeDoFinal(taxonomyTree.root, cipher, detail)
     }
 
     private fun taxonomyNodeDoFinal(node: TaxonomyNode, cipher: Cipher, detail: EncryptionDetail) {
-        val input = valueToByteArray(node.cat, detail)
+        val input = plaintextToByteArray(node.cat.toString(), detail)
         val output = cipher.doFinal(input)
-        node.cat = byteArrayToValue(output, detail)
+        node.cat = byteArrayToCiphertext(output, detail)
 
         node.subcats?.forEach { subNode -> taxonomyNodeDoFinal(subNode, cipher, detail) }
     }
 
-    private fun valueToByteArray(cell: String, detail: EncryptionDetail): ByteArray {
+    private fun plaintextToByteArray(plaintext: String, detail: EncryptionDetail): ByteArray {
         val suffixMode =
             detail.cipher in GaloisJCE.ppeAlgorithms && detail.params.cipherSpecific["suffix"] == true
         val ipMode =
             detail.cipher in GaloisJCE.ppeAlgorithms && detail.params.cipherSpecific.containsKey("ip")
-
         val opMode = configuration.mode
+
         return when {
             detail.cipher in GaloisJCE.opeAlgorithms && opMode == EngineMode.ENCRYPT ->
-                ByteBuffer.allocate(Long.SIZE_BYTES).putLong(cell.toLong()).array()
+                ByteBuffer.allocate(Long.SIZE_BYTES).putLong(plaintext.toLong()).array()
             detail.cipher in GaloisJCE.opeAlgorithms && opMode == EngineMode.DECRYPT ->
-                BigInteger(cell).toByteArray()
+                BigInteger(plaintext).toByteArray()
 
-            ipMode && !suffixMode -> InetAddress.getByName(cell).address
-            ipMode && suffixMode -> InetAddress.getByName(cell).address.reverseBits()
+            ipMode && !suffixMode -> InetAddress.getByName(plaintext).address
+            ipMode && suffixMode -> InetAddress.getByName(plaintext).address.reverseBits()
 
-            suffixMode && opMode == EngineMode.ENCRYPT -> cell.reversed().toByteArray()
-            suffixMode && opMode == EngineMode.DECRYPT -> Base64.getDecoder().decode(cell.reversed())
+            suffixMode && opMode == EngineMode.ENCRYPT -> plaintext.reversed().toByteArray()
+            suffixMode && opMode == EngineMode.DECRYPT -> Base64.getDecoder().decode(plaintext.reversed())
 
-            detail.cipher in GaloisJCE.fpeAlgorithms -> cell.toByteArray()
+            detail.cipher in GaloisJCE.fpeAlgorithms -> plaintext.toByteArray()
 
             ((!suffixMode && !ipMode) || detail.cipher in GaloisJCE.symmetricAlgorithms) && opMode == EngineMode.ENCRYPT ->
-                cell.toByteArray()
-            else -> Base64.getDecoder().decode(cell)
+                plaintext.toByteArray()
+            else -> Base64.getDecoder().decode(plaintext)
         }
     }
 
-    private fun byteArrayToValue(byteArray: ByteArray, detail: EncryptionDetail): String {
+    private fun byteArrayToCiphertext(byteArray: ByteArray, detail: EncryptionDetail): String {
         val suffixMode =
             detail.cipher in GaloisJCE.ppeAlgorithms && detail.params.cipherSpecific["suffix"] == true
         val ipMode =
@@ -170,10 +176,12 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
         }
     }
 
-    private fun initCipher(detail: EncryptionDetail, column: Column<*>): Cipher {
+    private fun getKeyAndParameters(
+        detail: EncryptionDetail,
+        column: Column<*>
+    ): Pair<SecretKey, AlgorithmParameterSpec?> {
+        val parameterSpec = getParameterSpec(detail, column)
         val secretKey: SecretKey
-        val cipher = Cipher.getInstance(detail.cipher)
-        val opMode = if (configuration.mode == EngineMode.ENCRYPT) Cipher.ENCRYPT_MODE else Cipher.DECRYPT_MODE
 
         if (detail.key != null) {
             secretKey = SecretKeySpec(Base64.getDecoder().decode(detail.key), detail.cipher)
@@ -181,8 +189,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
             val keyGenerator = KeyGenerator.getInstance(detail.cipher)
 
             // if it's an opeScheme or HPCBC+ set parameters
-            if (detail.cipher in GaloisJCE.opeAlgorithms + HPCBC_ALGORITHM_NAME)
-                keyGenerator.init(getParameterSpec(detail, column))
+            if (detail.cipher in GaloisJCE.opeAlgorithms + HPCBC_ALGORITHM_NAME) keyGenerator.init(parameterSpec)
 
             // set keySize, after the parameters since an algorithm key size may depend on these parameters
             if (detail.cipher != AICD_ALGORITHM_NAME) detail.params.keySize?.let { keyGenerator.init(it) }
@@ -190,19 +197,20 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
             secretKey = keyGenerator.generateKey()
             detail.key = Base64.getEncoder().encodeToString(secretKey.encoded)
         }
-        if (detail.cipher in GaloisJCE.opeAlgorithms + GaloisJCE.symmetricAlgorithms)
-            cipher.init(opMode, secretKey)
-        else
-            cipher.init(opMode, secretKey, getParameterSpec(detail, column))
-        return cipher
+
+        return Pair(secretKey, parameterSpec)
     }
 
     private fun getParameterSpec(detail: EncryptionDetail, column: Column<*>): AlgorithmParameterSpec? {
+
+        val values = column.toMutableList()
+        if (detail.params.taxonomyTree != null) values.addAll(detail.params.taxonomyTree.root.list)
+
         return when (detail.cipher) {
             AICD_ALGORITHM_NAME -> {
                 val parameterSpec = AICDParameterSpec()
-                parameterSpec.m = detail.params.cipherSpecific["m"] as? Long
-                    ?: (column.maxByOrNull { (it as Number).toLong() } as Number).toLong()
+                parameterSpec.m = (detail.params.cipherSpecific["m"] as? Long
+                    ?: values.maxByOrNull { it.toString().toLong() }).toString().toLong()
 
                 parameterSpec
             }
@@ -210,8 +218,9 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
             FOPE_ALGORITHM_NAME -> {
                 val parameterSpec = FOPEParameterSpec()
                 parameterSpec.d = (detail.params.cipherSpecific["d"] as? Number)?.toByte()
-                    ?: ceil(log2((column.maxByOrNull { (it as Number).toLong() } as Number).toDouble())).toInt()
-                        .toByte()
+                    ?: ceil(log2(values.maxByOrNull { it.toString().toLong() }.toString().toDouble())).toInt().toByte()
+
+
                 parameterSpec.tau = detail.params.cipherSpecific["tau"] as? Int ?: parameterSpec.tau
 
                 parameterSpec
@@ -220,8 +229,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
             PIORE_ALGORITHM_NAME -> {
                 val parameterSpec = PIOREParameterSpec()
                 parameterSpec.d = (detail.params.cipherSpecific["d"] as? Number)?.toByte()
-                    ?: ceil(log2((column.maxByOrNull { (it as Number).toLong() } as Number).toDouble())).toInt()
-                        .toByte()
+                    ?: ceil(log2(values.maxByOrNull { it.toString().toLong() }.toString().toDouble())).toInt().toByte()
 
                 parameterSpec
             }
@@ -234,7 +242,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                         "4" -> 4
                         "6" -> 16
                         else -> detail.params.cipherSpecific["max_length"] as? Int
-                            ?: column.maxByOrNull { (it as String).length } as Int
+                            ?: values.maxByOrNull { it.toString().length } as Int
                     }
                 parameterSpec
             }
@@ -242,8 +250,8 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
             HPCBC_ALGORITHM_NAME -> {
                 val parameterSpec = HPCBCParameterSpec()
                 parameterSpec.integrityCheck = detail.params.cipherSpecific["integrity_check"] as? Boolean ?: false
-                parameterSpec.blockSize =
-                    detail.params.cipherSpecific["block_size"] as? Int ?: parameterSpec.blockSize
+                parameterSpec.blockSize = detail.params.cipherSpecific["block_size"] as? Int ?: parameterSpec.blockSize
+
                 parameterSpec
             }
 
@@ -252,19 +260,25 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                     if (detail.cipher == DFF_ALGORITHM_NAME) DFFParameterSpec() else FF3ParameterSpec()
 
                 parameterSpec.radix = detail.params.cipherSpecific["radix"] as? Int ?: parameterSpec.radix
-                parameterSpec.tweak =
-                    (detail.params.cipherSpecific["tweak"] as? String)?.decodeHex()
-                        ?: GaloisJCE.random.generateSeed(
-                            parameterSpec.maxTLen
-                        ).also {
-                            detail.params.cipherSpecific["tweak"] = it.toHexString()
-                        }
+                parameterSpec.tweak = (detail.params.cipherSpecific["tweak"] as? String)?.decodeHex()
+                    ?: GaloisJCE.random.generateSeed(parameterSpec.maxTLen).also {
+                        detail.params.cipherSpecific["tweak"] = it.toHexString()
+                    }
 
                 parameterSpec
             }
             else -> null
         }
 
+    }
+
+    private fun getCipher(cipherName: String, secretKey: SecretKey, parameters: AlgorithmParameterSpec?): Cipher {
+        val cipher = Cipher.getInstance(cipherName)
+        val opMode = if (configuration.mode == EngineMode.ENCRYPT) Cipher.ENCRYPT_MODE else Cipher.DECRYPT_MODE
+
+        if (cipherName in GaloisJCE.opeAlgorithms + GaloisJCE.symmetricAlgorithms) cipher.init(opMode, secretKey)
+        else cipher.init(opMode, secretKey, parameters)
+        return cipher
     }
 
     fun tidyConfiguration(): EngineConfiguration {
@@ -274,6 +288,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                 it.key = null
                 it.params.keySize = null
             }
+
             when (it.cipher) {
                 in GaloisJCE.opeAlgorithms + GaloisJCE.symmetricAlgorithms -> it.params.cipherSpecific.clear()
                 CRYPTOPAN_ALGORITHM_NAME -> it.params.cipherSpecific.keys.retainAll(
@@ -283,6 +298,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                 in GaloisJCE.fpeAlgorithms -> it.params.cipherSpecific.keys.retainAll(listOf("radix", "tweak"))
             }
         }
+
         clone.mode = if (configuration.mode == EngineMode.ENCRYPT) EngineMode.DECRYPT else EngineMode.ENCRYPT
 
         return clone

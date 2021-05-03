@@ -14,15 +14,12 @@ import org.galois.core.provider.ppe.cryptopan.CRYPTOPAN_ALGORITHM_NAME
 import org.galois.core.provider.ppe.hpcbc.HPCBC_ALGORITHM_NAME
 import org.openjdk.jmh.annotations.*
 import org.openjdk.jmh.profile.GCProfiler
-import org.openjdk.jmh.profile.JavaFlightRecorderProfiler
 import org.openjdk.jmh.profile.LinuxPerfNormProfiler
 import org.openjdk.jmh.results.format.ResultFormatType
 import org.openjdk.jmh.runner.Runner
 import org.openjdk.jmh.runner.options.OptionsBuilder
 import tech.tablesaw.api.Table
 import java.io.ByteArrayOutputStream
-import java.io.File
-import java.nio.file.Files
 import java.util.concurrent.TimeUnit
 
 
@@ -83,8 +80,6 @@ class GaloisBenchmark {
     fun loadDataset() {
         val datasetStream = this.javaClass.getResourceAsStream("/benchmark_sample.csv")
         dataset = Table.read().csv(datasetStream).retainColumns(params.column).inRange(rows)
-
-        println(dataset.rowCount())
 
         val baos = ByteArrayOutputStream()
         dataset.write().csv(baos)
@@ -152,9 +147,9 @@ fun main() {
         .resultFormat(ResultFormatType.CSV)
         .result("benchmarks/benchmark_result.csv")
         // .output("benchmarks/benchmark_output.log")
-        .mode(Mode.AverageTime)
+        .mode(Mode.SingleShotTime)
         .addProfiler(GCProfiler::class.java)
-        .addProfiler(LinuxPerfNormProfiler::class.java)
+        //.addProfiler(LinuxPerfNormProfiler::class.java)
         .build()
 
     Runner(opt).run()

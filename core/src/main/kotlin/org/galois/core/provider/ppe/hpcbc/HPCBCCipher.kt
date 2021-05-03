@@ -29,8 +29,9 @@ class HPCBCCipher : GaloisCipher() {
         opMode == Cipher.ENCRYPT_MODE -> inputLen + parameterSpec.blockSize
         opMode == Cipher.DECRYPT_MODE -> {
             val outputLength: Int = inputLen - parameterSpec.blockSize
-            if (outputLength < 0) throw InvalidParameterException("The ciphertext must be longer than the block size")
-            else outputLength
+            require(outputLength >= 0) { "The ciphertext must be longer than the block size" }
+
+            outputLength
         }
         else -> 0
     }
@@ -95,6 +96,7 @@ class HPCBCCipher : GaloisCipher() {
                 plaintext[mI]
                 var p: ByteArray = hash.xor(mI)
 
+                // last block takes only the remaining bytes (no padding)
                 if (i == l && inputLen < plaintext.capacity()) {
                     val added = plaintext.capacity() - inputLen
                     p = p.sliceArray(0 until blockSize - added)
@@ -145,6 +147,7 @@ class HPCBCCipher : GaloisCipher() {
                 ciphertext[cI]
                 var q: ByteArray = cI.xor(hash)
 
+                // last block takes only the remaining bytes (no padding)
                 if (i == l && cipherTextBlocks < ciphertext.capacity()) {
                     val added = ciphertext.capacity() - cipherTextBlocks
                     q = q.sliceArray(0 until blockSize - added)

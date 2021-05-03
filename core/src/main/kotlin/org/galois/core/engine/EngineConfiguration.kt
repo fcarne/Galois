@@ -41,10 +41,13 @@ data class EncryptionParams(
     @get:[JsonIgnore JsonAnyGetter] @JsonAnySetter var cipherSpecific: MutableMap<String, Any> = HashMap()
 )
 
-open class TaxonomyTree(var tree: TaxonomyNode)
+open class TaxonomyTree(@JsonProperty("tree") var root: TaxonomyNode)
 
 data class TaxonomyNode(
-    var cat: String,
+    var cat: Any,
     @JsonFormat(with = [JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY])
     val subcats: MutableList<TaxonomyNode>?
-)
+) {
+    val list: List<Any>
+        get() = listOf(cat) + (subcats?.flatMap { it.list } ?: emptyList())
+}

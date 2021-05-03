@@ -70,8 +70,7 @@ class FOPECipher : GaloisCipher() {
     ): Int {
         if (opMode == Cipher.ENCRYPT_MODE) {
             val x = ByteBuffer.wrap(input).long
-            require(x in 0..domain) { "Number must be in range 0..$domain, was $x" }
-
+            require(x in 0..domain) { "Plaintext must be in range 0..$domain, was $x" }
 
             var cipher = f(0, 0)
 
@@ -85,7 +84,7 @@ class FOPECipher : GaloisCipher() {
 
         } else if (opMode == Cipher.DECRYPT_MODE) {
             val c = BigInteger(input)
-            require(c > BigInteger.ZERO && c <= n) { "Number must be in range 0..$n, was $c" }
+            require(c > BigInteger.ZERO && c <= n) { "Ciphertext must be in range 0..$n, was $c" }
 
 
             var a = f(0, 0)

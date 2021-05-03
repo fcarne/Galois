@@ -9,12 +9,16 @@ import java.security.SecureRandom
 import javax.crypto.Cipher
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
+import kotlin.math.pow
 
 const val PIORE_ALGORITHM_NAME = "PIOre"
 
 class PIORECipher : GaloisCipher() {
     private lateinit var m: BigInteger
     private var d: Byte = 0
+    private var domain: Long = 0
+
+    private lateinit var mPowerN: BigInteger
     private var mPowerNBytesLength = 0
 
     private lateinit var mac: Mac
@@ -28,10 +32,13 @@ class PIORECipher : GaloisCipher() {
         m = BigInteger.TWO.pow(pioreSecretKey.m.toInt())
         d = pioreSecretKey.d
 
+        domain = 2.0.pow(d.toInt()).toLong()
+
         mac = Mac.getInstance("HmacSha256")
         mac.init(SecretKeySpec(pioreSecretKey.k, mac.algorithm))
 
-        mPowerNBytesLength = m.pow(d.toInt()).toByteArray().size
+        mPowerN = m.pow(d.toInt())
+        mPowerNBytesLength = mPowerN.toByteArray().size
     }
 
     override fun engineGetOutputSize(inputLen: Int): Int =
@@ -48,6 +55,8 @@ class PIORECipher : GaloisCipher() {
     ): Int {
         if (opMode == Cipher.ENCRYPT_MODE) {
             val b = ByteBuffer.wrap(input).long
+            require(b in 0..domain) { "Plaintext must be in range 0..$domain, was $b" }
+
             var cipher = BigInteger.ZERO
 
             for (i in 1..d) {
@@ -60,6 +69,7 @@ class PIORECipher : GaloisCipher() {
 
         } else if (opMode == Cipher.DECRYPT_MODE) {
             var c = BigInteger(input)
+            require(c > BigInteger.ZERO && c < mPowerN) { "Ciphertext must be in range 0..$mPowerN, was $c" }
 
             var b: Long = 0
             val u = Array(d.toInt()) { BigInteger.ZERO }
