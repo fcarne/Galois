@@ -18,9 +18,11 @@ class AlgorithmDescription(val name: String, val family: String) {
         val field: String,
         val description: String,
         val conditionType: ParameterDescription.ConditionType,
-        val condition: String
+        val condition: String,
+        val decryptionRequired: Boolean
     ) {
-        override fun toString() = " - $field: $description. Condition: ${formatCondition()}"
+        override fun toString() =
+            " - $field: $description. Condition: ${formatCondition()}. ${if (decryptionRequired) "Required for decryption" else ""}"
 
         private fun formatCondition() = when (conditionType) {
             ParameterDescription.ConditionType.REGEX -> "-> Pattern: $condition"

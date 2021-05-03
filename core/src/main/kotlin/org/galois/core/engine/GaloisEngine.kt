@@ -41,7 +41,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
 
     init {
         GaloisJCE.add()
-        this.configuration = configuration
+        this.configuration = configuration.clone()
 
         val columns = configuration.encryptionDetails.map { it.columnName }
 
@@ -59,7 +59,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
         { "Ciphers $notSupportedCiphers are not yet supported" }
 
 
-        if (configuration.mode == Mode.DECRYPT) {
+        if (configuration.mode == EngineMode.DECRYPT) {
             val nullKeys = configuration.encryptionDetails.filter { it.key == null }
             require(nullKeys.isEmpty()) { "In DECRYPT mode all keys must be explicitly set" }
 
@@ -124,20 +124,20 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
 
         val opMode = configuration.mode
         return when {
-            detail.cipher in GaloisJCE.opeAlgorithms && opMode == Mode.ENCRYPT ->
+            detail.cipher in GaloisJCE.opeAlgorithms && opMode == EngineMode.ENCRYPT ->
                 ByteBuffer.allocate(Long.SIZE_BYTES).putLong(cell.toLong()).array()
-            detail.cipher in GaloisJCE.opeAlgorithms && opMode == Mode.DECRYPT ->
+            detail.cipher in GaloisJCE.opeAlgorithms && opMode == EngineMode.DECRYPT ->
                 BigInteger(cell).toByteArray()
 
             ipMode && !suffixMode -> InetAddress.getByName(cell).address
             ipMode && suffixMode -> InetAddress.getByName(cell).address.reverseBits()
 
-            suffixMode && opMode == Mode.ENCRYPT -> cell.reversed().toByteArray()
-            suffixMode && opMode == Mode.DECRYPT -> Base64.getDecoder().decode(cell.reversed())
+            suffixMode && opMode == EngineMode.ENCRYPT -> cell.reversed().toByteArray()
+            suffixMode && opMode == EngineMode.DECRYPT -> Base64.getDecoder().decode(cell.reversed())
 
             detail.cipher in GaloisJCE.fpeAlgorithms -> cell.toByteArray()
 
-            ((!suffixMode && !ipMode) || detail.cipher in GaloisJCE.symmetricAlgorithms) && opMode == Mode.ENCRYPT ->
+            ((!suffixMode && !ipMode) || detail.cipher in GaloisJCE.symmetricAlgorithms) && opMode == EngineMode.ENCRYPT ->
                 cell.toByteArray()
             else -> Base64.getDecoder().decode(cell)
         }
@@ -151,20 +151,20 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
         val opMode = configuration.mode
 
         return when {
-            detail.cipher in GaloisJCE.opeAlgorithms && opMode == Mode.ENCRYPT ->
+            detail.cipher in GaloisJCE.opeAlgorithms && opMode == EngineMode.ENCRYPT ->
                 BigInteger(byteArray).toString()
-            detail.cipher in GaloisJCE.opeAlgorithms && opMode == Mode.DECRYPT ->
+            detail.cipher in GaloisJCE.opeAlgorithms && opMode == EngineMode.DECRYPT ->
                 ByteBuffer.wrap(byteArray).long.toString()
 
             ipMode && !suffixMode -> InetAddress.getByAddress(byteArray).hostAddress
             ipMode && suffixMode -> InetAddress.getByAddress(byteArray.reverseBits()).hostAddress
 
-            suffixMode && opMode == Mode.ENCRYPT -> Base64.getEncoder().encodeToString(byteArray).reversed()
-            suffixMode && opMode == Mode.DECRYPT -> String(byteArray).reversed()
+            suffixMode && opMode == EngineMode.ENCRYPT -> Base64.getEncoder().encodeToString(byteArray).reversed()
+            suffixMode && opMode == EngineMode.DECRYPT -> String(byteArray).reversed()
 
             detail.cipher in GaloisJCE.fpeAlgorithms -> String(byteArray)
 
-            ((!suffixMode && !ipMode) || detail.cipher in GaloisJCE.symmetricAlgorithms) && opMode == Mode.ENCRYPT ->
+            ((!suffixMode && !ipMode) || detail.cipher in GaloisJCE.symmetricAlgorithms) && opMode == EngineMode.ENCRYPT ->
                 Base64.getEncoder().encodeToString(byteArray)
             else -> String(byteArray)
         }
@@ -173,7 +173,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
     private fun initCipher(detail: EncryptionDetail, column: Column<*>): Cipher {
         val secretKey: SecretKey
         val cipher = Cipher.getInstance(detail.cipher)
-        val opMode = if (configuration.mode == Mode.ENCRYPT) Cipher.ENCRYPT_MODE else Cipher.DECRYPT_MODE
+        val opMode = if (configuration.mode == EngineMode.ENCRYPT) Cipher.ENCRYPT_MODE else Cipher.DECRYPT_MODE
 
         if (detail.key != null) {
             secretKey = SecretKeySpec(Base64.getDecoder().decode(detail.key), detail.cipher)
@@ -202,7 +202,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
             AICD_ALGORITHM_NAME -> {
                 val parameterSpec = AICDParameterSpec()
                 parameterSpec.m = detail.params.cipherSpecific["m"] as? Long
-                    ?: column.maxByOrNull { (it as Number).toLong() } as Long
+                    ?: (column.maxByOrNull { (it as Number).toLong() } as Number).toLong()
 
                 parameterSpec
             }
@@ -268,8 +268,9 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
     }
 
     fun tidyConfiguration(): EngineConfiguration {
-        configuration.encryptionDetails.forEach {
-            if (configuration.mode == Mode.DECRYPT) {
+        val clone = configuration.clone()
+        clone.encryptionDetails.forEach {
+            if (configuration.mode == EngineMode.DECRYPT) {
                 it.key = null
                 it.params.keySize = null
             }
@@ -282,9 +283,9 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                 in GaloisJCE.fpeAlgorithms -> it.params.cipherSpecific.keys.retainAll(listOf("radix", "tweak"))
             }
         }
-        configuration.mode = if (configuration.mode == Mode.ENCRYPT) Mode.DECRYPT else Mode.ENCRYPT
+        clone.mode = if (configuration.mode == EngineMode.ENCRYPT) EngineMode.DECRYPT else EngineMode.ENCRYPT
 
-        return configuration
+        return clone
     }
 
 }

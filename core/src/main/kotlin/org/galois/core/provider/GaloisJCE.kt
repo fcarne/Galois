@@ -123,7 +123,8 @@ object GaloisJCE : Provider(
                     f.name,
                     annotation.description,
                     annotation.conditionType,
-                    annotation.condition
+                    annotation.condition,
+                    annotation.decryptionRequired
                 )
             }?.toMutableList()
 
@@ -133,7 +134,8 @@ object GaloisJCE : Provider(
                     "ip",
                     "The ip version (if the input represents ip-addresses)",
                     ParameterDescription.ConditionType.DISTINCT_VALUES,
-                    "4, 6"
+                    "4, 6",
+                    false
                 )
             )
             description.parameters?.add(
@@ -141,7 +143,8 @@ object GaloisJCE : Provider(
                     "suffix",
                     "If the input should preserve the suffix instead of the prefix",
                     ParameterDescription.ConditionType.BOOLEAN,
-                    ""
+                    "",
+                    false
                 )
             )
         }

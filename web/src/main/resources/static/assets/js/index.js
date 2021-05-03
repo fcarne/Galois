@@ -1,41 +1,45 @@
 var algorithmsDetails = []
 
 function fetchAlgorithms() {
-  fetch('/details').then(function(response) { return response.json();})
-  .then(function(data) {
-    $.each( data, function(key, val) {
-      algorithmsDetails.push(val);
-    });
+  fetch('/details').then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      $.each(data, function(key, val) {
+        algorithmsDetails.push(val);
+      });
 
-    console.log(algorithmsDetails)
-  }).catch(function(err) {
-    console.log('Fetch problem: ' + err.message);
-  });
+      console.log(algorithmsDetails)
+    }).catch(function(err) {
+      console.log('Fetch problem: ' + err.message);
+    });
 }
 
-function extractColumns(){
+function extractColumns() {
   return new Promise((resolve, reject) => {
     $("#columns").empty()
     var file = $("#dataset-input")[0].files[0];
-    if(file) {
+    if (file) {
       var reader = new FileReader();
       reader.onload = function(event) {
         var allText = event.target.result;
         var allTextLines = allText.split(/\r\n|\n/);
         var entries = allTextLines[0].split(',')
 
-        $.each(entries, function (i, entry) {
+        $.each(entries, function(i, entry) {
           var id = entry + "-column-select"
-          var col = $("<div></div>").addClass("col mb-3 d-grid");
-          var checkboxButton = $("<input>").attr({type: "checkbox", id: id, value: entry, name: "column"})
-          .addClass("btn-check checked-focus")
-          var label = $("<label></label>").addClass("btn btn-primary p-2 align-self-center").attr("for", id).text(entry)
+          var label = $("<label></label>").addClass("list-group-item list-group-item-action").text(entry)
+          var checkbox = $("<input>").attr({
+              type: "checkbox",
+              id: id,
+              value: entry,
+              name: "column"
+            })
+            .addClass("form-check-input me-1")
 
-          col.append(checkboxButton)
-          col.append(label)
-          $('#columns').append(col)
+          label.prepend(checkbox)
+          $('#columns').append(label)
         })
-        console.log('done')
         resolve('DONE')
       };
 
@@ -55,13 +59,18 @@ function createAlgorithmSelector(column) {
   var id = column + "-algorithm-choice"
 
   var div = $('<div></div>').addClass('form-floating mb-3')
-  var selector = $("<select></select>").addClass("form-select").attr({ id: id, 'aria-label': column + " algorithm select"})
-  var label  = $('<label></label>').attr("for", id).text("Choose the algorithm")
+  var selector = $("<select></select>").addClass("form-select").attr({
+    id: id,
+    'aria-label': column + " algorithm select",
+    required: true,
+    name: id
+  })
+  var label = $('<label></label>').attr("for", id).text("Choose the algorithm")
 
-  $.each(algorithmsDetails, function (i, algorithm) {
+  $.each(algorithmsDetails, function(i, algorithm) {
     $(selector).append($('<option>', {
       value: algorithm.name,
-      text : algorithm.name
+      text: algorithm.name
     }));
   })
   div.append(selector)
@@ -73,7 +82,13 @@ function createAlgorithmSelector(column) {
 function createKeyInput(column, mode) {
   var id = column + "-key"
   var div = $('<div></div>').addClass('form-floating mb-3')
-  var input = $('<input>').addClass('form-control').attr({type: 'text', id: id, 'required': mode == "decrypt"})
+  var input = $('<input>').addClass('form-control').attr({
+    type: 'text',
+    name: 'key',
+    id: id,
+    name: id,
+    'required': mode == "decrypt"
+  })
   var label = $('<label></label>').attr('for', id).text('Base64 Encoded Key')
   div.append(input)
   div.append(label)
@@ -85,8 +100,11 @@ function createKeySizeSelector(column) {
   var id = column + "-key-size"
 
   var div = $('<div></div>').addClass('form-floating mb-3')
-  var selector = $("<select></select>").addClass("form-select").attr({ id: id, 'aria-label': column + " key size select"})
-  var label  = $('<label></label>').attr("for", id).text("Choose the key size")
+  var selector = $("<select></select>").addClass("form-select").attr({
+    id: id,
+    'aria-label': column + " key size select"
+  })
+  var label = $('<label></label>').attr("for", id).text("Choose the key size")
 
   div.append(selector)
   div.append(label)
@@ -99,8 +117,11 @@ function createTaxonomyInput(column) {
   var id = column + "-taxonomy"
 
   var div = $('<div></div>').addClass('mb-3')
-  var input = $('<input>').addClass('form-control').attr({type: "file", id: id +'-file'})
-  var label = $('<label></label>').addClass('form-label mt-2').attr("for", id +'-file').text('Upload a taxonomy tree (in JSON)')
+  var input = $('<input>').addClass('form-control').attr({
+    type: "file",
+    id: id + '-file'
+  })
+  var label = $('<label></label>').addClass('form-label mt-2').attr("for", id + '-file').text('Upload a taxonomy tree (in JSON)')
 
   var p = $('<p></p>').addClass('mt-3 mb-2').text('...and edit it if you need to')
   var blackboard = $('<pre></pre>').addClass('overflow-auto mb-3 rounded-2').attr('id', id).css('height', '300px')
@@ -110,9 +131,9 @@ function createTaxonomyInput(column) {
   div.append(p)
   div.append(blackboard)
 
-  $(input).on('change' , function(){
+  $(input).on('change', function() {
     var file = this.files[0];
-    if(file) {
+    if (file) {
       var reader = new FileReader();
       reader.onload = function(event) {
         var json = event.target.result;
@@ -133,41 +154,65 @@ function createTaxonomyInput(column) {
 function createParamInput(column, family, param, mode) {
   var id = column + "-param-" + param.field
 
-  if(family == 'OPE' && mode == 'decrypt') return
+  if (family == 'OPE' && mode == 'decrypt') return
 
-  var div = $('<div></div>').addClass('form-floating').attr({'data-bs-toggle': "tooltip", 'data-bs-placement': "top", title: param.description})
+  var div = $('<div></div>').addClass('form-floating').attr({
+    'data-bs-toggle': "tooltip",
+    'data-bs-placement': "top",
+    title: param.description
+  })
   var label = $('<label></label>').attr("for", id).text(param.field)
 
   var input
-  switch(param.condition_type) {
+  switch (param.condition_type) {
     case "REGEX":
-    input = $('<input>').addClass('form-control').attr({type: 'text', id: id, pattern: param.condition})
-    break;
+      input = $('<input>').addClass('form-control').attr({
+        type: 'text',
+        id: id,
+        pattern: param.condition
+      })
+      break;
     case "RANGE":
-    var range = param.condition.split('..')
-    input = $('<input>').addClass('form-control').attr({type: 'number', id: id, min: range[0], max: range[1]})
-    break;
+      var range = param.condition.split('..')
+      input = $('<input>').addClass('form-control').attr({
+        type: 'number',
+        id: id,
+        min: range[0],
+        max: range[1]
+      })
+      break;
     case "LOWER_LIMIT":
-    input = $('<input>').addClass('form-control').attr({type: 'number', id: id, min: param.condition})
-    break;
+      input = $('<input>').addClass('form-control').attr({
+        type: 'number',
+        id: id,
+        min: param.condition
+      })
+      break;
     case "DISTINCT_VALUES":
-    var values = param.condition.split(', ')
-    input = $("<select></select>").addClass("form-select").attr({ id: id, 'aria-label': param.description})
-    input.append($('<option>').text('-- select an option --'))
-    $.each(values, function (i, val) {
-      input.append($('<option>', {
-        value: val,
-        text : val
-      }));
-    })
-    break;
+      var values = param.condition.split(', ')
+      input = $("<select></select>").addClass("form-select").attr({
+        id: id,
+        'aria-label': param.description
+      })
+      input.append($('<option>').text('Select an option'))
+      $.each(values, function(i, val) {
+        input.append($('<option>', {
+          value: val,
+          text: val
+        }));
+      })
+      break;
     case "BOOLEAN":
-    div = $("<div></div>").addClass("col d-grid");
-    input = $("<input>").attr({type: "checkbox", id: id, value: param.field}).addClass("btn-check checked-focus")
-    label.addClass("btn btn-primary p-3")
-    break;
+      div = $("<div></div>").addClass("form-check form-switch");
+      input = $("<input>").attr({
+        type: "checkbox",
+        id: id,
+        value: param.field
+      }).addClass("form-check-input")
+      label.addClass("form-check-label")
+      break;
   }
-
+  input.attr({name: 'param', required: mode == 'decrypt' && param.decryption_required})
   div.append(input)
   div.append(label)
   return div
@@ -177,13 +222,22 @@ function createDetailsAccordion(column, mode) {
   var id = column + "-accordion"
 
   var div = $('<div></div>').addClass('accordion-item').attr("id", id)
-  var title = $('<h2></h2>').addClass('accordion-header').attr('id', id +"-header")
+  var title = $('<h2></h2>').addClass('accordion-header').attr('id', id + "-header")
   var controls = $('<button></button>').addClass('accordion-button collapsed')
-  .attr({type: "button", 'data-bs-toggle': "collapse", 'data-bs-target': '#'+id+'-item',
-  'aria-expanded': "false", 'aria-controls': id+'-item'}).text('Set the parameters for ' + column)
+    .attr({
+      type: "button",
+      'data-bs-toggle': "collapse",
+      'data-bs-target': '#' + id + '-item',
+      'aria-expanded': "false",
+      'aria-controls': id + '-item'
+    }).text('Set the parameters for ' + column)
   title.append(controls)
 
-  var item = $('<div></div>').addClass('accordion-collapse collapse').attr({id: id+'-item', 'aria-labelledby': id+'-header', 'data-bs-parent': '#details'})
+  var item = $('<div></div>').addClass('accordion-collapse collapse').attr({
+    id: id + '-item',
+    'aria-labelledby': id + '-header',
+    'data-bs-parent': '#details'
+  })
   var itemBody = $('<div></div>').addClass('accordion-body')
 
   var algorithmSelector = createAlgorithmSelector(column)
@@ -191,36 +245,36 @@ function createDetailsAccordion(column, mode) {
 
   itemBody.append(createKeyInput(column, mode))
 
-  if(mode == 'encrypt') {
+  if (mode == 'encrypt') {
     var keySizeSelector = createKeySizeSelector(column)
     itemBody.append(keySizeSelector)
 
     algorithmSelector.children('select').on('change', function() {
       var keySizes = algorithmsDetails.find(x => this.value == x.name).key_sizes;
       $(keySizeSelector).children('select').empty()
-      $.each(keySizes, function (i, size) {
+      $.each(keySizes, function(i, size) {
         $(keySizeSelector).children('select').append($('<option>', {
           value: size,
-          text : size
+          text: size
         }));
       })
     })
   }
   itemBody.append(createTaxonomyInput(column))
 
-  var parametersRow = $('<div></div>').addClass('row g-3')
+  var parametersRow = $('<div></div>').addClass('d-grid gap-3')
   itemBody.append(parametersRow)
 
   algorithmSelector.children('select').on('change', function() {
     var algorithm = algorithmsDetails.find(x => this.value == x.name)
     parametersRow.empty()
-    if(algorithm.parameters != null && algorithm.parameters.length != 0)
-    parametersRow.append($('<div class="col-12"><p class="mb-0">Algorithm specific parameters: </p></div>'))
+    if (algorithm.parameters != null && algorithm.parameters.length != 0)
+      parametersRow.append($('<div class="col-12"><p style="margin: -0.5rem">Algorithm specific parameters: </p></div>'))
 
-    $.each(algorithm.parameters, function (i, param) {
-      var col = $('<div></div>').addClass('col col-sm-12')
-      col.append(createParamInput(column, algorithm.family, param, mode))
-      parametersRow.append(col)
+    $.each(algorithm.parameters, function(i, param) {
+      var div = $('<div></div>').addClass('row').append($('<div></div>').addClass('col-12'))
+      div.children('div').append(createParamInput(column, algorithm.family, param, mode))
+      parametersRow.append(div)
     })
     initTooltips()
   })
@@ -250,159 +304,178 @@ $(window).on('load', function() {
     titleTemplate: "#title#",
     transitionEffect: "slide",
     autoFocus: true,
-    onStepChanging: function (event, currentIndex, newIndex) {
-      if(newIndex == 1) {
-        var dataset = $('#dataset-input').val()
+    onStepChanging: function(event, currentIndex, newIndex) {
+      $('#wizard-p-'+currentIndex).addClass('was-validated')
+      if (newIndex == 1) {
+        var dataset = $('#dataset-input')
+        if (!dataset[0].validity.valid) return false
 
-        if($('#output-filename').val().length == 0) return false
-        if(dataset == null || dataset == "") return false
+        var filenameInput = $('#output-filename')
+        if (!filenameInput[0].validity.valid) return false
 
-        if(previousDataset != dataset) {
-          previousDataset = dataset
+        if (previousDataset != dataset.val()) {
+          previousDataset = dataset.val()
           var promise = extractColumns();
-          if(!uploadedConfig.columns_init) {
+          if (!uploadedConfig.columns_init) {
 
-            promise.then( (msg) => {
+            promise.then((msg) => {
               $.each(uploadedConfig.encryption_details, function(i, detail) {
                 var id = detail.column_name + "-column-select"
                 var checkbox = $('#' + id)
-                if(checkbox != null) checkbox.prop('checked', true);
+                if (checkbox != null) checkbox.prop('checked', true);
               })
-            }
-          )
-          uploadedConfig.columns_init = true
+            })
+            uploadedConfig.columns_init = true
+          }
+
         }
 
       }
 
-    }
+      if (newIndex == 2) {
+        var columnsSelected = []
+        $.each($("#columns input[name='column']:checked"), function() {
+          columnsSelected.push($(this).val());
+        });
 
-    if(newIndex == 2) {
-      var columnsSelected = []
-      $.each($("#columns input[name='column']:checked"), function(){
-        columnsSelected.push($(this).val());
-      });
+        var toRemove = previousColumns.filter(x => !columnsSelected.includes(x));
+        $.each(toRemove, function(i, column) {
+          $('#' + column + "-accordion").remove()
+          delete jsonEditors[column]
+        })
 
-      if(columnsSelected.length === 0) return false
+        var container = $("#details")
+        var toAdd = columnsSelected.filter(x => !previousColumns.includes(x));
 
-      var toRemove = previousColumns.filter(x => !columnsSelected.includes(x));
-      $.each(toRemove, function(i, column) {
-        $('#' + column + "-accordion").remove()
-        delete jsonEditors[column]
-      })
+        var mode = $('input[name=mode-radio]:checked').val()
+        if (previousMode != mode) {
+          toAdd = columnsSelected
+          container.empty()
+          previousMode = mode // triggers rebuilding of accordion inputs
+        }
 
-      var container = $("#details")
-      var toAdd = columnsSelected.filter(x => !previousColumns.includes(x));
+        $.each(toAdd, function(i, column) {
+          var accordionItem = createDetailsAccordion(column, mode)
+          container.append(accordionItem)
 
-      var mode = $('input[name=mode-radio]:checked').val()
-      if(previousMode != mode) {
-        toAdd = columnsSelected
-        container.empty()
-        previousMode = mode // triggers rebuilding of accordion inputs
+          jsonEditors[column] = new JsonEditor('#' + column + '-taxonomy') // must be done when the json container is added to the dom
+        })
+
+        previousColumns = columnsSelected
+
+        if (!uploadedConfig.algorithms_init) {
+          $.each(uploadedConfig.encryption_details, function(i, detail) {
+            var column = detail.column_name
+
+            $('#' + column + "-algorithm-choice").val(detail.cipher).change()
+
+            if (detail.key != null) $('#' + column + "-key").val(detail.key)
+
+            var keySizeInput = $('#' + column + "-key-size")
+            if (detail.key_size != null && keySizeInput != null) keySizeInput.val(detail.key_size)
+
+            if (detail.taxonomy_tree != null) jsonEditors[column].load(detail.taxonomy_tree.tree)
+
+            for (var param in detail.params) {
+              var paramInput = $('#' + column + '-param-' + param)
+              if (paramInput != null) {
+                if (paramInput.is(':checkbox')) paramInput.prop('checked', detail.params[param])
+                else paramInput.val(detail.params[param])
+              }
+            }
+          })
+        }
+
+        uploadedConfig.algorithms_init = true
       }
 
-      $.each(toAdd, function(i, column) {
-        var accordionItem = createDetailsAccordion(column, mode)
-        container.append(accordionItem)
-
-        jsonEditors[column] = new JsonEditor('#'+column+'-taxonomy') // must be done when the json container is added to the dom
-      })
-
-      previousColumns = columnsSelected
-
-      if(!uploadedConfig.algorithms_init) {
-        $.each(uploadedConfig.encryption_details, function(i, detail) {
-          var column = detail.column_name
-
-          $('#' + column + "-algorithm-choice").val(detail.cipher).change()
-
-          if(detail.key != null) $('#' + column + "-key").val(detail.key)
-
-          var keySizeInput = $('#' + column + "-key-size")
-          if(detail.key_size != null && keySizeInput != null) keySizeInput.val(detail.key_size)
-
-          if(detail.taxonomy_tree != null) jsonEditors[column].load(detail.taxonomy_tree.tree)
-
-          for (var param in detail.params) {
-            var paramInput = $('#' + column + '-param-' + param)
-            if(paramInput != null) {
-              if(paramInput.is(':checkbox')) paramInput.prop('checked', detail.params[param])
-              else paramInput.val(detail.params[param])
-            }
+      if (newIndex == 3) {
+        var invalid
+        $.each($('input[name=key]'), function(i, key) {
+          if (!key.validity.valid) {
+            invalid = true
+            $(key).parent().closest('.accordion-item').children('button.accordion-button').click();
+            return false
           }
         })
+        if(invalid) return false
+
+        $.each($('input[name=param]'), function(i, param) {
+          if (!param.validity.valid) {
+            invalid = true
+            console.log($(param).parent().closest('.accordion-item'))
+            console.log($(param).parent().closest('.accordion-item').children('button.accordion-button'))
+            $(param).parent().closest('.accordion-item').children('button.accordion-button').trigger('click');
+            return false
+          }
+        })
+        if(invalid) return false
+
+        config = getConfig(previousMode, previousColumns)
+        var summaryEditor = new JsonEditor('#summary', config)
       }
 
-      uploadedConfig.algorithms_init = true
+      if (newIndex < currentIndex) return true
+
+      return true
+    },
+    onFinishing: function(event, currentIndex) {
+          $('#wizard-p-'+currentIndex).addClass('was-validated')
+      if (!$('#confirm-switch').is(':checked')) return false
+
+      var formData = new FormData();
+      formData.append("dataset", document.getElementById("dataset-input").files[0]);
+      formData.append("config", JSON.stringify(config));
+
+      $.ajax({
+        url: '/doFinal',
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        xhrFields: {
+          responseType: 'blob'
+        },
+        success: function(data) {
+          console.log(data)
+          var a = document.createElement('a');
+          var url = window.URL.createObjectURL(data);
+          a.href = url;
+          a.download = config.output_filename + '-' + Date.now() + '.zip';
+          document.body.append(a);
+          a.click();
+          a.remove();
+          window.URL.revokeObjectURL(url);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert("Status: " + textStatus + "Error: " + errorThrown);
+        }
+      });
+
+      return true
     }
+  });
 
-    if(newIndex == 3) {
-      config = getConfig(previousMode, previousColumns)
-      var summaryEditor = new JsonEditor('#summary', config)
-    }
+  $('#config-input').on('change', function() {
+    var file = this.files[0];
+    if (file) {
+      var reader = new FileReader();
+      reader.onload = function(event) {
+        var json = event.target.result;
+        uploadedConfig = JSON.parse(json)
+        $(this).val('')
 
-    if(newIndex < currentIndex) return true
-
-    return true
-  },
-  onFinishing: function (event, currentIndex) {
-    if(!$('#confirm-switch').is(':checked')) return false
-
-    var formData = new FormData();
-    formData.append("dataset", document.getElementById("dataset-input").files[0]);
-    formData.append("config", JSON.stringify(config));
-
-    $.ajax({
-      url: '/doFinal',
-      type: 'post',
-      data: formData,
-      contentType: false,
-      processData: false,
-      xhrFields: {
-        responseType: 'blob'
-      },
-      success: function (data) {
-        console.log(data)
-        var a = document.createElement('a');
-        var url = window.URL.createObjectURL(data);
-        a.href = url;
-        a.download = config.output_filename + '-' + Date.now() + '.zip';
-        document.body.append(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url);
-      },
-      error: function(XMLHttpRequest, textStatus, errorThrown) {
-        alert("Status: " + textStatus+ "Error: " + errorThrown);
+        $('#output-filename').val(uploadedConfig.output_filename)
+        $("input[name=mode-radio][value=" + uploadedConfig.mode + "-mode]").prop('checked', true);
       }
-    });
-
-    return true
-  }
-});
-
-$('#config-input').on('change' , function() {
-  var file = this.files[0];
-  if(file) {
-    var reader = new FileReader();
-    reader.onload = function(event) {
-      var json = event.target.result;
-      uploadedConfig = JSON.parse(json)
-      $(this).val('')
-
-      $('#output-filename').val(uploadedConfig.output_filename)
-      $("input[name=mode-radio][value=" + uploadedConfig.mode + "-mode]").prop('checked', true);
-
-      console.log(uploadedConfig)
     }
-  }
-  reader.readAsText(file)
-});
+    reader.readAsText(file)
+  });
 });
 
 function initTooltips() {
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl)
   })
 }
@@ -421,13 +494,13 @@ function getConfig(mode, columns) {
     }
 
     var key = $('#' + column + '-key').val()
-    if(key != null && key != '') detail.key = key
+    if (key != null && key != '') detail.key = key
 
     var params = {}
 
     try {
       var tree = jsonEditors[column].get()
-      if(!$.isEmptyObject(tree)) {
+      if (!$.isEmptyObject(tree)) {
         params.taxonomy_tree = {}
         params.taxonomy_tree.tree = tree
       }
@@ -436,14 +509,14 @@ function getConfig(mode, columns) {
     }
 
     var keySize = $('#' + column + '-key-size')
-    if(keySize != undefined && keySize != null) params.key_size = keySize.val()
+    if (keySize != undefined && keySize != null) params.key_size = keySize.val()
 
-    var parameters =  algorithmsDetails.find(x => algorithm == x.name).parameters
+    var parameters = algorithmsDetails.find(x => algorithm == x.name).parameters
     $.each(parameters, function(i, param) {
       var input = $('#' + column + "-param-" + param.field)
-      if(input != null && input.val() != '') {
-        if(input.is(':checkbox')) params[param.field] = input.is(':checked')
-        else if(input.attr('type') == 'number') params[param.field] = parseInt(input.val())
+      if (input != null && input.val() != '') {
+        if (input.is(':checkbox')) params[param.field] = input.is(':checked')
+        else if (input.attr('type') == 'number') params[param.field] = parseInt(input.val())
         else params[param.field] = input.val()
       }
     })

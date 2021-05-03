@@ -1,11 +1,38 @@
-.checked-focus.btn-check:checked+.btn-primary {
-  box-shadow: 0 0 0 0.25rem rgb(49 132 253 / 50%);
+.json-editor-blackboard:focus-visible {
+outline-width: 0
 }
 
-.checked-focus.btn-check+.btn-primary:focus {
-  box-shadow: none !important
+.form-control.is-valid, .was-validated .form-control:valid {
+background-image: none;
+border-color:#ced4da;
 }
 
-.json-editor-blackbord:focus-visible {
-  outline-width: 0
+.was-validated .form-check-input:valid~.form-check-label {
+color: #212529;
+}
+
+.was-validated .form-check-input:valid:checked {
+background-color: #0d6efd;
+}
+
+.was-validated .form-check-input:valid {
+border-color: #0d6efd;
+}
+
+.was-validated .form-control:valid:focus {
+border-color: #86b7fe;
+box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+}
+.was-validated .form-check-input:valid:focus {
+box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%)
+}
+
+.was-validated .form-select:valid:focus {
+order-color: #86b7fe;
+box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+}
+
+.was-validated .form-select:valid {
+border-color: #ced4da;
+background-image: none;
 }

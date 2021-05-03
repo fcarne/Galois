@@ -2,7 +2,7 @@ package org.galois.core.engine
 
 import com.fasterxml.jackson.annotation.*
 
-enum class Mode {
+enum class EngineMode {
     @JsonProperty("encrypt")
     ENCRYPT,
 
@@ -12,7 +12,7 @@ enum class Mode {
 
 open class EngineConfiguration(
     val outputFilename: String,
-    var mode: Mode = Mode.ENCRYPT,
+    var mode: EngineMode = EngineMode.ENCRYPT,
     val encryptionDetails: List<EncryptionDetail>
 ) : Cloneable {
     public override fun clone() = EngineConfiguration(outputFilename, mode, encryptionDetails.map { it.copy() })

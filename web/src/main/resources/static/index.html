@@ -10,42 +10,45 @@
     <title>Galois UI</title>
 </head>
 <body>
-<div class="container vh-100 p-3">
-    <div class="row align-items-center h-100">
-        <div class="col bg-light p-5 mh-100 rounded-3">
-            <div class="row mb-2">
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row">
+        <div class="col bg-light m-4 px-5 py-4 border rounded-3">
+            <div class="row">
                 <div class="col"><h1 class="display-3 text-center">Galois Job Configuration</h1></div>
             </div>
+            <hr class="mb-4"/>
             <div class="row">
-                <form>
+                <form name="configuration">
                     <div id="wizard">
 
                         <h3>Dataset and mode</h3>
                         <section>
                             <div class="mb-3">
                                 <label for="dataset-input" class="form-label">Select the csv dataset to work on</label>
-                                <input class="form-control" type="file" id="dataset-input" required>
+                                <input class="form-control" type="file" id="dataset-input" name="dataset-input"
+                                       required>
                             </div>
                             <div class="mb-3">
                                 <label for="config-input" class="form-label">Upload a JSON configuration file...</label>
-                                <input class="form-control" type="file" id="config-input">
+                                <input class="form-control" type="file" id="config-input" name="config-input">
                             </div>
                             <hr/>
                             <p class="mb-2">... or create it manually.</p>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="output-filename" required>
+                                <input type="text" class="form-control" id="output-filename" name="output-filename"
+                                       required>
                                 <label for="output-filename">Output File Name</label>
                             </div>
                             <div class="mb-3">
                                 <span class="pe-1">Select the mode: </span>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="mode-radio" id="encrypt-radio"
-                                           value="encrypt" checked>
+                                           value="encrypt" checked required>
                                     <label class="form-check-label" for="encrypt-radio">Encrypt</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="mode-radio" id="decrypt-radio"
-                                           value="decrypt">
+                                           value="decrypt" required>
                                     <label class="form-check-label" for="decrypt-radio">Decrypt</label>
                                 </div>
                             </div>
@@ -53,7 +56,7 @@
                         <h3>Columns</h3>
                         <section>
                             <p class="mb-2">Click on the columns you want to add</p>
-                            <div id="columns" class="row row-cols-3">
+                            <div id="columns" class="list-group">
 
                             </div>
                         </section>
@@ -68,7 +71,8 @@
                             <p class="mb-2">This is your configuration: </p>
                             <pre id="summary" style="height: 500px" class="overflow-auto rounded-2"></pre>
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="confirm-switch" required>
+                                <input class="form-check-input" type="checkbox" id="confirm-switch"
+                                       name="confirm-switch" required>
                                 <label class="form-check-label" for="confirm-switch">I agree to send the dataset</label>
                             </div>
                         </section>

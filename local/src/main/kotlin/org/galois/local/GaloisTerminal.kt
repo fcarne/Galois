@@ -8,7 +8,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.runBlocking
 import org.galois.core.engine.GaloisEngine
-import org.galois.core.engine.Mode
+import org.galois.core.engine.EngineMode
 import org.galois.core.engine.TaxonomyTree
 import org.galois.core.provider.GaloisJCE
 import picocli.CommandLine
@@ -56,11 +56,11 @@ class GaloisTerminal {
         val engine = GaloisEngine(dataset, config)
         val computedDataset: Table
 
-        println("Started ${if (config.mode == Mode.ENCRYPT) "encrypting" else "decrypting"}")
+        println("Started ${if (config.mode == EngineMode.ENCRYPT) "encrypting" else "decrypting"}")
 
         val time = measureTimeMillis { computedDataset = engine.compute() }
 
-        println("${if (config.mode == Mode.ENCRYPT) "Encrypted" else "Decrypted"} ${dataset.rowCount()} lines in $time ms")
+        println("${if (config.mode == EngineMode.ENCRYPT) "Encrypted" else "Decrypted"} ${dataset.rowCount()} lines in $time ms")
         println("Saving files to directory ${config.outputDir}...")
 
         val computedDatasetFile = File(config.outputDir, config.outputFilename)

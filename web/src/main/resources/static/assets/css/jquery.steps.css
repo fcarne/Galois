@@ -124,7 +124,7 @@ border-color: #6da8fd;
 background: #6da8fd;
 color: white
 }
-
+.wizard>.steps>ul>li.current:after,
 .wizard>.steps>ul>li.done:after{
  background: #6da8fd;
 }
@@ -153,11 +153,14 @@ color: white
 }
 
 .wizard>.steps .disabled a,
-.wizard>.steps .disabled a:hover,
 .wizard>.steps .disabled a:active {
 	/*background: #eee;*/
 	color: #aaa;
 	cursor: default;
+}
+
+.wizard>.steps .disabled a:hover {
+  color: #3b424a
 }
 
 .wizard>.steps .current a,
@@ -183,13 +186,13 @@ color: white
 }
 
 .wizard>.content {
-	background: #eee;
+	background: #f3f3f3;
     border:	1px solid #dee2e6!important;
 	display: block;
     padding: 1em;
     margin: 1em 0em;
-	/*min-height: 35em;*/
-	overflow: auto;
+	/*min-height: 35em;
+	overflow: auto;*/
 	position: relative;
 	width: auto;
 	-webkit-border-radius: 5px;
@@ -274,11 +277,16 @@ color: white
 	border-radius: 5px;
 }
 
+.wizard>.actions a:focus {
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+}
+
 .wizard>.actions .disabled a,
 .wizard>.actions .disabled a:hover,
 .wizard>.actions .disabled a:active {
 	background: #eee;
 	color: #aaa;
+	border: 1px solid #dee2e6!important;
 }
 
 .wizard>.loading {}

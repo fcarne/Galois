@@ -12,11 +12,14 @@ class LocalEngineConfiguration(
     var input: String,
     val outputDir: String,
     outputFilename: String,
-    mode: Mode,
+    mode: EngineMode,
     encryptionDetails: List<EncryptionDetail>
-) : EngineConfiguration(outputFilename, mode, encryptionDetails)
+) : EngineConfiguration(outputFilename, mode, encryptionDetails) {
+    override fun clone() =
+        LocalEngineConfiguration(input, outputDir, outputFilename, mode, encryptionDetails.map { it.copy() })
+}
 
-class LocalTaxonomyTree(val outputFilename: String, tree: TaxonomyNode): TaxonomyTree(tree)
+class LocalTaxonomyTree(val outputFilename: String, tree: TaxonomyNode) : TaxonomyTree(tree)
 
 class LocalTaxonomyTreeDeserializer : JsonDeserializer<LocalTaxonomyTree>() {
     override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): LocalTaxonomyTree? {

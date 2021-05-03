@@ -4,4 +4,15 @@
 
 plugins {
     id("org.galois.kotlin-library-conventions")
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.4.32"
+    id("org.jetbrains.kotlin.kapt")
+}
+
+allOpen {
+    annotation("org.openjdk.jmh.annotations.State")
+}
+
+dependencies {
+    testImplementation("org.openjdk.jmh:jmh-core:1.29")
+    kaptTest("org.openjdk.jmh:jmh-generator-annprocess:1.29")
 }
