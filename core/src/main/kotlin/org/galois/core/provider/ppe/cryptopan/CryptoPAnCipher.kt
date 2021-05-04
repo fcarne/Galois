@@ -79,7 +79,7 @@ class CryptoPANCipher : GaloisCipher() {
 
         val bitsLength = parameterSpec.bitsMaxLength
         if (opMode == Cipher.ENCRYPT_MODE) {
-            val ciphertext = FluentBitSet(parameterSpec.bitsMaxLength)
+            val ciphertext = FluentBitSet(bitsLength)
             for (pos in 0 until inputLen * 8) {
                 val otp = calculateOTP(plaintext, padBits, pos)
                 val cipherInput = otp.toByteArray()

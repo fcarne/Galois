@@ -35,6 +35,7 @@ import kotlin.experimental.and
 import kotlin.experimental.or
 import kotlin.math.ceil
 import kotlin.math.log2
+import kotlin.system.measureTimeMillis
 
 class GaloisEngine(private val dataset: Table, configuration: EngineConfiguration) {
     private val configuration: EngineConfiguration
@@ -206,8 +207,8 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
         val values = column.toMutableList()
         if (detail.params.taxonomyTree != null) values.addAll(detail.params.taxonomyTree.root.list)
 
-        return when (detail.cipher) {
-            AICD_ALGORITHM_NAME -> {
+        return when {
+            detail.cipher == AICD_ALGORITHM_NAME && configuration.mode == EngineMode.ENCRYPT -> {
                 val parameterSpec = AICDParameterSpec()
                 parameterSpec.m = (detail.params.cipherSpecific["m"] as? Long
                     ?: values.maxByOrNull { it.toString().toLong() }).toString().toLong()
@@ -215,7 +216,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                 parameterSpec
             }
 
-            FOPE_ALGORITHM_NAME -> {
+            detail.cipher == FOPE_ALGORITHM_NAME && configuration.mode == EngineMode.ENCRYPT -> {
                 val parameterSpec = FOPEParameterSpec()
                 parameterSpec.d = (detail.params.cipherSpecific["d"] as? Number)?.toByte()
                     ?: ceil(log2(values.maxByOrNull { it.toString().toLong() }.toString().toDouble())).toInt().toByte()
@@ -226,7 +227,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                 parameterSpec
             }
 
-            PIORE_ALGORITHM_NAME -> {
+            detail.cipher == PIORE_ALGORITHM_NAME && configuration.mode == EngineMode.ENCRYPT -> {
                 val parameterSpec = PIOREParameterSpec()
                 parameterSpec.d = (detail.params.cipherSpecific["d"] as? Number)?.toByte()
                     ?: ceil(log2(values.maxByOrNull { it.toString().toLong() }.toString().toDouble())).toInt().toByte()
@@ -234,20 +235,23 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                 parameterSpec
             }
 
-            CRYPTOPAN_ALGORITHM_NAME -> {
+            detail.cipher == CRYPTOPAN_ALGORITHM_NAME -> {
                 val ipMode = detail.params.cipherSpecific["ip"]
                 val parameterSpec = CryptoPAnParameterSpec()
-                parameterSpec.maxLength =
-                    when (ipMode) {
-                        "4" -> 4
-                        "6" -> 16
-                        else -> detail.params.cipherSpecific["max_length"] as? Int
-                            ?: values.maxByOrNull { it.toString().length } as Int
-                    }
+                val time = measureTimeMillis {
+                    parameterSpec.maxLength =
+                        when (ipMode) {
+                            "4" -> 4
+                            "6" -> 16
+                            else -> detail.params.cipherSpecific["max_length"] as? Int
+                                ?: values.maxByOrNull { it.toString().length } as Int
+                        }
+                }
+                println("$time ms")
                 parameterSpec
             }
 
-            HPCBC_ALGORITHM_NAME -> {
+            detail.cipher == HPCBC_ALGORITHM_NAME -> {
                 val parameterSpec = HPCBCParameterSpec()
                 parameterSpec.integrityCheck = detail.params.cipherSpecific["integrity_check"] as? Boolean ?: false
                 parameterSpec.blockSize = detail.params.cipherSpecific["block_size"] as? Int ?: parameterSpec.blockSize
@@ -255,7 +259,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                 parameterSpec
             }
 
-            in GaloisJCE.fpeAlgorithms -> {
+            detail.cipher in GaloisJCE.fpeAlgorithms -> {
                 val parameterSpec: FPEParameterSpec =
                     if (detail.cipher == DFF_ALGORITHM_NAME) DFFParameterSpec() else FF3ParameterSpec()
 
