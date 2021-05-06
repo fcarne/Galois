@@ -2,17 +2,53 @@ var algorithmsDetails = []
 
 function fetchAlgorithms() {
   fetch('/details').then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      $.each(data, function(key, val) {
-        algorithmsDetails.push(val);
-      });
-
-      console.log(algorithmsDetails)
-    }).catch(function(err) {
-      console.log('Fetch problem: ' + err.message);
+    return response.json();
+  })
+  .then(function(data) {
+    $.each(data, function(key, val) {
+      algorithmsDetails.push(val);
     });
+
+    console.log(algorithmsDetails)
+  }).catch(function(err) {
+    alertError("Sorry, the server is not working. Retry later :(");
+  });
+}
+
+var removeAlertTimeout
+function alertError(msg) {
+  var container = $('#alert-container')
+  var alertNode
+
+  if(container.is(':empty')){
+    alertNode = $('<div></div>').addClass('alert alert-danger d-flex align-items-center alert-dismissible fade show')
+    .css('z-index', 2500).attr('role', 'alert')
+
+    var message = $('<div></div>').text(msg)
+
+    alertNode.append('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" '
+    + 'class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16">'
+    + '<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 '
+    + '1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905'
+    + ' 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" /></svg>')
+    alertNode.append(message)
+    alertNode.append('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>')
+
+    container.append(alertNode)
+
+  } else {
+    alertNode = container.find('.alert')
+    alertNode.find('div').text(msg)
+    clearTimeout(removeAlert)
+  }
+
+  removeAlertTimeout = setTimeout(function(){
+    closeAlertMessage()
+  }, 5000);
+}
+
+function closeAlertMessage() {
+  new bootstrap.Alert($('.alert')[0]).close()
 }
 
 function extractColumns() {
@@ -30,12 +66,12 @@ function extractColumns() {
           var id = entry + "-column-select"
           var label = $("<label></label>").addClass("list-group-item list-group-item-action").text(entry)
           var checkbox = $("<input>").attr({
-              type: "checkbox",
-              id: id,
-              value: entry,
-              name: "column"
-            })
-            .addClass("form-check-input me-1")
+            type: "checkbox",
+            id: id,
+            value: entry,
+            name: "column"
+          })
+          .addClass("form-check-input me-1")
 
           label.prepend(checkbox)
           $('#columns').append(label)
@@ -44,7 +80,6 @@ function extractColumns() {
       };
 
       reader.onerror = function(event) {
-        console.log("parse error")
         $('#dataset-input').val('')
         $('#details').empty()
         reject('ERROR')
@@ -137,12 +172,14 @@ function createTaxonomyInput(column) {
       var reader = new FileReader();
       reader.onload = function(event) {
         var json = event.target.result;
-        var result = JSON.parse(json)
-
-        var editor = new JsonEditor('#' + id, algorithmsDetails)
-        editor.load(result)
-
-        $(this).val('')
+        try {
+          var result = JSON.parse(json)
+          var editor = new JsonEditor('#' + id, algorithmsDetails, {})
+          editor.load(result)
+          $(this).val('')
+        } catch(e) {
+          alertError("Please check that the JSON file is valid")
+        }
       }
     }
     reader.readAsText(file)
@@ -166,51 +203,51 @@ function createParamInput(column, family, param, mode) {
   var input
   switch (param.condition_type) {
     case "REGEX":
-      input = $('<input>').addClass('form-control').attr({
-        type: 'text',
-        id: id,
-        pattern: param.condition
-      })
-      break;
+    input = $('<input>').addClass('form-control').attr({
+      type: 'text',
+      id: id,
+      pattern: param.condition
+    })
+    break;
     case "RANGE":
-      var range = param.condition.split('..')
-      input = $('<input>').addClass('form-control').attr({
-        type: 'number',
-        id: id,
-        min: range[0],
-        max: range[1]
-      })
-      break;
+    var range = param.condition.split('..')
+    input = $('<input>').addClass('form-control').attr({
+      type: 'number',
+      id: id,
+      min: range[0],
+      max: range[1]
+    })
+    break;
     case "LOWER_LIMIT":
-      input = $('<input>').addClass('form-control').attr({
-        type: 'number',
-        id: id,
-        min: param.condition
-      })
-      break;
+    input = $('<input>').addClass('form-control').attr({
+      type: 'number',
+      id: id,
+      min: param.condition
+    })
+    break;
     case "DISTINCT_VALUES":
-      var values = param.condition.split(', ')
-      input = $("<select></select>").addClass("form-select").attr({
-        id: id,
-        'aria-label': param.description
-      })
-      input.append($('<option>').text('Select an option'))
-      $.each(values, function(i, val) {
-        input.append($('<option>', {
-          value: val,
-          text: val
-        }));
-      })
-      break;
+    var values = param.condition.split(', ')
+    input = $("<select></select>").addClass("form-select").attr({
+      id: id,
+      'aria-label': param.description
+    })
+    input.append($('<option>').text('Select an option'))
+    $.each(values, function(i, val) {
+      input.append($('<option>', {
+        value: val,
+        text: val
+      }));
+    })
+    break;
     case "BOOLEAN":
-      div = $("<div></div>").addClass("form-check form-switch");
-      input = $("<input>").attr({
-        type: "checkbox",
-        id: id,
-        value: param.field
-      }).addClass("form-check-input")
-      label.addClass("form-check-label")
-      break;
+    div = $("<div></div>").addClass("form-check form-switch");
+    input = $("<input>").attr({
+      type: "checkbox",
+      id: id,
+      value: param.field
+    }).addClass("form-check-input")
+    label.addClass("form-check-label")
+    break;
   }
   input.attr({name: 'param', required: mode == 'decrypt' && param.decryption_required})
   div.append(input)
@@ -224,13 +261,13 @@ function createDetailsAccordion(column, mode) {
   var div = $('<div></div>').addClass('accordion-item').attr("id", id)
   var title = $('<h2></h2>').addClass('accordion-header').attr('id', id + "-header")
   var controls = $('<button></button>').addClass('accordion-button collapsed')
-    .attr({
-      type: "button",
-      'data-bs-toggle': "collapse",
-      'data-bs-target': '#' + id + '-item',
-      'aria-expanded': "false",
-      'aria-controls': id + '-item'
-    }).text('Set the parameters for ' + column)
+  .attr({
+    type: "button",
+    'data-bs-toggle': "collapse",
+    'data-bs-target': '#' + id + '-item',
+    'aria-expanded': "false",
+    'aria-controls': id + '-item'
+  }).text('Set the parameters for ' + column)
   title.append(controls)
 
   var item = $('<div></div>').addClass('accordion-collapse collapse').attr({
@@ -269,7 +306,7 @@ function createDetailsAccordion(column, mode) {
     var algorithm = algorithmsDetails.find(x => this.value == x.name)
     parametersRow.empty()
     if (algorithm.parameters != null && algorithm.parameters.length != 0)
-      parametersRow.append($('<div class="col-12"><p style="margin: -0.5rem">Algorithm specific parameters: </p></div>'))
+    parametersRow.append($('<div class="col-12"><p style="margin: -0.5rem">Algorithm specific parameters: </p></div>'))
 
     $.each(algorithm.parameters, function(i, param) {
       var div = $('<div></div>').addClass('row').append($('<div></div>').addClass('col-12'))
@@ -304,6 +341,9 @@ $(window).on('load', function() {
     titleTemplate: "#title#",
     transitionEffect: "slide",
     autoFocus: true,
+    labels: {
+      finish: "Send"
+    },
     onStepChanging: function(event, currentIndex, newIndex) {
       $('#wizard-p-'+currentIndex).addClass('was-validated')
       if (newIndex == 1) {
@@ -375,6 +415,7 @@ $(window).on('load', function() {
             if (detail.key_size != null && keySizeInput != null) keySizeInput.val(detail.key_size)
 
             if (detail.taxonomy_tree != null) jsonEditors[column].load(detail.taxonomy_tree.tree)
+            else jsonEditors[column].load({})
 
             for (var param in detail.params) {
               var paramInput = $('#' + column + '-param-' + param)
@@ -420,13 +461,19 @@ $(window).on('load', function() {
       return true
     },
     onFinishing: function(event, currentIndex) {
-          $('#wizard-p-'+currentIndex).addClass('was-validated')
+      $('#wizard-p-'+currentIndex).addClass('was-validated')
       if (!$('#confirm-switch').is(':checked')) return false
 
       var formData = new FormData();
       formData.append("dataset", document.getElementById("dataset-input").files[0]);
-      formData.append("config", JSON.stringify(config));
+      try {
+        formData.append("config", JSON.stringify(config));
+      } catch(e) {
+        alertError("Please check that the summary is a valid JSON object (maybe you edited it)")
+        return false
+      }
 
+      var finishButton = $('.actions.clearfix a[href="#finish"]')
       $.ajax({
         url: '/doFinal',
         type: 'post',
@@ -437,7 +484,6 @@ $(window).on('load', function() {
           responseType: 'blob'
         },
         success: function(data) {
-          console.log(data)
           var a = document.createElement('a');
           var url = window.URL.createObjectURL(data);
           a.href = url;
@@ -448,9 +494,12 @@ $(window).on('load', function() {
           window.URL.revokeObjectURL(url);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-          alert("Status: " + textStatus + "Error: " + errorThrown);
+          alertError(errorThrown)
         }
+      }).done(function() {
+        finishButton.text('Send')
       });
+      finishButton.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...')
 
       return true
     }
@@ -462,9 +511,13 @@ $(window).on('load', function() {
       var reader = new FileReader();
       reader.onload = function(event) {
         var json = event.target.result;
-        uploadedConfig = JSON.parse(json)
-        $(this).val('')
-
+        try {
+          uploadedConfig = JSON.parse(json)
+        } catch(e) {
+          alertError("Please check that the JSON file is valid")
+          return
+        }
+        closeAlertMessage()
         $('#output-filename').val(uploadedConfig.output_filename)
         $("input[name=mode-radio][value=" + uploadedConfig.mode + "-mode]").prop('checked', true);
       }
@@ -505,7 +558,8 @@ function getConfig(mode, columns) {
         params.taxonomy_tree.tree = tree
       }
     } catch (ex) {
-      console.log('empty tree')
+      alertError("Please check that the taxonomy tree of " + column + " is a valid JSON document")
+      return {}
     }
 
     var keySize = $('#' + column + '-key-size')

@@ -5,6 +5,6 @@ import java.util.*
 
 class PIORETest : OPETest() {
     override val algorithmName = PIORE_ALGORITHM_NAME
-    override val customKey = PIORESecretKey(16.toByte(), 8.toByte(), ByteArray(30))
-    override val base64Key = PIORESecretKey(Base64.getDecoder().decode("JTbfxrghvc2TDIR6/Bp/yGugI5kD2F8xMB3PLZ/iEwg="))
+    override val customKey = PIORESecretKey(1000, 8.toByte(), ByteArray(29))
+    override val base64Key = PIORESecretKey(Base64.getDecoder().decode("LxcIJC9eVOf4g8aO4z7EDA=="))
 }

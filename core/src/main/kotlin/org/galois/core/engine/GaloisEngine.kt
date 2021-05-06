@@ -1,11 +1,9 @@
 package org.galois.core.engine
 
-import org.galois.core.provider.decodeHex
-import org.galois.core.provider.ope.piore.PIORE_ALGORITHM_NAME
-import org.galois.core.provider.toHexString
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.galois.core.provider.GaloisJCE
+import org.galois.core.provider.decodeHex
 import org.galois.core.provider.fpe.FPEParameterSpec
 import org.galois.core.provider.fpe.dff.DFFParameterSpec
 import org.galois.core.provider.fpe.dff.DFF_ALGORITHM_NAME
@@ -15,16 +13,20 @@ import org.galois.core.provider.ope.aicd.AICD_ALGORITHM_NAME
 import org.galois.core.provider.ope.fope.FOPEParameterSpec
 import org.galois.core.provider.ope.fope.FOPE_ALGORITHM_NAME
 import org.galois.core.provider.ope.piore.PIOREParameterSpec
+import org.galois.core.provider.ope.piore.PIORE_ALGORITHM_NAME
 import org.galois.core.provider.ppe.cryptopan.CRYPTOPAN_ALGORITHM_NAME
 import org.galois.core.provider.ppe.cryptopan.CryptoPAnParameterSpec
 import org.galois.core.provider.ppe.hpcbc.HPCBCParameterSpec
 import org.galois.core.provider.ppe.hpcbc.HPCBC_ALGORITHM_NAME
+import org.galois.core.provider.toHexString
 import tech.tablesaw.api.StringColumn
 import tech.tablesaw.api.Table
 import tech.tablesaw.columns.Column
+import java.math.BigDecimal
 import java.math.BigInteger
 import java.net.InetAddress
 import java.nio.ByteBuffer
+import java.security.InvalidKeyException
 import java.security.spec.AlgorithmParameterSpec
 import java.util.*
 import javax.crypto.Cipher
@@ -35,7 +37,6 @@ import kotlin.experimental.and
 import kotlin.experimental.or
 import kotlin.math.ceil
 import kotlin.math.log2
-import kotlin.system.measureTimeMillis
 
 class GaloisEngine(private val dataset: Table, configuration: EngineConfiguration) {
     private val configuration: EngineConfiguration
@@ -87,13 +88,15 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
     private suspend fun columnDoFinal(detail: EncryptionDetail, column: Column<*>): Column<*> = coroutineScope {
         val computedColumn = StringColumn.create(column.name())
         val (secretKey, parameters) = getKeyAndParameters(detail, column)
-        val cipher = getCipher(detail.cipher, secretKey, parameters)
+        val cipher = getCipher(detail, secretKey, parameters)
 
         val computedTaxonomy =
             detail.params.taxonomyTree?.let { async { taxonomyTreeDoFinal(it, detail, secretKey, parameters) } }
 
         column.forEach { value ->
-            val cell = value.toString()
+            val cell =
+                if (detail.cipher in GaloisJCE.fpeAlgorithms && value is Double) BigDecimal(value).toPlainString()
+                else value.toString()
 
             val input = plaintextToByteArray(cell, detail)
             val output = cipher.doFinal(input)
@@ -111,7 +114,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
         secretKey: SecretKey,
         parameters: AlgorithmParameterSpec?
     ) {
-        val cipher = getCipher(detail.cipher, secretKey, parameters)
+        val cipher = getCipher(detail, secretKey, parameters)
         taxonomyNodeDoFinal(taxonomyTree.root, cipher, detail)
     }
 
@@ -205,7 +208,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
     private fun getParameterSpec(detail: EncryptionDetail, column: Column<*>): AlgorithmParameterSpec? {
 
         val values = column.toMutableList()
-        if (detail.params.taxonomyTree != null) values.addAll(detail.params.taxonomyTree.root.list)
+        if (detail.params.taxonomyTree != null) values.addAll(detail.params.taxonomyTree.root.toList())
 
         return when {
             detail.cipher == AICD_ALGORITHM_NAME && configuration.mode == EngineMode.ENCRYPT -> {
@@ -229,7 +232,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
 
             detail.cipher == PIORE_ALGORITHM_NAME && configuration.mode == EngineMode.ENCRYPT -> {
                 val parameterSpec = PIOREParameterSpec()
-                parameterSpec.d = (detail.params.cipherSpecific["d"] as? Number)?.toByte()
+                parameterSpec.n = (detail.params.cipherSpecific["d"] as? Number)?.toByte()
                     ?: ceil(log2(values.maxByOrNull { it.toString().toLong() }.toString().toDouble())).toInt().toByte()
 
                 parameterSpec
@@ -238,16 +241,14 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
             detail.cipher == CRYPTOPAN_ALGORITHM_NAME -> {
                 val ipMode = detail.params.cipherSpecific["ip"]
                 val parameterSpec = CryptoPAnParameterSpec()
-                val time = measureTimeMillis {
-                    parameterSpec.maxLength =
-                        when (ipMode) {
-                            "4" -> 4
-                            "6" -> 16
-                            else -> detail.params.cipherSpecific["max_length"] as? Int
-                                ?: values.maxByOrNull { it.toString().length } as Int
-                        }
-                }
-                println("$time ms")
+                parameterSpec.maxLength =
+                    when (ipMode) {
+                        "4" -> 4
+                        "6" -> 16
+                        else -> detail.params.cipherSpecific["max_length"] as? Int
+                            ?: values.maxByOrNull { it.toString().length }.toString().length
+                    }
+
                 parameterSpec
             }
 
@@ -276,12 +277,19 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
 
     }
 
-    private fun getCipher(cipherName: String, secretKey: SecretKey, parameters: AlgorithmParameterSpec?): Cipher {
-        val cipher = Cipher.getInstance(cipherName)
+    private fun getCipher(detail: EncryptionDetail, secretKey: SecretKey, parameters: AlgorithmParameterSpec?): Cipher {
+        val cipher = Cipher.getInstance(detail.cipher)
         val opMode = if (configuration.mode == EngineMode.ENCRYPT) Cipher.ENCRYPT_MODE else Cipher.DECRYPT_MODE
 
-        if (cipherName in GaloisJCE.opeAlgorithms + GaloisJCE.symmetricAlgorithms) cipher.init(opMode, secretKey)
-        else cipher.init(opMode, secretKey, parameters)
+        try {
+            if (detail.cipher in GaloisJCE.opeAlgorithms + GaloisJCE.symmetricAlgorithms) cipher.init(opMode, secretKey)
+            else cipher.init(opMode, secretKey, parameters)
+        } catch (e: InvalidKeyException) {
+            throw InvalidKeyException(
+                """Invalid key for ${detail.columnName}:
+                |${e.localizedMessage}""".trimMargin()
+            )
+        }
         return cipher
     }
 

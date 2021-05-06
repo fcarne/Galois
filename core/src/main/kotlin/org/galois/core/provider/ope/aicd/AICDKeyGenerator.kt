@@ -43,9 +43,8 @@ class AICDKeyGenerator : KeyGeneratorSpi() {
 
         // -2 to avoid sign byte
         val lambda = keySize - 2
-        val k =
-            BigInteger(lambda, secureRandom).mod(BigInteger.TWO.pow(lambda + 1).subtract(BigInteger.TWO.pow(lambda)))
-                .add(BigInteger.TWO.pow(lambda))
+        val k = BigInteger(lambda, secureRandom)
+            .mod(BigInteger.TWO.pow(lambda + 1) - BigInteger.TWO.pow(lambda)) + BigInteger.TWO.pow(lambda)
 
         return AICDSecretKey(k)
     }

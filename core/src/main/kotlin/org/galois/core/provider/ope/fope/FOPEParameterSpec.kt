@@ -19,11 +19,11 @@ class FOPEParameterSpec(tau: Int = 16, d: Byte = 8) : AlgorithmParameterSpec {
     @ParameterDescription(
         "The binary logarithm of the upper bound of the domain",
         ParameterDescription.ConditionType.RANGE,
-        "1..127"
+        "1..63"
     )
     var d: Byte = 8
         set(value) {
-            require(value > 0) { "D must be greater than 0, was $value" }
+            require(value in 1..63) { "D must be in range 1..63, was $value" }
             field = value
         }
 

@@ -5,17 +5,17 @@ import javax.crypto.SecretKey
 
 class PIORESecretKey : SecretKey {
     private val encoded: ByteArray
-    val m: Byte
-    val d: Byte
+    val m: Short
+    val n: Byte
     val k: ByteArray
 
-    constructor(m: Byte, d: Byte, k: ByteArray) {
+    constructor(m: Short, n: Byte, k: ByteArray) {
         this.m = m
-        this.d = d
+        this.n = n
         this.k = k
 
         val buffer = ByteBuffer.allocate(FIXED_LENGTH + k.size)
-        buffer.put(m).put(d).put(k)
+        buffer.putShort(m).put(n).put(k)
         this.encoded = buffer.array()
     }
 
@@ -23,12 +23,12 @@ class PIORESecretKey : SecretKey {
         require(isKeySizeValid(encoded.size * 8)) { getKeySizeError(encoded.size * 8) }
         val buffer = ByteBuffer.wrap(encoded)
 
-        this.m = buffer.get()
-        this.d = buffer.get()
+        this.m = buffer.short
+        this.n = buffer.get()
         this.k = ByteArray(buffer.remaining())
         buffer[k]
 
-        require(isKeyValid(m, d)) { getInvalidParameters(m, d) }
+        require(isKeyValid(m, n)) { getInvalidParameters(m, n) }
 
         this.encoded = encoded.clone()
     }
@@ -39,18 +39,21 @@ class PIORESecretKey : SecretKey {
 
     override fun getEncoded() = encoded.clone()
 
-    private fun isKeyValid(m: Byte, n: Byte) = m >= 12 && n > 0
+    private fun isKeyValid(m: Short, n: Byte) = m in MIN_M..MAX_M && n > 0
 
-    private fun getInvalidParameters(m: Byte, n: Byte): String {
+    private fun getInvalidParameters(m: Short, n: Byte): String {
         val error = StringBuilder().append("Invalid parameters:\n")
-        if (m < 12) error.append(" - m must be greater than 12 in order to avoid collision, was $m").append("\n")
-        if (n < 0) error.append(" - d must be positive. was $n").append("\n")
+        if (m !in MIN_M..MAX_M) error.append(" - m must be in range $MIN_M..$MAX_M, was $m").append("\n")
+        if (n < 0) error.append(" - n must be positive. was $n").append("\n")
         return error.toString()
     }
 
     companion object {
         val KEY_SIZES = intArrayOf(128, 192, 256, 384, 512)
-        const val FIXED_LENGTH = 2 * Byte.SIZE_BYTES
+        const val FIXED_LENGTH = Short.SIZE_BYTES + Byte.SIZE_BYTES
+
+        const val MAX_M = Short.MAX_VALUE / 2
+        const val MIN_M = 512
 
         fun isKeySizeValid(len: Int) = len in KEY_SIZES
         fun getKeySizeError(len: Int) = "Key size can only be ${KEY_SIZES.joinToString()}, was $len"

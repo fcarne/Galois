@@ -69,7 +69,7 @@ class DFFCipher : GaloisCipher() {
         try {
             BigInteger(inputString, radix)
         } catch (e: NumberFormatException) {
-            throw InvalidParameterException("The input is not supported in the current radix $radix")
+            throw InvalidParameterException("$inputString is not supported in the current radix: $radix")
         }
 
         val p = calculateP(radix, inputLen, tweak)
@@ -112,7 +112,7 @@ class DFFCipher : GaloisCipher() {
 
                 val q = calculateQ(i, radix, b)
                 val y = cipher.doFinal(q.xor(j1))
-                val yBig = BigInteger(y.toHexString(), 16)
+                val yBig = y.toHexString().toBigInteger(16)
 
                 // Calculate c
                 val cBig = try {
@@ -145,7 +145,7 @@ class DFFCipher : GaloisCipher() {
 
                 val q = calculateQ(i, radix, a)
                 val y = cipher.doFinal(q.xor(j1))
-                val yBig = BigInteger(y.toHexString(), 16)
+                val yBig = y.toHexString().toBigInteger(16)
 
                 // Calculate c
                 val cBig = try {
@@ -183,7 +183,7 @@ class DFFCipher : GaloisCipher() {
     private fun calculateQ(i: Int, radix: Int, s: String): ByteArray {
         val q = ByteArray(16) // Q is always 16 bytes, zero initialized
         q[0] = i.toByte()
-        val sBytes = BigInteger(s, radix).toByteArray()
+        val sBytes = s.toBigInteger(radix).toByteArray()
         System.arraycopy(sBytes, 0, q, 16 - sBytes.size, sBytes.size)
         return q
     }

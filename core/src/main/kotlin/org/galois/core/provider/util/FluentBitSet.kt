@@ -12,8 +12,8 @@ class FluentBitSet : Cloneable {
         bitset = BitSet()
     }
 
-    constructor(nbits: Int) {
-        bitset = BitSet(nbits)
+    constructor(nBits: Int) {
+        bitset = BitSet(nBits)
     }
 
     private constructor(bitset: BitSet) {
@@ -26,12 +26,20 @@ class FluentBitSet : Cloneable {
         return newBitSet
     }
 
+    fun getValue(bitIndex: Int) = bitset[bitIndex]
+
     operator fun get(from: Int, to: Int): FluentBitSet = FluentBitSet(bitset[from, to])
 
-    operator fun set(fromIndex: Int, toIndex: Int): FluentBitSet {
-        bitset[fromIndex] = toIndex
+    fun set(fromIndex: Int, toIndex: Int): FluentBitSet {
+        bitset.set(fromIndex, toIndex)
         return this
     }
+
+    operator fun set(index: Int, value: Boolean): FluentBitSet {
+        bitset[index] = value
+        return this
+    }
+
 
     fun and(set: BitSet): FluentBitSet {
         bitset.and(set)
@@ -66,9 +74,8 @@ class FluentBitSet : Cloneable {
 
         for (i in shifted.indices.reversed()) {
             if (i - rightPart >= words.size) continue
-            if (n % 64 != 0 && i > rightPart - 1) {
-                shifted[i] = shifted[i] or (words[i - rightPart] ushr 64 - n % 64)
-            }
+            if (n % 64 != 0 && i > rightPart - 1) shifted[i] = shifted[i] or (words[i - rightPart] ushr 64 - n % 64)
+
             if (i - leftPart >= words.size) continue
             if (i > leftPart - 1) shifted[i] = shifted[i] or (words[i - leftPart] shl n)
         }
@@ -87,12 +94,9 @@ class FluentBitSet : Cloneable {
         val leftPart = rightPart + 1
 
         for (i in words.indices) {
-            if (i < words.size - rightPart) {
-                shifted[i] = shifted[i] or (words[i + rightPart] ushr n)
-            }
-            if (n % 64 != 0 && i < words.size - leftPart) {
-                shifted[i] = shifted[i] or (words[i + leftPart] shl 64 - n % 64)
-            }
+            if (i < words.size - rightPart) shifted[i] = shifted[i] or (words[i + rightPart] ushr n)
+            if (n % 64 != 0 && i < words.size - leftPart) shifted[i] =
+                shifted[i] or (words[i + leftPart] shl 64 - n % 64)
         }
 
         bitset = BitSet.valueOf(shifted)

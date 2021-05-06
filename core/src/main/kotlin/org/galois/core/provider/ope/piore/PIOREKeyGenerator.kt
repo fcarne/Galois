@@ -40,7 +40,7 @@ class PIOREKeyGenerator : KeyGeneratorSpi() {
         val k = ByteArray(keySize / 8 - PIORESecretKey.FIXED_LENGTH)
         secureRandom.nextBytes(k)
 
-        val m = (secureRandom.nextInt(24 - 12) + 12).toByte()
-        return PIORESecretKey(m, parameterSpec.d, k)
+        val m = (secureRandom.nextInt(PIORESecretKey.MAX_M - PIORESecretKey.MIN_M) + PIORESecretKey.MIN_M).toShort()
+        return PIORESecretKey(m, parameterSpec.n, k)
     }
 }

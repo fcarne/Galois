@@ -113,7 +113,7 @@ class FF3Cipher : GaloisCipher() {
                 // P is fixed-length 16 bytes
                 val p = calculateP(i, radix, w, b).reversedArray()
                 val s: ByteArray = cipher.doFinal(p).reversedArray()
-                val y = BigInteger(s.toHexString(), 16)
+                val y = s.toHexString().toBigInteger(16)
 
                 // Calculate c
                 val cBig = try {
@@ -150,7 +150,7 @@ class FF3Cipher : GaloisCipher() {
                 // P is fixed-length 16 bytes
                 val p = calculateP(i, radix, w, a).reversedArray()
                 val s: ByteArray = cipher.doFinal(p).reversedArray()
-                val y = BigInteger(s.toHexString(), 16)
+                val y = s.toHexString().toBigInteger(16)
 
                 // Calculate c
                 val cBig = try {
@@ -180,7 +180,7 @@ class FF3Cipher : GaloisCipher() {
         w.copyInto(p, 0, 0, 3)
         p[3] = (w[3] xor i.toByte())
         // The remaining 12 bytes of P are copied from reverse(B) with padding
-        val sBytes = BigInteger(s.reversed(), radix).toByteArray()
+        val sBytes = s.reversed().toBigInteger(radix).toByteArray()
         System.arraycopy(sBytes, 0, p, 16 - sBytes.size, sBytes.size)
 
         return p

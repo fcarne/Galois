@@ -6,7 +6,7 @@
   "encryption_details" : [ {
     "column_name" : "native-country",
     "cipher" : "AES",
-    "key" : "onuinBdAvtWiKmSff8cnww==",
+    "key" : "XOw5G+G9nmZvu7ZotHoqCg==",
     "params" : {
       "taxonomy_tree" : {
         "output_filename" : "taxonomy.json",
@@ -16,13 +16,13 @@
   }, {
     "column_name" : "age",
     "cipher" : "FastOPE",
-    "key" : "Qvazw/1AXBQ/oPZ7E5bBAD+JF2XF28k7B23KQmhKUAE="
+    "key" : "QXLZe9aJKEo/xjD+BXFA1j/Bu4CRHZ65B5w6LOc2dBM="
   }, {
     "column_name" : "ip-address",
     "cipher" : "CryptoPAn",
-    "key" : "tQu5FY2fcZpF2KkhxhpKDdKUzp8ETJTKlvDIQXB5hw4=",
+    "key" : "O18nkukZCKDUsOeNzsIRiDPKgwP+N1ie9rhTB9TsGMA=",
     "params" : {
-      "ip" : 4
+      "ip" : "4"
     }
   } ]
 }

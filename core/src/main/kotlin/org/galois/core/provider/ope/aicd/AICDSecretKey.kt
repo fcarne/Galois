@@ -1,6 +1,5 @@
 package org.galois.core.provider.ope.aicd
 
-import org.galois.core.provider.fpe.dff.DFFSecretKey
 import java.math.BigInteger
 import javax.crypto.SecretKey
 
@@ -40,7 +39,7 @@ class AICDSecretKey : SecretKey {
     companion object {
         val KEY_SIZES = intArrayOf(128, 192, 256, 384, 512)
         fun isKeySizeValid(len: Int) = len in KEY_SIZES
-        fun getKeySizeError(len: Int) = "Key size can only be ${DFFSecretKey.KEY_SIZES.joinToString()}, was $len"
+        fun getKeySizeError(len: Int) = "Key size can only be ${KEY_SIZES.joinToString()}, was $len"
     }
 
 }

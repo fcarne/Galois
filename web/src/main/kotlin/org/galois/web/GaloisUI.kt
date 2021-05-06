@@ -24,6 +24,8 @@ import org.galois.core.provider.GaloisJCE
 import org.slf4j.event.Level
 import tech.tablesaw.api.Table
 import java.io.ByteArrayOutputStream
+import java.io.IOException
+import java.security.InvalidKeyException
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
@@ -49,23 +51,36 @@ fun main() {
             post("/doFinal") {
                 val multipartData = call.receiveMultipart().readAllParts()
 
-                try {
+                val mapper = jacksonObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
+                    .enable(SerializationFeature.INDENT_OUTPUT)
+                    .setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
 
-                    val mapper = jacksonObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
-                        .enable(SerializationFeature.INDENT_OUTPUT)
-                        .setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
-
-                    val configuration = multipartData.first { it.name == "config" }.let<PartData, EngineConfiguration> {
+                val configuration = try {
+                    multipartData.first { it.name == "config" }.let {
                         it as PartData.FormItem
-                        mapper.readValue(it.value)
+                        mapper.readValue<EngineConfiguration>(it.value)
                     }
+                } catch (e: JsonParseException) {
+                    System.err.println(e.message)
+                    call.response.status(HttpStatusCode.UnprocessableEntity)
+                    call.respondText { "Something is wrong with the configuration file, please check it again" }
+                    return@post
+                }
 
-                    val dataset: Table = multipartData.first { it.name == "dataset" }.let {
+                val dataset = try {
+                    multipartData.first { it.name == "dataset" }.let {
                         it as PartData.FileItem
                         val fileBytes = it.streamProvider()
                         Table.read().csv(fileBytes, "Dataset")
                     }
+                } catch (e: IOException) {
+                    System.err.println(e.message)
+                    call.response.status(HttpStatusCode.UnprocessableEntity)
+                    call.respondText { "Something is wrong with the dataset, please check it again" }
+                    return@post
+                }
 
+                try {
                     val engine = GaloisEngine(dataset, configuration)
                     val result = engine.compute()
 
@@ -74,19 +89,18 @@ fun main() {
                         ContentType.Application.Zip,
                         HttpStatusCode.OK
                     )
-
                 } catch (e: IllegalArgumentException) {
                     System.err.println(e.message)
                     call.response.status(HttpStatusCode.UnprocessableEntity)
-                    e.message?.let { call.respondText(it) }
-                } catch (e: JsonParseException) {
+                    call.respondText { e.localizedMessage }
+                } catch (e: InvalidKeyException) {
                     System.err.println(e.message)
                     call.response.status(HttpStatusCode.UnprocessableEntity)
-                    e.message?.let { call.respondText(it) }
-                } catch (e: JsonParseException) {
+                    call.respondText { e.localizedMessage }
+                } catch (e: Exception) {
                     System.err.println(e.message)
-                    call.response.status(HttpStatusCode.BadRequest)
-                    e.message?.let { call.respondText(it) }
+                    call.response.status(HttpStatusCode.InternalServerError)
+                    call.respondText { e.localizedMessage }
                 }
             }
 

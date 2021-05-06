@@ -55,17 +55,16 @@ class AICDCipher : GaloisCipher() {
             val m = ByteBuffer.wrap(input).long
             require(m in 0..domain) { "Plaintext must be in range 0..$domain, was $m" }
 
-            val r = BigInteger(k.bitLength(), secureRandom).mod(k.subtract(BigInteger.TWO.multiply(kThreeQuarters)))
-                .add(kThreeQuarters)
-            val c = BigInteger.valueOf(m).multiply(k).add(r)
+            val r = BigInteger(k.bitLength(), secureRandom).mod((k - kThreeQuarters) - kThreeQuarters) + kThreeQuarters
+            val c = m.toBigInteger() * k + r
 
             val cipherArray = c.toByteArray()
             System.arraycopy(cipherArray, 0, output, output.size - cipherArray.size, cipherArray.size)
         } else if (opMode == Cipher.DECRYPT_MODE) {
             val c = BigInteger(input)
-            require(c > BigInteger.ZERO && c <= maxCipherValue) { "Ciphertext must be in range 0..$maxCipherValue, was $c" }
+            require(c >= BigInteger.ZERO && c <= maxCipherValue) { "Ciphertext must be in range 0..$maxCipherValue, was $c" }
 
-            val m = c.divide(k).toLong()
+            val m = (c / k).toLong()
 
             val plaintextArray = ByteBuffer.allocate(Long.SIZE_BYTES).putLong(m).array()
             System.arraycopy(plaintextArray, 0, output, 0, output.size)

@@ -60,73 +60,73 @@
 }
 
 .wizard>.steps>ul {
-  counter-reset: step;
+	counter-reset: step;
 }
 
 .wizard>.steps>ul>li {
-	 float: left;
-      width: 25%;
-      position: relative;
-      text-align: center;
+	float: left;
+	width: 25%;
+	position: relative;
+	text-align: center;
 }
 
 .wizard>.steps>ul>li:before,
 .wizard>.steps>ul>li:after {
-  transition: all 0.25s
+	transition: all 0.25s
 }
 
 .wizard>.steps>ul>li:before{
-  content:counter(step);
-  counter-increment: step;
-  width: 30px;
-  height: 30px;
-  border: 2px solid #bebebe;
-  display: block;
-  margin: 0 auto 10px auto;
-  border-radius: 50%;
-  line-height: 27px;
-  background: white;
-  color: #bebebe;
-  text-align: center;
-  font-weight: bold;
+	content:counter(step);
+	counter-increment: step;
+	width: 30px;
+	height: 30px;
+	border: 2px solid #bebebe;
+	display: block;
+	margin: 0 auto 10px auto;
+	border-radius: 50%;
+	line-height: 27px;
+	background: white;
+	color: #bebebe;
+	text-align: center;
+	font-weight: bold;
 }
 
 .wizard>.steps>ul>li:after{
-  content: '';
-  position: absolute;
-  width:100%;
-  height: 3px;
-  background: #979797;
-  top: 15px;
-  left: -50%;
-  z-index: -1;
+	content: '';
+	position: absolute;
+	width:100%;
+	height: 3px;
+	background: #979797;
+	top: 15px;
+	left: -50%;
+	z-index: -1;
 }
 
 .wizard>.steps>ul>li:first-child:after{
-content: none;
+	content: none;
 }
 
 .wizard>.steps>ul>li.current:before{
-  border-color: #0d6efd;
-  background: #0d6efd;
-  color: #fff;
-  transform: scale(1.25)
+	border-color: #0d6efd;
+	background: #0d6efd;
+	color: #fff;
+	transform: scale(1.25)
 }
 
 .wizard>.steps>ul>li.current.error:before{
-border-color: #dc3545;
-background: #dc3545;
-color: white
+	border-color: #dc3545;
+	background: #dc3545;
+	color: white
 }
 
 .wizard>.steps>ul>li.done:before{
-border-color: #6da8fd;
-background: #6da8fd;
-color: white
+	border-color: #6da8fd;
+	background: #6da8fd;
+	color: white
 }
 .wizard>.steps>ul>li.current:after,
 .wizard>.steps>ul>li.done:after{
- background: #6da8fd;
+	background: #6da8fd;
 }
 
 .wizard>.steps>ul>li,
@@ -160,14 +160,14 @@ color: white
 }
 
 .wizard>.steps .disabled a:hover {
-  color: #3b424a
+	color: #3b424a
 }
 
 .wizard>.steps .current a,
 .wizard>.steps .current a:hover,
 .wizard>.steps .current a:active {
 	/*background: #0d6efd;*/
-    color: #212529;
+	color: #212529;
 	cursor: default;
 }
 
@@ -187,10 +187,10 @@ color: white
 
 .wizard>.content {
 	background: #f3f3f3;
-    border:	1px solid #dee2e6!important;
+	border:	1px solid #dee2e6!important;
 	display: block;
-    padding: 1em;
-    margin: 1em 0em;
+	padding: 1em;
+	margin: 1em 0em;
 	/*min-height: 35em;
 	overflow: auto;*/
 	position: relative;
@@ -278,7 +278,7 @@ color: white
 }
 
 .wizard>.actions a:focus {
-    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+	box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
 }
 
 .wizard>.actions .disabled a,
@@ -289,10 +289,10 @@ color: white
 	border: 1px solid #dee2e6!important;
 }
 
+
 .wizard>.loading {}
 
 .wizard>.loading .spinner {}
-
 
 /* Tabcontrol */
 

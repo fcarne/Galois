@@ -48,6 +48,5 @@ data class TaxonomyNode(
     @JsonFormat(with = [JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY])
     val subcats: MutableList<TaxonomyNode>?
 ) {
-    val list: List<Any>
-        get() = listOf(cat) + (subcats?.flatMap { it.list } ?: emptyList())
+    fun toList(): List<Any> = listOf(cat) + (subcats?.flatMap { it.toList() } ?: emptyList())
 }

@@ -1,6 +1,7 @@
 package org.galois.local
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.core.JsonParseException
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.module.SimpleModule
@@ -14,6 +15,9 @@ import org.galois.core.provider.GaloisJCE
 import picocli.CommandLine
 import tech.tablesaw.api.Table
 import java.io.File
+import java.io.IOException
+import java.lang.Exception
+import java.security.InvalidKeyException
 import kotlin.system.measureTimeMillis
 
 @CommandLine.Command(
@@ -27,16 +31,13 @@ import kotlin.system.measureTimeMillis
 )
 class GaloisTerminal {
 
-    @CommandLine.Command(
-        name = "do-final",
-        description = ["Runs the Galois Engine using the given config file"]
-    )
+    @CommandLine.Command(name = "do-final", description = ["Runs the Galois Engine using the given config file"])
     fun doFinal(
         @CommandLine.Parameters(
             paramLabel = "config",
             description = ["The path of the json configuration file"]
         ) configFile: File
-    ) = runBlocking {
+    ): Int {
         val mapper = jacksonObjectMapper().enable(SerializationFeature.INDENT_OUTPUT)
             .setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
             .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
@@ -44,45 +45,78 @@ class GaloisTerminal {
         SimpleModule().addDeserializer(TaxonomyTree::class.java, LocalTaxonomyTreeDeserializer())
             .also { mapper.registerModule(it) }
 
-        val config = mapper.readValue<LocalEngineConfiguration>(configFile)
+        val config = try {
+            mapper.readValue<LocalEngineConfiguration>(configFile)
+        } catch (e: JsonParseException) {
+            System.err.println("Something is wrong with the configuration file, please check it again")
+            return 10
+        } catch (e: IOException) {
+            System.err.println("Please check that the configuration file exists and is readable")
+            return 10
+        }
+
         val datasetFile = File(config.input)
-        require(datasetFile.isFile && datasetFile.exists() && datasetFile.canRead())
-        { "The input file must exists and be readable" }
 
-        require(File(config.outputDir).mkdir() || File(config.outputDir).isDirectory) { "The output directory is not a directory" }
-
-        val dataset = Table.read().csv(datasetFile)
+        val dataset = try {
+            Table.read().csv(datasetFile)
+        } catch (e: IOException) {
+            System.err.println(
+                "There was a problem while reading from ${datasetFile.absolutePath}, " +
+                        "please check that it is valid and tha the file is readable"
+            )
+            return 10
+        }
 
         val engine = GaloisEngine(dataset, config)
         val computedDataset: Table
 
         println("Started ${if (config.mode == EngineMode.ENCRYPT) "encrypting" else "decrypting"}")
 
-        val time = measureTimeMillis { computedDataset = engine.compute() }
+
+        val time = try {
+            measureTimeMillis { runBlocking { computedDataset = engine.compute() } }
+        } catch (e: IllegalArgumentException) {
+            System.err.println(e.localizedMessage)
+            return 10
+        } catch (e: InvalidKeyException) {
+            System.err.println(e.localizedMessage)
+            return 10
+        } catch (e: Exception) {
+            System.err.println(e.localizedMessage)
+            return 20
+        }
 
         println("${if (config.mode == EngineMode.ENCRYPT) "Encrypted" else "Decrypted"} ${dataset.rowCount()} lines in $time ms")
         println("Saving files to directory ${config.outputDir}...")
 
         val computedDatasetFile = File(config.outputDir, config.outputFilename)
-        computedDataset.write().csv(computedDatasetFile)
+
+        try {
+            computedDataset.write().csv(computedDatasetFile)
+        } catch (e: IOException) {
+            System.err.println("There was a problem while saving the computed dataset to ${config.outputDir} ")
+        }
 
         val configOutput = engine.tidyConfiguration()
         configOutput.encryptionDetails.forEach {
             it.params.taxonomyTree?.let { taxonomyTree ->
                 taxonomyTree as LocalTaxonomyTree
                 val taxonomyOutputFile = File(config.outputDir, taxonomyTree.outputFilename)
-                mapper.writeValue(taxonomyOutputFile, taxonomyTree.tree)
+                mapper.writeValue(taxonomyOutputFile, taxonomyTree.root)
             }
         }
 
         configOutput as LocalEngineConfiguration
         configOutput.input = computedDatasetFile.absolutePath
 
-        SimpleModule().addSerializer(LocalTaxonomyTree::class.java, LocalTaxonomyTreeSerializer(configOutput.outputDir))
-            .also { mapper.registerModule(it) }
+        SimpleModule().addSerializer(
+            LocalTaxonomyTree::class.java, LocalTaxonomyTreeSerializer(configOutput.outputDir)
+        ).also { mapper.registerModule(it) }
 
         val configOutputFile = File(config.outputDir, configFile.name)
         mapper.writeValue(configOutputFile, configOutput)
+
+        return 0
     }
 
     @CommandLine.Command(name = "desc", description = ["Displays the description of the algorithms parameters"])
@@ -97,15 +131,13 @@ class GaloisTerminal {
             else algorithms.forEach { println(GaloisJCE.getDescription(it)) }
             0
         } catch (e: IllegalArgumentException) {
-            println(e.message)
-            64
+            System.err.println(e.message)
+            10
         }
-
-
     }
 }
 
 fun main(args: Array<String>) {
     val exitCode = CommandLine(GaloisTerminal()).execute(*args)
-    println("Exit code: $exitCode")
+    println("Process finished with exit code $exitCode")
 }

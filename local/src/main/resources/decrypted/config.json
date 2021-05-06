@@ -19,7 +19,7 @@
     "column_name" : "ip-address",
     "cipher" : "CryptoPAn",
     "params" : {
-      "ip" : 4
+      "ip" : "4"
     }
   } ]
 }

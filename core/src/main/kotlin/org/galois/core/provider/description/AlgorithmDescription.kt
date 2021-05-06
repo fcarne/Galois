@@ -11,7 +11,9 @@ class AlgorithmDescription(val name: String, val family: String) {
         """.trimMargin()
 
     private fun printParameters() = parameters?.let { list ->
-        "Parameters:\n ${list.joinToString("\n") { it.toString() }}\n"
+        """Parameters:
+            |${list.joinToString("\n") { it.toString() }}
+            |""".trimMargin()
     } ?: ""
 
     class Parameter(

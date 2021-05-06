@@ -44,6 +44,7 @@ dependencies {
     // DataFrame
     implementation("tech.tablesaw:tablesaw-core:0.38.2")
 
+    // Logging
     implementation("org.slf4j:slf4j-api:1.7.30")
     implementation("org.slf4j:slf4j-simple:1.7.30")
 }

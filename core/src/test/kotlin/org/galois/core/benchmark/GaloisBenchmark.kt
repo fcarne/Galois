@@ -1,12 +1,13 @@
 package org.galois.core.benchmark
 
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import org.galois.core.engine.EncryptionDetail
 import org.galois.core.engine.EngineConfiguration
 import org.galois.core.engine.EngineMode
 import org.galois.core.engine.GaloisEngine
 import org.galois.core.provider.fpe.dff.DFF_ALGORITHM_NAME
 import org.galois.core.provider.fpe.ff3.FF3_ALGORITHM_NAME
+import org.galois.core.provider.ope.acope.ACOPE_ALGORITHM_NAME
 import org.galois.core.provider.ope.aicd.AICD_ALGORITHM_NAME
 import org.galois.core.provider.ope.fope.FOPE_ALGORITHM_NAME
 import org.galois.core.provider.ope.piore.PIORE_ALGORITHM_NAME
@@ -14,11 +15,16 @@ import org.galois.core.provider.ppe.cryptopan.CRYPTOPAN_ALGORITHM_NAME
 import org.galois.core.provider.ppe.hpcbc.HPCBC_ALGORITHM_NAME
 import org.openjdk.jmh.annotations.*
 import org.openjdk.jmh.profile.GCProfiler
+import org.openjdk.jmh.profile.LinuxPerfNormProfiler
 import org.openjdk.jmh.results.format.ResultFormatType
 import org.openjdk.jmh.runner.Runner
 import org.openjdk.jmh.runner.options.OptionsBuilder
 import tech.tablesaw.api.Table
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileWriter
+import java.time.Duration
+import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
 
 enum class BenchmarkConfig(val algorithm: String, val column: String) {
@@ -28,6 +34,8 @@ enum class BenchmarkConfig(val algorithm: String, val column: String) {
     PIORE_SALARY(PIORE_ALGORITHM_NAME, "salary"),
     AICD_AGE(AICD_ALGORITHM_NAME, "age"),
     AICD_SALARY(AICD_ALGORITHM_NAME, "salary"),
+    ACOPE_AGE(ACOPE_ALGORITHM_NAME, "age"),
+    ACOPE_SALARY(ACOPE_ALGORITHM_NAME, "salary"),
     CRYPTOPAN_IP(CRYPTOPAN_ALGORITHM_NAME, "ip-address"),
     CRYPTOPAN_ZIP(CRYPTOPAN_ALGORITHM_NAME, "zip-code"),
     HPCBC_IP(HPCBC_ALGORITHM_NAME, "ip-address"),
@@ -51,8 +59,8 @@ private fun createEngineConfig(params: BenchmarkConfig): EngineConfiguration {
 }
 
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-@Warmup(iterations = 1, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 1, time = 5, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 3, time = 5, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 5, timeUnit = TimeUnit.SECONDS)
 @State(Scope.Benchmark)
 class EncryptionTimeAndSizeBenchmark {
 
@@ -63,6 +71,8 @@ class EncryptionTimeAndSizeBenchmark {
         "PIORE_SALARY",
         "AICD_AGE",
         "AICD_SALARY",
+        "ACOPE_AGE",
+        "ACOPE_SALARY",
         "CRYPTOPAN_IP",
         "CRYPTOPAN_ZIP",
         "HPCBC_IP",
@@ -85,6 +95,8 @@ class EncryptionTimeAndSizeBenchmark {
 
     private var initialSize: Int = 0
     private lateinit var deltas: MutableList<Int>
+
+    private val sizeFile = File("benchmarks/sizes-${System.currentTimeMillis()}.log")
 
     @Setup(Level.Trial)
     fun loadDataset() {
@@ -119,18 +131,23 @@ class EncryptionTimeAndSizeBenchmark {
     fun getMeanDelta() {
         deltas.sort()
         val meanDelta = deltas.average()
-        println(
-            """$params - $rows. Initial size: $initialSize Bytes. 
-                |Increment: $meanDelta Bytes (${String.format("%.3f", meanDelta / initialSize * 100)}%)
-                |Min: ${deltas[0]}. Max: ${deltas[deltas.lastIndex]}""".trimMargin()
-        )
+        val result = """$params - $rows. Initial size: $initialSize Bytes. 
+            |Increment: $meanDelta Bytes (${String.format("%.3f", meanDelta / initialSize * 100)}%)
+            |Min: ${deltas[0]}. Max: ${deltas[deltas.lastIndex]}
+            |""".trimMargin()
+
+        println(result)
+        val fileWriter = FileWriter(sizeFile, true)
+        fileWriter.write(result)
+        fileWriter.close()
+
         deltas.clear()
     }
 }
 
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-@Warmup(iterations = 1, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 1, time = 5, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 3, time = 5, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @State(Scope.Benchmark)
 class DecryptionTimeBenchmark {
 
@@ -139,6 +156,8 @@ class DecryptionTimeBenchmark {
         "FOPE_SALARY",
         "PIORE_AGE",
         "PIORE_SALARY",
+        "ACOPE_AGE",
+        "ACOPE_SALARY",
         "AICD_AGE",
         "AICD_SALARY",
         "CRYPTOPAN_IP",
@@ -165,7 +184,6 @@ class DecryptionTimeBenchmark {
         dataset = Table.read().csv(datasetStream).retainColumns(params.column).inRange(rows)
 
         encryptConfig = createEngineConfig(params)
-
     }
 
     @Setup(Level.Invocation)
@@ -191,7 +209,8 @@ class BaselineBenchmark {
 }
 
 fun main() {
-    println("===== BENCHMARKING STARTED =====")
+    val start = LocalDateTime.now()
+    println("===== $start BENCHMARKING STARTED =====")
     val opt = OptionsBuilder()
         .include(BaselineBenchmark::class.java.simpleName)
         .include(EncryptionTimeAndSizeBenchmark::class.java.simpleName)
@@ -201,13 +220,16 @@ fun main() {
         .forks(1)
         .resultFormat(ResultFormatType.CSV)
         .result("benchmarks/benchmark_result.csv")
-        // .output("benchmarks/benchmark_output.log")
-        .mode(Mode.SingleShotTime)
+        .output("benchmarks/benchmark_output.log")
+        .mode(Mode.AverageTime)
         .addProfiler(GCProfiler::class.java)
-        //.addProfiler(LinuxPerfNormProfiler::class.java)
+        .addProfiler(LinuxPerfNormProfiler::class.java)
         .build()
 
     Runner(opt).run()
-    println("===== BENCHMARKING FINISHED =====")
+    val stop = LocalDateTime.now()
+    println("===== $stop BENCHMARKING FINISHED =====")
+    println("===== ELAPSED TIME: ${Duration.between(start, stop).toMinutes()} =====")
+
 
 }

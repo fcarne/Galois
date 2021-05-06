@@ -32,11 +32,11 @@ class FOPECipher : GaloisCipher() {
         val keyBytes: ByteArray = getKeyBytes(key)
         val fopeSecretKey = FOPESecretKey(keyBytes)
 
-        val alpha = BigDecimal.valueOf(fopeSecretKey.alpha)
-        val beta = BigDecimal.valueOf(fopeSecretKey.beta)
-        val bigN = BigDecimal.valueOf(fopeSecretKey.n)
+        val alpha = fopeSecretKey.alpha.toBigDecimal()
+        val beta = fopeSecretKey.beta.toBigDecimal()
+        val bigN = fopeSecretKey.n.toBigDecimal()
         n = bigN.toBigInteger()
-        val e = BigDecimal.valueOf(fopeSecretKey.e)
+        val e = fopeSecretKey.e.toBigDecimal()
         d = fopeSecretKey.d
         domain = 2.0.pow(d.toInt()).toLong()
 
@@ -44,16 +44,16 @@ class FOPECipher : GaloisCipher() {
         supLimitF = Array(d + 1) { BigInteger.ZERO }
 
         for (i in 0..d) {
-            val factor = e.pow(i).multiply(bigN)
-            infLimitF[i] = alpha.multiply(factor).setScale(0, RoundingMode.FLOOR).toBigInteger()
-            supLimitF[i] = beta.multiply(factor).setScale(0, RoundingMode.CEILING).toBigInteger()
+            val factor = e.pow(i) * bigN
+            infLimitF[i] = (alpha * factor).setScale(0, RoundingMode.FLOOR).toBigInteger()
+            supLimitF[i] = (beta * factor).setScale(0, RoundingMode.CEILING).toBigInteger()
         }
         infLimitF[d.toInt()] = BigInteger.ONE
 
         mac = Mac.getInstance("HmacSha256")
         mac.init(SecretKeySpec(fopeSecretKey.k, mac.algorithm))
 
-        nBytesLength = bigN.toBigInteger().toByteArray().size
+        nBytesLength = n.toByteArray().size
     }
 
     override fun engineGetOutputSize(inputLen: Int) =
@@ -76,7 +76,7 @@ class FOPECipher : GaloisCipher() {
 
             for (i in 1..d) {
                 val xI = (x shr d - i and 1).toInt()
-                cipher = BigInteger.valueOf((2 * xI - 1).toLong()).multiply(f(i, x)).add(cipher)
+                cipher += (2 * xI - 1).toBigInteger() * f(i, x)
             }
 
             val cipherArray = cipher.toByteArray()
@@ -84,7 +84,7 @@ class FOPECipher : GaloisCipher() {
 
         } else if (opMode == Cipher.DECRYPT_MODE) {
             val c = BigInteger(input)
-            require(c > BigInteger.ZERO && c <= n) { "Ciphertext must be in range 0..$n, was $c" }
+            require(c >= BigInteger.ZERO && c <= n) { "Ciphertext must be in range 0..$n, was $c" }
 
 
             var a = f(0, 0)
@@ -92,14 +92,14 @@ class FOPECipher : GaloisCipher() {
             var x = if (c < a) 0 else 1L shl d - 1
             for (i in 2..d) {
                 val xI = (x shr d - i + 1 and 1).toInt()
-                a = BigInteger.valueOf((2 * xI - 1).toLong()).multiply(f(i - 1, x)).add(a)
+                a += (2 * xI - 1).toBigInteger() * f(i - 1, x)
                 if (c >= a) x = x or (1L shl d - i)
             }
 
             val x0 = x and 1
 
-            a = BigInteger.valueOf(2 * x0 - 1).multiply(f(d.toInt(), x)).add(a)
-            if (c.compareTo(a) != 0) x = Long.MIN_VALUE // Maybe remove if Mondrian does change encrypted values
+            a += (2 * x0 - 1).toBigInteger() * f(d.toInt(), x)
+            if (c != a) x = Long.MIN_VALUE // Maybe remove if Mondrian does change encrypted values
 
             val plaintextArray = ByteBuffer.allocate(Long.SIZE_BYTES).putLong(x).array()
             System.arraycopy(plaintextArray, 0, output, 0, output.size)
@@ -111,7 +111,7 @@ class FOPECipher : GaloisCipher() {
         // Include only i most significant bits
         val shift = d - i
         val n = x shr shift shl shift
-        return prf(n).mod(supLimitF[i].subtract(infLimitF[i])).add(infLimitF[i])
+        return prf(n).mod(supLimitF[i] - infLimitF[i]) + infLimitF[i]
     }
 
     private fun prf(x: Long): BigInteger {

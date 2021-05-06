@@ -1,6 +1,5 @@
 package org.galois.core.provider.ope.fope
 
-import org.galois.core.provider.fpe.dff.DFFSecretKey
 import java.nio.ByteBuffer
 import javax.crypto.SecretKey
 
@@ -65,6 +64,6 @@ class FOPESecretKey : SecretKey {
         const val FIXED_LENGTH = Double.SIZE_BYTES * 3 + Byte.SIZE_BYTES
 
         fun isKeySizeValid(len: Int) = len in KEY_SIZES
-        fun getKeySizeError(len: Int) = "Key size can only be ${DFFSecretKey.KEY_SIZES.joinToString()}, was $len"
+        fun getKeySizeError(len: Int) = "Key size can only be ${KEY_SIZES.joinToString()}, was $len"
     }
 }
