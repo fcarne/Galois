@@ -59,12 +59,9 @@ class PIORECipher : GaloisCipher() {
 
             var cipher = BigInteger.ZERO
 
-            println("b $b")
-
             for (i in 1..n) {
                 val bI = (b shr n - i and 1).toInt()
                 val uI = f(i, b, bI)
-                println("$i: uI = $uI - bI = $bI")
                 cipher += m.pow(n - i) * uI
             }
 

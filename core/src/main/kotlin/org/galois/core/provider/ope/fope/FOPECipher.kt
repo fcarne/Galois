@@ -1,7 +1,6 @@
 package org.galois.core.provider.ope.fope
 
 import org.galois.core.provider.GaloisCipher
-import java.math.BigDecimal
 import java.math.BigInteger
 import java.math.RoundingMode
 import java.nio.ByteBuffer
@@ -99,7 +98,7 @@ class FOPECipher : GaloisCipher() {
             val x0 = x and 1
 
             a += (2 * x0 - 1).toBigInteger() * f(d.toInt(), x)
-            if (c != a) x = Long.MIN_VALUE // Maybe remove if Mondrian does change encrypted values
+            if (c != a) x = Long.MIN_VALUE // Maybe remove if Mondrian changes encrypted values
 
             val plaintextArray = ByteBuffer.allocate(Long.SIZE_BYTES).putLong(x).array()
             System.arraycopy(plaintextArray, 0, output, 0, output.size)
@@ -114,8 +113,8 @@ class FOPECipher : GaloisCipher() {
         return prf(n).mod(supLimitF[i] - infLimitF[i]) + infLimitF[i]
     }
 
-    private fun prf(x: Long): BigInteger {
-        val message = ByteBuffer.allocate(Long.SIZE_BYTES).putLong(x).array()
+    private fun prf(n: Long): BigInteger {
+        val message = ByteBuffer.allocate(Long.SIZE_BYTES).putLong(n).array()
         return BigInteger(mac.doFinal(message))
     }
 

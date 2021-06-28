@@ -15,8 +15,6 @@ repositories {
 dependencies {
     constraints {
         // Define dependency versions as constraints
-        //implementation("org.apache.commons:commons-text:1.9")
-
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     }
 

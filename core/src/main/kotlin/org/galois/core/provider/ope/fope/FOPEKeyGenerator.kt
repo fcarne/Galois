@@ -1,13 +1,13 @@
 package org.galois.core.provider.ope.fope
 
 import org.galois.core.provider.GaloisJCE
-import java.math.BigDecimal
 import java.security.InvalidAlgorithmParameterException
 import java.security.SecureRandom
 import java.security.spec.AlgorithmParameterSpec
 import javax.crypto.KeyGeneratorSpi
 import javax.crypto.SecretKey
 import kotlin.math.ceil
+import kotlin.math.pow
 
 class FOPEKeyGenerator : KeyGeneratorSpi() {
     private lateinit var secureRandom: SecureRandom
@@ -42,8 +42,7 @@ class FOPEKeyGenerator : KeyGeneratorSpi() {
         val alpha = 0.5 * secureRandom.nextDouble()
         val beta = 1.0 - alpha
         val e = secureRandom.nextDouble() * alpha
-        val n = ceil(parameterSpec.tau.toDouble()) / (beta * e.toBigDecimal().pow(parameterSpec.d.toInt())
-            .toDouble())
+        val n = ceil(parameterSpec.tau / (beta * e.pow(parameterSpec.d.toInt())))
         val k = ByteArray(keySize / 8 - FOPESecretKey.FIXED_LENGTH)
         secureRandom.nextBytes(k)
 

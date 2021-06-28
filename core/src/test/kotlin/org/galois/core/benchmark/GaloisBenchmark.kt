@@ -71,8 +71,8 @@ class EncryptionTimeAndSizeBenchmark {
         "PIORE_SALARY",
         "AICD_AGE",
         "AICD_SALARY",
-        "ACOPE_AGE",
-        "ACOPE_SALARY",
+        //"ACOPE_AGE",
+        //"ACOPE_SALARY",
         "CRYPTOPAN_IP",
         "CRYPTOPAN_ZIP",
         "HPCBC_IP",
@@ -156,8 +156,8 @@ class DecryptionTimeBenchmark {
         "FOPE_SALARY",
         "PIORE_AGE",
         "PIORE_SALARY",
-        "ACOPE_AGE",
-        "ACOPE_SALARY",
+        //"ACOPE_AGE",
+        //"ACOPE_SALARY",
         "AICD_AGE",
         "AICD_SALARY",
         "CRYPTOPAN_IP",
@@ -211,6 +211,7 @@ class BaselineBenchmark {
 fun main() {
     val start = LocalDateTime.now()
     println("===== $start BENCHMARKING STARTED =====")
+    // run the command "sudo sysctl -w kernel.perf_event_paranoid=1" for the LinuxPerfNormProfiler
     val opt = OptionsBuilder()
         .include(BaselineBenchmark::class.java.simpleName)
         .include(EncryptionTimeAndSizeBenchmark::class.java.simpleName)

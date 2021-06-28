@@ -1,0 +1,578 @@
+# JMH version: 1.29
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/302/lib/idea_rt.jar=46777:/snap/intellij-idea-community/302/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, 1 s each
+# Measurement: 1 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.BaselineBenchmark.baseline
+
+# Run progress: 0,00% complete, ETA 00:52:32
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: ≈ 10⁻⁶ ms/op
+Iteration   1: ≈ 10⁻⁶ ms/op
+                 ·gc.alloc.rate:      ≈ 10⁻⁴ MB/sec
+                 ·gc.alloc.rate.norm: ≈ 10⁻⁷ B/op
+                 ·gc.count:           ≈ 0 counts
+
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "org.galois.core.benchmark.BaselineBenchmark.baseline":
+  ≈ 10⁻⁶ ms/op
+
+Secondary result "org.galois.core.benchmark.BaselineBenchmark.baseline:·gc.alloc.rate":
+  ≈ 10⁻⁴ MB/sec
+
+Secondary result "org.galois.core.benchmark.BaselineBenchmark.baseline:·gc.alloc.rate.norm":
+  ≈ 10⁻⁷ B/op
+
+Secondary result "org.galois.core.benchmark.BaselineBenchmark.baseline:·gc.count":
+  ≈ 0 counts
+
+
+# JMH version: 1.29
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/302/lib/idea_rt.jar=46777:/snap/intellij-idea-community/302/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt
+# Parameters: (params = FOPE_AGE, rows = 100)
+
+# Run progress: 0,06% complete, ETA 02:14:46
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 1,045 ms/op
+# Warmup Iteration   2: 0,963 ms/op
+# Warmup Iteration   3: 0,955 ms/op
+Iteration   1: 0,948 ms/op
+                 ·gc.alloc.rate:               601,880 MB/sec
+                 ·gc.alloc.rate.norm:          1255290,117 B/op
+                 ·gc.churn.G1_Eden_Space:      596,558 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 1244191,030 B/op
+                 ·gc.churn.G1_Old_Gen:         0,100 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    209,353 B/op
+                 ·gc.count:                    88,000 counts
+                 ·gc.time:                     37,000 ms
+
+Iteration   2: 0,959 ms/op
+                 ·gc.alloc.rate:               595,421 MB/sec
+                 ·gc.alloc.rate.norm:          1255870,269 B/op
+                 ·gc.churn.G1_Eden_Space:      593,503 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 1251824,211 B/op
+                 ·gc.churn.G1_Old_Gen:         0,100 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    211,046 B/op
+                 ·gc.count:                    90,000 counts
+                 ·gc.time:                     38,000 ms
+
+Iteration   3: 0,956 ms/op
+                 ·gc.alloc.rate:               596,528 MB/sec
+                 ·gc.alloc.rate.norm:          1254567,216 B/op
+                 ·gc.churn.G1_Eden_Space:      596,566 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 1254646,417 B/op
+                 ·gc.churn.G1_Old_Gen:         0,100 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    211,088 B/op
+                 ·gc.count:                    88,000 counts
+                 ·gc.time:                     36,000 ms
+
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt":
+  0,954 ±(99.9%) 0,102 ms/op [Average]
+  (min, avg, max) = (0,948, 0,954, 0,959), stdev = 0,006
+  CI (99.9%): [0,852, 1,057] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.alloc.rate":
+  597,943 ±(99.9%) 63,010 MB/sec [Average]
+  (min, avg, max) = (595,421, 597,943, 601,880), stdev = 3,454
+  CI (99.9%): [534,933, 660,953] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.alloc.rate.norm":
+  1255242,534 ±(99.9%) 11910,014 B/op [Average]
+  (min, avg, max) = (1254567,216, 1255242,534, 1255870,269), stdev = 652,828
+  CI (99.9%): [1243332,520, 1267152,547] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Eden_Space":
+  595,542 ±(99.9%) 32,221 MB/sec [Average]
+  (min, avg, max) = (593,503, 595,542, 596,566), stdev = 1,766
+  CI (99.9%): [563,322, 627,763] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm":
+  1250220,553 ±(99.9%) 98680,781 B/op [Average]
+  (min, avg, max) = (1244191,030, 1250220,553, 1254646,417), stdev = 5409,027
+  CI (99.9%): [1151539,772, 1348901,334] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Old_Gen":
+  0,100 ±(99.9%) 0,003 MB/sec [Average]
+  (min, avg, max) = (0,100, 0,100, 0,100), stdev = 0,001
+  CI (99.9%): [0,097, 0,104] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm":
+  210,496 ±(99.9%) 18,057 B/op [Average]
+  (min, avg, max) = (209,353, 210,496, 211,088), stdev = 0,990
+  CI (99.9%): [192,438, 228,553] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.count":
+  266,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (88,000, 88,667, 90,000), stdev = 1,155
+  CI (99.9%): [266,000, 266,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.time":
+  111,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (36,000, 37,000, 38,000), stdev = 1,000
+  CI (99.9%): [111,000, 111,000] (assumes normal distribution)
+
+
+# JMH version: 1.29
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/302/lib/idea_rt.jar=46777:/snap/intellij-idea-community/302/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt
+# Parameters: (params = FOPE_AGE, rows = 1000)
+
+# Run progress: 1,49% complete, ETA 01:05:06
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 9,663 ms/op
+# Warmup Iteration   2: 9,325 ms/op
+# Warmup Iteration   3: 9,239 ms/op
+Iteration   1: 9,212 ms/op
+                 ·gc.alloc.rate:               597,899 MB/sec
+                 ·gc.alloc.rate.norm:          12100744,983 B/op
+                 ·gc.churn.G1_Eden_Space:      593,869 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 12019182,150 B/op
+                 ·gc.churn.G1_Old_Gen:         0,098 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    1992,749 B/op
+                 ·gc.count:                    87,000 counts
+                 ·gc.time:                     37,000 ms
+
+Iteration   2: 9,192 ms/op
+                 ·gc.alloc.rate:               598,589 MB/sec
+                 ·gc.alloc.rate.norm:          12084740,132 B/op
+                 ·gc.churn.G1_Eden_Space:      594,251 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 11997168,996 B/op
+                 ·gc.churn.G1_Old_Gen:         0,100 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    2011,678 B/op
+                 ·gc.count:                    87,000 counts
+                 ·gc.time:                     35,000 ms
+
+Iteration   3: 9,202 ms/op
+                 ·gc.alloc.rate:               600,791 MB/sec
+                 ·gc.alloc.rate.norm:          12138326,268 B/op
+                 ·gc.churn.G1_Eden_Space:      599,846 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 12119229,769 B/op
+                 ·gc.churn.G1_Old_Gen:         0,099 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    2006,165 B/op
+                 ·gc.count:                    90,000 counts
+                 ·gc.time:                     34,000 ms
+
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt":
+  9,202 ±(99.9%) 0,174 ms/op [Average]
+  (min, avg, max) = (9,192, 9,202, 9,212), stdev = 0,010
+  CI (99.9%): [9,028, 9,376] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.alloc.rate":
+  599,093 ±(99.9%) 27,557 MB/sec [Average]
+  (min, avg, max) = (597,899, 599,093, 600,791), stdev = 1,510
+  CI (99.9%): [571,536, 626,649] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.alloc.rate.norm":
+  12107937,128 ±(99.9%) 501839,580 B/op [Average]
+  (min, avg, max) = (12084740,132, 12107937,128, 12138326,268), stdev = 27507,521
+  CI (99.9%): [11606097,548, 12609776,708] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Eden_Space":
+  595,988 ±(99.9%) 61,041 MB/sec [Average]
+  (min, avg, max) = (593,869, 595,988, 599,846), stdev = 3,346
+  CI (99.9%): [534,948, 657,029] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm":
+  12045193,639 ±(99.9%) 1186845,820 B/op [Average]
+  (min, avg, max) = (11997168,996, 12045193,639, 12119229,769), stdev = 65055,024
+  CI (99.9%): [10858347,818, 13232039,459] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Old_Gen":
+  0,099 ±(99.9%) 0,011 MB/sec [Average]
+  (min, avg, max) = (0,098, 0,099, 0,100), stdev = 0,001
+  CI (99.9%): [0,088, 0,110] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm":
+  2003,530 ±(99.9%) 177,615 B/op [Average]
+  (min, avg, max) = (1992,749, 2003,530, 2011,678), stdev = 9,736
+  CI (99.9%): [1825,916, 2181,145] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.count":
+  264,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (87,000, 88,000, 90,000), stdev = 1,732
+  CI (99.9%): [264,000, 264,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.time":
+  106,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (34,000, 35,333, 37,000), stdev = 1,528
+  CI (99.9%): [106,000, 106,000] (assumes normal distribution)
+
+
+# JMH version: 1.29
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/302/lib/idea_rt.jar=46777:/snap/intellij-idea-community/302/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt
+# Parameters: (params = FOPE_AGE, rows = 10000)
+
+# Run progress: 2,92% complete, ETA 01:02:28
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 93,948 ms/op
+# Warmup Iteration   2: 91,307 ms/op
+# Warmup Iteration   3: 91,140 ms/op
+Iteration   1: 90,717 ms/op
+                 ·gc.alloc.rate:               601,163 MB/sec
+                 ·gc.alloc.rate.norm:          120027326,286 B/op
+                 ·gc.churn.G1_Eden_Space:      600,117 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 119818532,571 B/op
+                 ·gc.churn.G1_Old_Gen:         0,148 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    29456,571 B/op
+                 ·gc.count:                    92,000 counts
+                 ·gc.time:                     37,000 ms
+
+Iteration   2: 90,709 ms/op
+                 ·gc.alloc.rate:               601,315 MB/sec
+                 ·gc.alloc.rate.norm:          119958711,143 B/op
+                 ·gc.churn.G1_Eden_Space:      599,017 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 119500214,857 B/op
+                 ·gc.churn.G1_Old_Gen:         0,151 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    30067,429 B/op
+                 ·gc.count:                    91,000 counts
+                 ·gc.time:                     37,000 ms
+
+Iteration   3: 90,332 ms/op
+                 ·gc.alloc.rate:               600,075 MB/sec
+                 ·gc.alloc.rate.norm:          119855771,857 B/op
+                 ·gc.churn.G1_Eden_Space:      598,295 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 119500214,857 B/op
+                 ·gc.churn.G1_Old_Gen:         0,149 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    29719,714 B/op
+                 ·gc.count:                    91,000 counts
+                 ·gc.time:                     37,000 ms
+
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt":
+  90,586 ±(99.9%) 4,009 ms/op [Average]
+  (min, avg, max) = (90,332, 90,586, 90,717), stdev = 0,220
+  CI (99.9%): [86,577, 94,595] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.alloc.rate":
+  600,851 ±(99.9%) 12,335 MB/sec [Average]
+  (min, avg, max) = (600,075, 600,851, 601,315), stdev = 0,676
+  CI (99.9%): [588,516, 613,186] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.alloc.rate.norm":
+  119947269,762 ±(99.9%) 1575301,811 B/op [Average]
+  (min, avg, max) = (119855771,857, 119947269,762, 120027326,286), stdev = 86347,608
+  CI (99.9%): [118371967,951, 121522571,573] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Eden_Space":
+  599,143 ±(99.9%) 16,736 MB/sec [Average]
+  (min, avg, max) = (598,295, 599,143, 600,117), stdev = 0,917
+  CI (99.9%): [582,407, 615,879] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm":
+  119606320,762 ±(99.9%) 3352846,275 B/op [Average]
+  (min, avg, max) = (119500214,857, 119606320,762, 119818532,571), stdev = 183780,818
+  CI (99.9%): [116253474,486, 122959167,037] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Old_Gen":
+  0,149 ±(99.9%) 0,029 MB/sec [Average]
+  (min, avg, max) = (0,148, 0,149, 0,151), stdev = 0,002
+  CI (99.9%): [0,120, 0,178] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm":
+  29747,905 ±(99.9%) 5589,927 B/op [Average]
+  (min, avg, max) = (29456,571, 29747,905, 30067,429), stdev = 306,403
+  CI (99.9%): [24157,978, 35337,831] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.count":
+  274,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (91,000, 91,333, 92,000), stdev = 0,577
+  CI (99.9%): [274,000, 274,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.time":
+  111,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (37,000, 37,000, 37,000), stdev = 0,001
+  CI (99.9%): [111,000, 111,000] (assumes normal distribution)
+
+
+# JMH version: 1.29
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/302/lib/idea_rt.jar=46777:/snap/intellij-idea-community/302/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt
+# Parameters: (params = FOPE_SALARY, rows = 100)
+
+# Run progress: 4,35% complete, ETA 01:01:12
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 2,794 ms/op
+# Warmup Iteration   2: 2,659 ms/op
+# Warmup Iteration   3: 2,631 ms/op
+Iteration   1: 2,613 ms/op
+                 ·gc.alloc.rate:               595,708 MB/sec
+                 ·gc.alloc.rate.norm:          3428918,595 B/op
+                 ·gc.churn.G1_Eden_Space:      594,884 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 3424178,919 B/op
+                 ·gc.churn.G1_Old_Gen:         0,108 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    620,429 B/op
+                 ·gc.count:                    87,000 counts
+                 ·gc.time:                     39,000 ms
+
+Iteration   2: 2,612 ms/op
+                 ·gc.alloc.rate:               595,831 MB/sec
+                 ·gc.alloc.rate.norm:          3426179,952 B/op
+                 ·gc.churn.G1_Eden_Space:      594,862 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 3420602,753 B/op
+                 ·gc.churn.G1_Old_Gen:         0,108 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    623,649 B/op
+                 ·gc.count:                    87,000 counts
+                 ·gc.time:                     37,000 ms
+
+Iteration   3: 2,604 ms/op
+                 ·gc.alloc.rate:               596,989 MB/sec
+                 ·gc.alloc.rate.norm:          3425237,833 B/op
+                 ·gc.churn.G1_Eden_Space:      594,629 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 3411694,933 B/op
+                 ·gc.churn.G1_Old_Gen:         0,107 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    614,663 B/op
+                 ·gc.count:                    87,000 counts
+                 ·gc.time:                     34,000 ms
+
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt":
+  2,610 ±(99.9%) 0,083 ms/op [Average]
+  (min, avg, max) = (2,604, 2,610, 2,613), stdev = 0,005
+  CI (99.9%): [2,527, 2,693] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.alloc.rate":
+  596,176 ±(99.9%) 12,895 MB/sec [Average]
+  (min, avg, max) = (595,708, 596,176, 596,989), stdev = 0,707
+  CI (99.9%): [583,281, 609,071] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.alloc.rate.norm":
+  3426778,793 ±(99.9%) 34883,027 B/op [Average]
+  (min, avg, max) = (3425237,833, 3426778,793, 3428918,595), stdev = 1912,056
+  CI (99.9%): [3391895,767, 3461661,820] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Eden_Space":
+  594,791 ±(99.9%) 2,580 MB/sec [Average]
+  (min, avg, max) = (594,629, 594,791, 594,884), stdev = 0,141
+  CI (99.9%): [592,211, 597,372] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm":
+  3418825,535 ±(99.9%) 117287,915 B/op [Average]
+  (min, avg, max) = (3411694,933, 3418825,535, 3424178,919), stdev = 6428,946
+  CI (99.9%): [3301537,620, 3536113,450] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Old_Gen":
+  0,108 ±(99.9%) 0,012 MB/sec [Average]
+  (min, avg, max) = (0,107, 0,108, 0,108), stdev = 0,001
+  CI (99.9%): [0,096, 0,120] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm":
+  619,580 ±(99.9%) 83,064 B/op [Average]
+  (min, avg, max) = (614,663, 619,580, 623,649), stdev = 4,553
+  CI (99.9%): [536,517, 702,644] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.count":
+  261,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (87,000, 87,000, 87,000), stdev = 0,001
+  CI (99.9%): [261,000, 261,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.time":
+  110,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (34,000, 36,667, 39,000), stdev = 2,517
+  CI (99.9%): [110,000, 110,000] (assumes normal distribution)
+
+
+# JMH version: 1.29
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/302/lib/idea_rt.jar=46777:/snap/intellij-idea-community/302/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt
+# Parameters: (params = FOPE_SALARY, rows = 1000)
+
+# Run progress: 5,77% complete, ETA 00:59:56
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 27,136 ms/op
+# Warmup Iteration   2: 26,585 ms/op
+# Warmup Iteration   3: 26,163 ms/op
+Iteration   1: 25,884 ms/op
+                 ·gc.alloc.rate:               582,516 MB/sec
+                 ·gc.alloc.rate.norm:          33031101,744 B/op
+                 ·gc.churn.G1_Eden_Space:      578,184 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 32785476,267 B/op
+                 ·gc.churn.G1_Old_Gen:         0,256 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    14533,621 B/op
+                 ·gc.count:                    84,000 counts
+                 ·gc.time:                     45,000 ms
+
+Iteration   2: 25,644 ms/op
+                 ·gc.alloc.rate:               586,563 MB/sec
+                 ·gc.alloc.rate.norm:          32967064,449 B/op
+                 ·gc.churn.G1_Eden_Space:      580,356 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 32618203,429 B/op
+                 ·gc.churn.G1_Old_Gen:         0,249 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    13987,469 B/op
+                 ·gc.count:                    84,000 counts
+                 ·gc.time:                     44,000 ms
+
+Iteration   3: 25,995 ms/op
+                 ·gc.alloc.rate:               578,608 MB/sec
+                 ·gc.alloc.rate.norm:          32945326,804 B/op
+                 ·gc.churn.G1_Eden_Space:      578,769 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 32954473,567 B/op
+                 ·gc.churn.G1_Old_Gen:         0,232 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    13214,351 B/op
+                 ·gc.count:                    84,000 counts
+                 ·gc.time:                     43,000 ms
+
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt":
+  25,841 ±(99.9%) 3,280 ms/op [Average]
+  (min, avg, max) = (25,644, 25,841, 25,995), stdev = 0,180
+  CI (99.9%): [22,561, 29,121] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.alloc.rate":
+  582,562 ±(99.9%) 72,564 MB/sec [Average]
+  (min, avg, max) = (578,608, 582,562, 586,563), stdev = 3,977
+  CI (99.9%): [509,999, 655,126] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.alloc.rate.norm":
+  32981164,332 ±(99.9%) 813522,777 B/op [Average]
+  (min, avg, max) = (32945326,804, 32981164,332, 33031101,744), stdev = 44591,929
+  CI (99.9%): [32167641,555, 33794687,110] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Eden_Space":
+  579,103 ±(99.9%) 20,503 MB/sec [Average]
+  (min, avg, max) = (578,184, 579,103, 580,356), stdev = 1,124
+  CI (99.9%): [558,600, 599,606] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm":
+  32786051,087 ±(99.9%) 3067423,018 B/op [Average]
+  (min, avg, max) = (32618203,429, 32786051,087, 32954473,567), stdev = 168135,806
+  CI (99.9%): [29718628,069, 35853474,105] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Old_Gen":
+  0,246 ±(99.9%) 0,226 MB/sec [Average]
+  (min, avg, max) = (0,232, 0,246, 0,256), stdev = 0,012
+  CI (99.9%): [0,019, 0,472] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm":
+  13911,813 ±(99.9%) 12093,417 B/op [Average]
+  (min, avg, max) = (13214,351, 13911,813, 14533,621), stdev = 662,881
+  CI (99.9%): [1818,397, 26005,230] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.count":
+  252,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (84,000, 84,000, 84,000), stdev = 0,001
+  CI (99.9%): [252,000, 252,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt:·gc.time":
+  132,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (43,000, 44,000, 45,000), stdev = 1,000
+  CI (99.9%): [132,000, 132,000] (assumes normal distribution)
+
+
+# JMH version: 1.29
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/302/lib/idea_rt.jar=46777:/snap/intellij-idea-community/302/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.DecryptionTimeBenchmark.decrypt
+# Parameters: (params = FOPE_SALARY, rows = 10000)
+
+# Run progress: 7,20% complete, ETA 00:58:51
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 264,027 ms/op
+# Warmup Iteration   2: 265,384 ms/op
+# Warmup Iteration   3: 264,314 ms/op
+Iteration   1: 262,721 ms/op
+                 ·gc.alloc.rate:                   586,647 MB/sec
+                 ·gc.alloc.rate.norm:              337064647,200 B/op
+                 ·gc.churn.G1_Eden_Space:          579,439 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm:     332922880,000 B/op
+                 ·gc.churn.G1_Old_Gen:             0,920 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:        528522,800 B/op
+                 ·gc.churn.G1_Survivor_Space:      0,821 MB/sec
+                 ·gc.churn.G1_Survivor_Space.norm: 471859,200 B/op
+                 ·gc.count:                        64,000 counts
+                 ·gc.time:                         64,000 ms
+
+Iteration   2: 255,056 ms/op
+                 ·gc.alloc.rate:                   585,992 MB/sec
+                 ·gc.alloc.rate.norm:              327062150,800 B/op
+                 ·gc.churn.G1_Eden_Space:          587,005 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm:     327627571,200 B/op
+                 ·gc.churn.G1_Old_Gen:             0,752 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:        419482,800 B/op
+                 ·gc.churn.G1_Survivor_Space:      0,751 MB/sec
+                 ·gc.churn.G1_Survivor_Space.norm: 419430,400 B/op
+                 ·gc.count:                        61,000 counts
+                 ·gc.time:                         65,000 ms
+
+Iteration   3: 
