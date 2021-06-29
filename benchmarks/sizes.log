@@ -1,0 +1,126 @@
+FOPE_AGE - 100. Initial size: 304 Bytes. 
+Increment: 768,483 Bytes (252,791%)
+Min: 175. Max: 4100
+FOPE_AGE - 1000. Initial size: 3004 Bytes. 
+Increment: 7641,108 Bytes (254,364%)
+Min: 1700. Max: 36000
+FOPE_AGE - 10000. Initial size: 30004 Bytes. 
+Increment: 78039,400 Bytes (260,097%)
+Min: 20000. Max: 290000
+FOPE_SALARY - 100. Initial size: 699 Bytes. 
+Increment: 1876,724 Bytes (268,487%)
+Min: 182. Max: 9508
+FOPE_SALARY - 1000. Initial size: 6954 Bytes. 
+Increment: 18858,338 Bytes (271,187%)
+Min: 1843. Max: 77053
+FOPE_SALARY - 10000. Initial size: 69427 Bytes. 
+Increment: 193528,277 Bytes (278,751%)
+Min: 29027. Max: 590580
+PIORE_AGE - 100. Initial size: 304 Bytes. 
+Increment: 2488,101 Bytes (818,454%)
+Min: 1404. Max: 2800
+PIORE_AGE - 1000. Initial size: 3004 Bytes. 
+Increment: 24862,898 Bytes (827,660%)
+Min: 16000. Max: 28000
+PIORE_AGE - 10000. Initial size: 30004 Bytes. 
+Increment: 248245,125 Bytes (827,373%)
+Min: 160000. Max: 280000
+PIORE_SALARY - 100. Initial size: 699 Bytes. 
+Increment: 7065,779 Bytes (1010,841%)
+Min: 4779. Max: 7908
+PIORE_SALARY - 1000. Initial size: 6954 Bytes. 
+Increment: 70480,210 Bytes (1013,520%)
+Min: 49053. Max: 79053
+PIORE_SALARY - 10000. Initial size: 69427 Bytes. 
+Increment: 690243,866 Bytes (994,201%)
+Min: 490580. Max: 780580
+AICD_AGE - 100. Initial size: 304 Bytes. 
+Increment: 3800,825 Bytes (1250,271%)
+Min: 3800. Max: 3804
+AICD_AGE - 1000. Initial size: 3004 Bytes. 
+Increment: 38016,741 Bytes (1265,537%)
+Min: 38000. Max: 38089
+AICD_AGE - 10000. Initial size: 30004 Bytes. 
+Increment: 380173,328 Bytes (1267,075%)
+Min: 380000. Max: 380919
+AICD_SALARY - 100. Initial size: 699 Bytes. 
+Increment: 3825,811 Bytes (547,326%)
+Min: 3798. Max: 3848
+AICD_SALARY - 1000. Initial size: 6954 Bytes. 
+Increment: 38222,891 Bytes (549,653%)
+Min: 37977. Max: 38481
+AICD_SALARY - 10000. Initial size: 69427 Bytes. 
+Increment: 382318,593 Bytes (550,677%)
+Min: 379821. Max: 384763
+CRYPTOPAN_IP - 100. Initial size: 1440 Bytes. 
+Increment: -0,943 Bytes (-0,066%)
+Min: -52. Max: 59
+CRYPTOPAN_IP - 1000. Initial size: 14333 Bytes. 
+Increment: -38,329 Bytes (-0,267%)
+Min: -294. Max: 268
+CRYPTOPAN_IP - 10000. Initial size: 142395 Bytes. 
+Increment: 374,872 Bytes (0,263%)
+Min: -1309. Max: 2667
+CRYPTOPAN_ZIP - 100. Initial size: 596 Bytes. 
+Increment: 309,000 Bytes (51,846%)
+Min: 309. Max: 309
+CRYPTOPAN_ZIP - 1000. Initial size: 5904 Bytes. 
+Increment: 3061,000 Bytes (51,846%)
+Min: 3061. Max: 3061
+CRYPTOPAN_ZIP - 10000. Initial size: 58945 Bytes. 
+Increment: 30640,000 Bytes (51,981%)
+Min: 30640. Max: 30640
+HPCBC_IP - 100. Initial size: 1440 Bytes. 
+Increment: -1,034 Bytes (-0,072%)
+Min: -39. Max: 35
+HPCBC_IP - 1000. Initial size: 14333 Bytes. 
+Increment: -35,766 Bytes (-0,250%)
+Min: -152. Max: 83
+HPCBC_IP - 10000. Initial size: 142395 Bytes. 
+Increment: 394,235 Bytes (0,277%)
+Min: -66. Max: 980
+HPCBC_ZIP - 100. Initial size: 596 Bytes. 
+Increment: 309,000 Bytes (51,846%)
+Min: 309. Max: 309
+HPCBC_ZIP - 1000. Initial size: 5904 Bytes. 
+Increment: 3061,000 Bytes (51,846%)
+Min: 3061. Max: 3061
+HPCBC_ZIP - 10000. Initial size: 58945 Bytes. 
+Increment: 30640,000 Bytes (51,981%)
+Min: 30640. Max: 30640
+DFF_CCN - 100. Initial size: 1719 Bytes. 
+Increment: 0,000 Bytes (0,000%)
+Min: 0. Max: 0
+DFF_CCN - 1000. Initial size: 17019 Bytes. 
+Increment: 0,000 Bytes (0,000%)
+Min: 0. Max: 0
+DFF_CCN - 10000. Initial size: 170019 Bytes. 
+Increment: 0,000 Bytes (0,000%)
+Min: 0. Max: 0
+DFF_CF - 100. Initial size: 1703 Bytes. 
+Increment: 0,000 Bytes (0,000%)
+Min: 0. Max: 0
+DFF_CF - 1000. Initial size: 17003 Bytes. 
+Increment: 0,000 Bytes (0,000%)
+Min: 0. Max: 0
+DFF_CF - 10000. Initial size: 170003 Bytes. 
+Increment: 0,000 Bytes (0,000%)
+Min: 0. Max: 0
+FF3_CCN - 100. Initial size: 1719 Bytes. 
+Increment: 0,000 Bytes (0,000%)
+Min: 0. Max: 0
+FF3_CCN - 1000. Initial size: 17019 Bytes. 
+Increment: 0,000 Bytes (0,000%)
+Min: 0. Max: 0
+FF3_CCN - 10000. Initial size: 170019 Bytes. 
+Increment: 0,000 Bytes (0,000%)
+Min: 0. Max: 0
+FF3_CF - 100. Initial size: 1703 Bytes. 
+Increment: 0,000 Bytes (0,000%)
+Min: 0. Max: 0
+FF3_CF - 1000. Initial size: 17003 Bytes. 
+Increment: 0,000 Bytes (0,000%)
+Min: 0. Max: 0
+FF3_CF - 10000. Initial size: 170003 Bytes. 
+Increment: 0,000 Bytes (0,000%)
+Min: 0. Max: 0

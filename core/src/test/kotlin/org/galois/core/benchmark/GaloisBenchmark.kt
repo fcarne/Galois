@@ -16,6 +16,7 @@ import org.galois.core.provider.ppe.hpcbc.HPCBC_ALGORITHM_NAME
 import org.openjdk.jmh.annotations.*
 import org.openjdk.jmh.profile.GCProfiler
 import org.openjdk.jmh.profile.LinuxPerfNormProfiler
+import org.openjdk.jmh.profile.LinuxPerfProfiler
 import org.openjdk.jmh.results.format.ResultFormatType
 import org.openjdk.jmh.runner.Runner
 import org.openjdk.jmh.runner.options.OptionsBuilder
@@ -23,8 +24,10 @@ import tech.tablesaw.api.Table
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileWriter
+import java.text.SimpleDateFormat
 import java.time.Duration
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
 enum class BenchmarkConfig(val algorithm: String, val column: String) {
@@ -96,7 +99,7 @@ class EncryptionTimeAndSizeBenchmark {
     private var initialSize: Int = 0
     private lateinit var deltas: MutableList<Int>
 
-    private val sizeFile = File("benchmarks/sizes-${System.currentTimeMillis()}.log")
+    private val sizeFile = File("benchmarks/sizes.log")
 
     @Setup(Level.Trial)
     fun loadDataset() {
@@ -132,7 +135,12 @@ class EncryptionTimeAndSizeBenchmark {
         deltas.sort()
         val meanDelta = deltas.average()
         val result = """$params - $rows. Initial size: $initialSize Bytes. 
-            |Increment: $meanDelta Bytes (${String.format("%.3f", meanDelta / initialSize * 100)}%)
+            |Increment: ${String.format("%.3f", meanDelta)} Bytes (${
+            String.format(
+                "%.3f",
+                meanDelta / initialSize * 100
+            )
+        }%)
             |Min: ${deltas[0]}. Max: ${deltas[deltas.lastIndex]}
             |""".trimMargin()
 
@@ -210,8 +218,8 @@ class BaselineBenchmark {
 
 fun main() {
     val start = LocalDateTime.now()
-    println("===== $start BENCHMARKING STARTED =====")
-    // run the command "sudo sysctl -w kernel.perf_event_paranoid=1" for the LinuxPerfNormProfiler
+    println("===== ${start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))} BENCHMARKING STARTED =====")
+    // run the command "sudo sysctl -w kernel.perf_event_paranoid=0" for perf
     val opt = OptionsBuilder()
         .include(BaselineBenchmark::class.java.simpleName)
         .include(EncryptionTimeAndSizeBenchmark::class.java.simpleName)
@@ -224,13 +232,12 @@ fun main() {
         .output("benchmarks/benchmark_output.log")
         .mode(Mode.AverageTime)
         .addProfiler(GCProfiler::class.java)
+        .addProfiler(LinuxPerfProfiler::class.java)
         .addProfiler(LinuxPerfNormProfiler::class.java)
         .build()
 
     Runner(opt).run()
     val stop = LocalDateTime.now()
-    println("===== $stop BENCHMARKING FINISHED =====")
-    println("===== ELAPSED TIME: ${Duration.between(start, stop).toMinutes()} Minutes =====")
-
-
+    println("===== ${stop.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))} BENCHMARKING FINISHED =====")
+    println("===== ELAPSED TIME: ${Duration.between(start, stop).toMinutes()} minutes =====")
 }
