@@ -4,7 +4,7 @@
 
 plugins {
     id("org.galois.kotlin-library-conventions")
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.4.32"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.5.20"
     id("org.jetbrains.kotlin.kapt")
 }
 
@@ -13,6 +13,7 @@ allOpen {
 }
 
 dependencies {
-    testImplementation("org.openjdk.jmh:jmh-core:1.29")
-    kaptTest("org.openjdk.jmh:jmh-generator-annprocess:1.29")
+    val jmhVersion = "1.32"
+    testImplementation("org.openjdk.jmh:jmh-core:$jmhVersion")
+    kaptTest("org.openjdk.jmh:jmh-generator-annprocess:$jmhVersion")
 }

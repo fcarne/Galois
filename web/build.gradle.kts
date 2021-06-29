@@ -5,11 +5,12 @@
 plugins {
     id("org.galois.kotlin-application-conventions")
 }
-
 dependencies {
+    val ktorVersion = "1.6.0"
+
     implementation(project(":core"))
-    implementation("io.ktor:ktor-server-netty:1.5.3")
-    implementation("io.ktor:ktor-jackson:1.5.3")
+    implementation("io.ktor:ktor-server-netty:$ktorVersion")
+    implementation("io.ktor:ktor-jackson:$ktorVersion")
 }
 
 application {

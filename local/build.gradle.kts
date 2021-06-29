@@ -7,8 +7,10 @@ plugins {
 }
 
 dependencies {
+    val picocliVersion = "4.6.1"
+
     implementation(project(":core"))
-    implementation("info.picocli:picocli:4.6.1")
+    implementation("info.picocli:picocli:$picocliVersion")
 }
 
 application {
