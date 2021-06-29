@@ -230,7 +230,7 @@ fun main() {
     Runner(opt).run()
     val stop = LocalDateTime.now()
     println("===== $stop BENCHMARKING FINISHED =====")
-    println("===== ELAPSED TIME: ${Duration.between(start, stop).toMinutes()} =====")
+    println("===== ELAPSED TIME: ${Duration.between(start, stop).toMinutes()} Minutes =====")
 
 
 }
