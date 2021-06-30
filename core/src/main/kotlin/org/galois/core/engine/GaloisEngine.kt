@@ -12,8 +12,8 @@ import org.galois.core.provider.ope.aicd.AICDParameterSpec
 import org.galois.core.provider.ope.aicd.AICD_ALGORITHM_NAME
 import org.galois.core.provider.ope.fope.FOPEParameterSpec
 import org.galois.core.provider.ope.fope.FOPE_ALGORITHM_NAME
-import org.galois.core.provider.ope.piore.PIOREParameterSpec
-import org.galois.core.provider.ope.piore.PIORE_ALGORITHM_NAME
+import org.galois.core.provider.ope.pore.POREParameterSpec
+import org.galois.core.provider.ope.pore.PORE_ALGORITHM_NAME
 import org.galois.core.provider.ppe.cryptopan.CRYPTOPAN_ALGORITHM_NAME
 import org.galois.core.provider.ppe.cryptopan.CryptoPAnParameterSpec
 import org.galois.core.provider.ppe.hpcbc.HPCBCParameterSpec
@@ -230,8 +230,8 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                 parameterSpec
             }
 
-            detail.cipher == PIORE_ALGORITHM_NAME && configuration.mode == EngineMode.ENCRYPT -> {
-                val parameterSpec = PIOREParameterSpec()
+            detail.cipher == PORE_ALGORITHM_NAME && configuration.mode == EngineMode.ENCRYPT -> {
+                val parameterSpec = POREParameterSpec()
                 parameterSpec.n = (detail.params.cipherSpecific["d"] as? Number)?.toByte()
                     ?: ceil(log2(values.maxByOrNull { it.toString().toLong() }.toString().toDouble())).toInt().toByte()
 

@@ -1,8 +1,5 @@
 package org.galois.core.provider
 
-import org.galois.core.provider.ope.piore.PIORECipher
-import org.galois.core.provider.ope.piore.PIOREKeyGenerator
-import org.galois.core.provider.ope.piore.PIORE_ALGORITHM_NAME
 import org.galois.core.provider.description.AlgorithmDescription
 import org.galois.core.provider.description.ParameterDescription
 import org.galois.core.provider.fpe.dff.*
@@ -10,8 +7,7 @@ import org.galois.core.provider.fpe.ff3.*
 import org.galois.core.provider.ope.acope.*
 import org.galois.core.provider.ope.aicd.*
 import org.galois.core.provider.ope.fope.*
-import org.galois.core.provider.ope.piore.PIOREParameterSpec
-import org.galois.core.provider.ope.piore.PIORESecretKey
+import org.galois.core.provider.ope.pore.*
 import org.galois.core.provider.ppe.cryptopan.*
 import org.galois.core.provider.ppe.hpcbc.*
 import java.security.Provider
@@ -25,12 +21,12 @@ import kotlin.reflect.full.memberProperties
 object GaloisJCE : Provider(
     "GaloisJCE",
     "2.0",
-    "Galois Provider (implements FastOPE, CommonDivisor, PIOre, Arithmetic coding, " +
-            "Crypto-PAN - Lucent's extension, ESAE HPCBC+, NIST FF3, FF2 addendum DFF, AES ECB Mode and Blowfish ECB Mode)"
+    "Galois Provider (implements FastOPE, CommonDivisor, POre, Arithmetic coding, " +
+            "Crypto-PAN - Stott's extension, ESAE HPCBC+, NIST FF3, FF2 addendum DFF, AES ECB Mode and Blowfish ECB Mode)"
 ) {
     val random = SecureRandom()
 
-    val opeAlgorithms = listOf(AICD_ALGORITHM_NAME, FOPE_ALGORITHM_NAME, PIORE_ALGORITHM_NAME, ACOPE_ALGORITHM_NAME)
+    val opeAlgorithms = listOf(AICD_ALGORITHM_NAME, FOPE_ALGORITHM_NAME, PORE_ALGORITHM_NAME)
     val ppeAlgorithms = listOf(CRYPTOPAN_ALGORITHM_NAME, HPCBC_ALGORITHM_NAME)
     val fpeAlgorithms = listOf(DFF_ALGORITHM_NAME, FF3_ALGORITHM_NAME)
     val symmetricAlgorithms = listOf("AES", "Blowfish")
@@ -45,13 +41,9 @@ object GaloisJCE : Provider(
         put("Cipher.$FOPE_ALGORITHM_NAME", FOPECipher::class.java.canonicalName)
         put("KeyGenerator.$FOPE_ALGORITHM_NAME", FOPEKeyGenerator::class.java.canonicalName)
 
-        // PIORE
-        put("Cipher.$PIORE_ALGORITHM_NAME", PIORECipher::class.java.canonicalName)
-        put("KeyGenerator.$PIORE_ALGORITHM_NAME", PIOREKeyGenerator::class.java.canonicalName)
-
-        // ACOPE
-        put("Cipher.$ACOPE_ALGORITHM_NAME", ACOPECipher::class.java.canonicalName)
-        put("KeyGenerator.$ACOPE_ALGORITHM_NAME", ACOPEKeyGenerator::class.java.canonicalName)
+        // PORE
+        put("Cipher.$PORE_ALGORITHM_NAME", PORECipher::class.java.canonicalName)
+        put("KeyGenerator.$PORE_ALGORITHM_NAME", POREKeyGenerator::class.java.canonicalName)
 
         // CRYPTO-PAN
         put("Cipher.$CRYPTOPAN_ALGORITHM_NAME", CryptoPANCipher::class.java.canonicalName)
@@ -90,9 +82,9 @@ object GaloisJCE : Provider(
                 description.keySizes = FOPESecretKey.KEY_SIZES
                 FOPEParameterSpec::class
             }
-            PIORE_ALGORITHM_NAME -> {
-                description.keySizes = PIORESecretKey.KEY_SIZES
-                PIOREParameterSpec::class
+            PORE_ALGORITHM_NAME -> {
+                description.keySizes = PORESecretKey.KEY_SIZES
+                POREParameterSpec::class
             }
             ACOPE_ALGORITHM_NAME -> {
                 description.keySizes = ACOPESecretKey.KEY_SIZES

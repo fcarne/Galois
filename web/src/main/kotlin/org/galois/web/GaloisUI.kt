@@ -42,7 +42,6 @@ fun main() {
 
         install(CallLogging) { level = Level.INFO }
 
-
         routing {
             resource("/", "static/index.html")
 

@@ -1,4 +1,4 @@
-package org.galois.core.provider.ope.piore
+package org.galois.core.provider.ope.pore
 
 import org.galois.core.provider.GaloisCipher
 import java.math.BigInteger
@@ -11,15 +11,15 @@ import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 import kotlin.math.pow
 
-const val PIORE_ALGORITHM_NAME = "PIOre"
+const val PORE_ALGORITHM_NAME = "POre"
 
-class PIORECipher : GaloisCipher() {
-    private lateinit var m: BigInteger
+class PORECipher : GaloisCipher() {
+    private lateinit var q: BigInteger
     private var n: Byte = 0
     private var domain: Long = 0
 
-    private lateinit var mPowerN: BigInteger
-    private var mPowerNBytesLength = 0
+    private lateinit var qPowerN: BigInteger
+    private var qPowerNBytesLength = 0
 
     private lateinit var mac: Mac
 
@@ -28,21 +28,21 @@ class PIORECipher : GaloisCipher() {
         this.opMode = opMode
         val keyBytes = getKeyBytes(key)
 
-        val pioreSecretKey = PIORESecretKey(keyBytes)
-        m = pioreSecretKey.m.toLong().toBigInteger()
-        n = pioreSecretKey.n
+        val poreSecretKey = PORESecretKey(keyBytes)
+        q = poreSecretKey.q.toLong().toBigInteger()
+        n = poreSecretKey.n
 
         domain = 2.0.pow(n.toInt()).toLong()
 
         mac = Mac.getInstance("HmacSha256")
-        mac.init(SecretKeySpec(pioreSecretKey.k, mac.algorithm))
+        mac.init(SecretKeySpec(poreSecretKey.k, mac.algorithm))
 
-        mPowerN = m.pow(n.toInt())
-        mPowerNBytesLength = mPowerN.toByteArray().size
+        qPowerN = q.pow(n.toInt())
+        qPowerNBytesLength = qPowerN.toByteArray().size
     }
 
     override fun engineGetOutputSize(inputLen: Int): Int =
-        if (opMode == Cipher.ENCRYPT_MODE && mPowerNBytesLength > 0) mPowerNBytesLength
+        if (opMode == Cipher.ENCRYPT_MODE && qPowerNBytesLength > 0) qPowerNBytesLength
         else if (opMode == Cipher.DECRYPT_MODE) Long.SIZE_BYTES
         else 0
 
@@ -62,7 +62,7 @@ class PIORECipher : GaloisCipher() {
             for (i in 1..n) {
                 val bI = (b shr n - i and 1).toInt()
                 val uI = f(i, b, bI)
-                cipher += m.pow(n - i) * uI
+                cipher += q.pow(n - i) * uI
             }
 
             val cipherArray = cipher.toByteArray()
@@ -70,13 +70,13 @@ class PIORECipher : GaloisCipher() {
 
         } else if (opMode == Cipher.DECRYPT_MODE) {
             var c = BigInteger(input)
-            require(c >= BigInteger.ZERO && c < mPowerN) { "Ciphertext must be in range 0..$mPowerN - 1, was $c" }
+            require(c >= BigInteger.ZERO && c < qPowerN) { "Ciphertext must be in range 0..$qPowerN - 1, was $c" }
 
             var b: Long = 0
             val u = Array(n.toInt()) { BigInteger.ZERO }
 
             for (i in n - 1 downTo 0) {
-                val quotientAndRemainder = c.divideAndRemainder(m)
+                val quotientAndRemainder = c.divideAndRemainder(q)
                 c = quotientAndRemainder[0]
                 u[i] = quotientAndRemainder[1]
             }
@@ -98,7 +98,7 @@ class PIORECipher : GaloisCipher() {
     private fun f(i: Int, b: Long, bI: Int): BigInteger {
         val shift = n - i + 1
         val x = b shr shift shl shift
-        return (prf(i, x) + bI.toBigInteger()).mod(m)
+        return (prf(i, x) + bI.toBigInteger()).mod(q)
     }
 
     private fun prf(i: Int, b: Long): BigInteger {

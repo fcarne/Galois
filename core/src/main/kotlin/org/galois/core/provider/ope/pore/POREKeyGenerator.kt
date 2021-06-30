@@ -1,4 +1,4 @@
-package org.galois.core.provider.ope.piore
+package org.galois.core.provider.ope.pore
 
 import org.galois.core.provider.GaloisJCE
 import java.security.InvalidAlgorithmParameterException
@@ -7,11 +7,11 @@ import java.security.spec.AlgorithmParameterSpec
 import javax.crypto.KeyGeneratorSpi
 import javax.crypto.SecretKey
 
-class PIOREKeyGenerator : KeyGeneratorSpi() {
+class POREKeyGenerator : KeyGeneratorSpi() {
     private lateinit var secureRandom: SecureRandom
-    private lateinit var parameterSpec: PIOREParameterSpec
+    private lateinit var parameterSpec: POREParameterSpec
 
-    private var keySize: Int = PIORESecretKey.KEY_SIZES[0]
+    private var keySize: Int = PORESecretKey.KEY_SIZES[0]
 
     override fun engineInit(secureRandom: SecureRandom) {
         this.secureRandom = secureRandom
@@ -19,15 +19,15 @@ class PIOREKeyGenerator : KeyGeneratorSpi() {
 
     @Throws(InvalidAlgorithmParameterException::class)
     override fun engineInit(algorithmParameterSpec: AlgorithmParameterSpec, secureRandom: SecureRandom) {
-        if (algorithmParameterSpec !is PIOREParameterSpec)
-            throw InvalidAlgorithmParameterException("ParameterSpec must be of type ${PIOREParameterSpec::class.java.name}")
+        if (algorithmParameterSpec !is POREParameterSpec)
+            throw InvalidAlgorithmParameterException("ParameterSpec must be of type ${POREParameterSpec::class.java.name}")
 
         parameterSpec = algorithmParameterSpec
         engineInit(secureRandom)
     }
 
     override fun engineInit(keySize: Int, secureRandom: SecureRandom) {
-        require(PIORESecretKey.isKeySizeValid(keySize)) { PIORESecretKey.getKeySizeError(keySize) }
+        require(PORESecretKey.isKeySizeValid(keySize)) { PORESecretKey.getKeySizeError(keySize) }
 
         this.keySize = keySize
         engineInit(secureRandom)
@@ -35,12 +35,11 @@ class PIOREKeyGenerator : KeyGeneratorSpi() {
 
     override fun engineGenerateKey(): SecretKey {
         if (!this::secureRandom.isInitialized) secureRandom = GaloisJCE.random
-        if (!this::parameterSpec.isInitialized) parameterSpec = PIOREParameterSpec()
+        if (!this::parameterSpec.isInitialized) parameterSpec = POREParameterSpec()
 
-        val k = ByteArray(keySize / 8 - PIORESecretKey.FIXED_LENGTH)
+        val k = ByteArray(keySize / 8 - PORESecretKey.FIXED_LENGTH)
         secureRandom.nextBytes(k)
 
-        val m = (secureRandom.nextInt(PIORESecretKey.MAX_M - PIORESecretKey.MIN_M) + PIORESecretKey.MIN_M).toShort()
-        return PIORESecretKey(m, parameterSpec.n, k)
+        return PORESecretKey(parameterSpec.q, parameterSpec.n, k)
     }
 }

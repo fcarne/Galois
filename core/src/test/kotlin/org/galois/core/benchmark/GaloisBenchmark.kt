@@ -10,7 +10,7 @@ import org.galois.core.provider.fpe.ff3.FF3_ALGORITHM_NAME
 import org.galois.core.provider.ope.acope.ACOPE_ALGORITHM_NAME
 import org.galois.core.provider.ope.aicd.AICD_ALGORITHM_NAME
 import org.galois.core.provider.ope.fope.FOPE_ALGORITHM_NAME
-import org.galois.core.provider.ope.piore.PIORE_ALGORITHM_NAME
+import org.galois.core.provider.ope.pore.PORE_ALGORITHM_NAME
 import org.galois.core.provider.ppe.cryptopan.CRYPTOPAN_ALGORITHM_NAME
 import org.galois.core.provider.ppe.hpcbc.HPCBC_ALGORITHM_NAME
 import org.openjdk.jmh.annotations.*
@@ -21,10 +21,11 @@ import org.openjdk.jmh.results.format.ResultFormatType
 import org.openjdk.jmh.runner.Runner
 import org.openjdk.jmh.runner.options.OptionsBuilder
 import tech.tablesaw.api.Table
+import java.awt.Desktop
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileWriter
-import java.text.SimpleDateFormat
+import java.net.URI
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -33,12 +34,10 @@ import java.util.concurrent.TimeUnit
 enum class BenchmarkConfig(val algorithm: String, val column: String) {
     FOPE_AGE(FOPE_ALGORITHM_NAME, "age"),
     FOPE_SALARY(FOPE_ALGORITHM_NAME, "salary"),
-    PIORE_AGE(PIORE_ALGORITHM_NAME, "age"),
-    PIORE_SALARY(PIORE_ALGORITHM_NAME, "salary"),
+    PORE_AGE(PORE_ALGORITHM_NAME, "age"),
+    PORE_SALARY(PORE_ALGORITHM_NAME, "salary"),
     AICD_AGE(AICD_ALGORITHM_NAME, "age"),
     AICD_SALARY(AICD_ALGORITHM_NAME, "salary"),
-    ACOPE_AGE(ACOPE_ALGORITHM_NAME, "age"),
-    ACOPE_SALARY(ACOPE_ALGORITHM_NAME, "salary"),
     CRYPTOPAN_IP(CRYPTOPAN_ALGORITHM_NAME, "ip-address"),
     CRYPTOPAN_ZIP(CRYPTOPAN_ALGORITHM_NAME, "zip-code"),
     HPCBC_IP(HPCBC_ALGORITHM_NAME, "ip-address"),
@@ -70,12 +69,10 @@ class EncryptionTimeAndSizeBenchmark {
     @Param(
         "FOPE_AGE",
         "FOPE_SALARY",
-        "PIORE_AGE",
-        "PIORE_SALARY",
+        "PORE_AGE",
+        "PORE_SALARY",
         "AICD_AGE",
         "AICD_SALARY",
-        //"ACOPE_AGE",
-        //"ACOPE_SALARY",
         "CRYPTOPAN_IP",
         "CRYPTOPAN_ZIP",
         "HPCBC_IP",
@@ -162,10 +159,8 @@ class DecryptionTimeBenchmark {
     @Param(
         "FOPE_AGE",
         "FOPE_SALARY",
-        "PIORE_AGE",
-        "PIORE_SALARY",
-        //"ACOPE_AGE",
-        //"ACOPE_SALARY",
+        "PORE_AGE",
+        "PORE_SALARY",
         "AICD_AGE",
         "AICD_SALARY",
         "CRYPTOPAN_IP",
@@ -240,4 +235,8 @@ fun main() {
     val stop = LocalDateTime.now()
     println("===== ${stop.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))} BENCHMARKING FINISHED =====")
     println("===== ELAPSED TIME: ${Duration.between(start, stop).toMinutes()} minutes =====")
+
+    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+        Desktop.getDesktop().browse(URI("https://www.youtube.com/watch?v=CSvFpBOe8eY"))
+    }
 }
