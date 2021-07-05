@@ -1,0 +1,1346 @@
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, 1 s each
+# Measurement: 1 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.BaselineBenchmark.baseline
+
+# Run progress: 0,00% complete, ETA 00:07:32
+# Fork: 1 of 1
+# Warmup Iteration   1: ≈ 10⁻⁶ ms/op
+Iteration   1: ≈ 10⁻⁶ ms/op
+                 ·gc.alloc.rate:      ≈ 10⁻⁴ MB/sec
+                 ·gc.alloc.rate.norm: ≈ 10⁻⁷ B/op
+                 ·gc.count:           ≈ 0 counts
+
+
+
+Result "org.galois.core.benchmark.BaselineBenchmark.baseline":
+  ≈ 10⁻⁶ ms/op
+
+Secondary result "org.galois.core.benchmark.BaselineBenchmark.baseline:·gc.alloc.rate":
+  ≈ 10⁻⁴ MB/sec
+
+Secondary result "org.galois.core.benchmark.BaselineBenchmark.baseline:·gc.alloc.rate.norm":
+  ≈ 10⁻⁷ B/op
+
+Secondary result "org.galois.core.benchmark.BaselineBenchmark.baseline:·gc.count":
+  ≈ 0 counts
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt
+# Parameters: (params = PORE_AGE, rows = 100)
+
+# Run progress: 0,44% complete, ETA 00:18:08
+# Fork: 1 of 1
+# Warmup Iteration   1: 0,866 ms/op
+# Warmup Iteration   2: 0,807 ms/op
+# Warmup Iteration   3: 0,803 ms/op
+Iteration   1: 0,801 ms/op
+                 ·gc.alloc.rate:               650,009 MB/sec
+                 ·gc.alloc.rate.norm:          1154823,990 B/op
+                 ·gc.churn.G1_Eden_Space:      649,341 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 1153636,616 B/op
+                 ·gc.churn.G1_Old_Gen:         0,100 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    177,690 B/op
+                 ·gc.count:                    98,000 counts
+                 ·gc.time:                     36,000 ms
+
+Iteration   2: 0,799 ms/op
+                 ·gc.alloc.rate:               652,535 MB/sec
+                 ·gc.alloc.rate.norm:          1154959,815 B/op
+                 ·gc.churn.G1_Eden_Space:      651,845 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 1153736,949 B/op
+                 ·gc.churn.G1_Old_Gen:         0,102 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    180,192 B/op
+                 ·gc.count:                    95,000 counts
+                 ·gc.time:                     35,000 ms
+
+Iteration   3: 0,799 ms/op
+                 ·gc.alloc.rate:               652,021 MB/sec
+                 ·gc.alloc.rate.norm:          1154847,532 B/op
+                 ·gc.churn.G1_Eden_Space:      651,918 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 1154664,838 B/op
+                 ·gc.churn.G1_Old_Gen:         0,101 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    178,104 B/op
+                 ·gc.count:                    95,000 counts
+                 ·gc.time:                     36,000 ms
+
+
+
+Result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt":
+  0,800 ±(99.9%) 0,029 ms/op [Average]
+  (min, avg, max) = (0,799, 0,800, 0,801), stdev = 0,002
+  CI (99.9%): [0,771, 0,828] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate":
+  651,522 ±(99.9%) 24,353 MB/sec [Average]
+  (min, avg, max) = (650,009, 651,522, 652,535), stdev = 1,335
+  CI (99.9%): [627,169, 675,875] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate.norm":
+  1154877,112 ±(99.9%) 1324,194 B/op [Average]
+  (min, avg, max) = (1154823,990, 1154877,112, 1154959,815), stdev = 72,584
+  CI (99.9%): [1153552,918, 1156201,306] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space":
+  651,034 ±(99.9%) 26,762 MB/sec [Average]
+  (min, avg, max) = (649,341, 651,034, 651,918), stdev = 1,467
+  CI (99.9%): [624,273, 677,796] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm":
+  1154012,801 ±(99.9%) 10342,450 B/op [Average]
+  (min, avg, max) = (1153636,616, 1154012,801, 1154664,838), stdev = 566,905
+  CI (99.9%): [1143670,351, 1164355,251] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen":
+  0,101 ±(99.9%) 0,017 MB/sec [Average]
+  (min, avg, max) = (0,100, 0,101, 0,102), stdev = 0,001
+  CI (99.9%): [0,084, 0,118] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm":
+  178,662 ±(99.9%) 24,465 B/op [Average]
+  (min, avg, max) = (177,690, 178,662, 180,192), stdev = 1,341
+  CI (99.9%): [154,196, 203,127] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.count":
+  288,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (95,000, 96,000, 98,000), stdev = 1,732
+  CI (99.9%): [288,000, 288,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.time":
+  107,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (35,000, 35,667, 36,000), stdev = 0,577
+  CI (99.9%): [107,000, 107,000] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt
+# Parameters: (params = PORE_AGE, rows = 1000)
+
+# Run progress: 10,40% complete, ETA 00:08:20
+# Fork: 1 of 1
+# Warmup Iteration   1: 8,259 ms/op
+# Warmup Iteration   2: 7,944 ms/op
+# Warmup Iteration   3: 7,897 ms/op
+Iteration   1: 7,926 ms/op
+                 ·gc.alloc.rate:               645,731 MB/sec
+                 ·gc.alloc.rate.norm:          11350442,654 B/op
+                 ·gc.churn.G1_Eden_Space:      639,258 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 11236654,137 B/op
+                 ·gc.churn.G1_Old_Gen:         0,102 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    1796,274 B/op
+                 ·gc.count:                    103,000 counts
+                 ·gc.time:                     36,000 ms
+
+Iteration   2: 7,866 ms/op
+                 ·gc.alloc.rate:               650,402 MB/sec
+                 ·gc.alloc.rate.norm:          11348098,962 B/op
+                 ·gc.churn.G1_Eden_Space:      644,720 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 11248964,051 B/op
+                 ·gc.churn.G1_Old_Gen:         0,103 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    1795,772 B/op
+                 ·gc.count:                    95,000 counts
+                 ·gc.time:                     35,000 ms
+
+Iteration   3: 7,850 ms/op
+                 ·gc.alloc.rate:               651,491 MB/sec
+                 ·gc.alloc.rate.norm:          11340361,390 B/op
+                 ·gc.churn.G1_Eden_Space:      651,500 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 11340523,374 B/op
+                 ·gc.churn.G1_Old_Gen:         0,100 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    1746,654 B/op
+                 ·gc.count:                    95,000 counts
+                 ·gc.time:                     36,000 ms
+
+
+
+Result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt":
+  7,881 ±(99.9%) 0,737 ms/op [Average]
+  (min, avg, max) = (7,850, 7,881, 7,926), stdev = 0,040
+  CI (99.9%): [7,143, 8,618] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate":
+  649,208 ±(99.9%) 55,826 MB/sec [Average]
+  (min, avg, max) = (645,731, 649,208, 651,491), stdev = 3,060
+  CI (99.9%): [593,382, 705,034] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate.norm":
+  11346301,002 ±(99.9%) 96247,464 B/op [Average]
+  (min, avg, max) = (11340361,390, 11346301,002, 11350442,654), stdev = 5275,648
+  CI (99.9%): [11250053,538, 11442548,466] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space":
+  645,159 ±(99.9%) 111,891 MB/sec [Average]
+  (min, avg, max) = (639,258, 645,159, 651,500), stdev = 6,133
+  CI (99.9%): [533,268, 757,051] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm":
+  11275380,521 ±(99.9%) 1035333,597 B/op [Average]
+  (min, avg, max) = (11236654,137, 11275380,521, 11340523,374), stdev = 56750,128
+  CI (99.9%): [10240046,924, 12310714,118] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen":
+  0,102 ±(99.9%) 0,024 MB/sec [Average]
+  (min, avg, max) = (0,100, 0,102, 0,103), stdev = 0,001
+  CI (99.9%): [0,078, 0,126] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm":
+  1779,567 ±(99.9%) 520,027 B/op [Average]
+  (min, avg, max) = (1746,654, 1779,567, 1796,274), stdev = 28,504
+  CI (99.9%): [1259,540, 2299,594] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.count":
+  293,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (95,000, 97,667, 103,000), stdev = 4,619
+  CI (99.9%): [293,000, 293,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.time":
+  107,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (35,000, 35,667, 36,000), stdev = 0,577
+  CI (99.9%): [107,000, 107,000] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt
+# Parameters: (params = PORE_AGE, rows = 10000)
+
+# Run progress: 20,35% complete, ETA 00:07:15
+# Fork: 1 of 1
+# Warmup Iteration   1: 80,328 ms/op
+# Warmup Iteration   2: 79,244 ms/op
+# Warmup Iteration   3: 78,474 ms/op
+Iteration   1: 78,304 ms/op
+                 ·gc.alloc.rate:               652,595 MB/sec
+                 ·gc.alloc.rate.norm:          113242821,000 B/op
+                 ·gc.churn.G1_Eden_Space:      652,804 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 113278976,000 B/op
+                 ·gc.churn.G1_Old_Gen:         0,147 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    25472,250 B/op
+                 ·gc.count:                    99,000 counts
+                 ·gc.time:                     35,000 ms
+
+Iteration   2: 78,214 ms/op
+                 ·gc.alloc.rate:               653,127 MB/sec
+                 ·gc.alloc.rate.norm:          113224484,750 B/op
+                 ·gc.churn.G1_Eden_Space:      653,158 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 113229824,000 B/op
+                 ·gc.churn.G1_Old_Gen:         0,150 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    25976,500 B/op
+                 ·gc.count:                    95,000 counts
+                 ·gc.time:                     37,000 ms
+
+Iteration   3: 78,030 ms/op
+                 ·gc.alloc.rate:               653,367 MB/sec
+                 ·gc.alloc.rate.norm:          113220220,875 B/op
+                 ·gc.churn.G1_Eden_Space:      648,884 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 112443392,000 B/op
+                 ·gc.churn.G1_Old_Gen:         0,146 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    25358,750 B/op
+                 ·gc.count:                    96,000 counts
+                 ·gc.time:                     37,000 ms
+
+
+
+Result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt":
+  78,183 ±(99.9%) 2,546 ms/op [Average]
+  (min, avg, max) = (78,030, 78,183, 78,304), stdev = 0,140
+  CI (99.9%): [75,637, 80,729] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate":
+  653,030 ±(99.9%) 7,202 MB/sec [Average]
+  (min, avg, max) = (652,595, 653,030, 653,367), stdev = 0,395
+  CI (99.9%): [645,828, 660,232] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate.norm":
+  113229175,542 ±(99.9%) 219072,136 B/op [Average]
+  (min, avg, max) = (113220220,875, 113229175,542, 113242821,000), stdev = 12008,083
+  CI (99.9%): [113010103,406, 113448247,678] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space":
+  651,615 ±(99.9%) 43,276 MB/sec [Average]
+  (min, avg, max) = (648,884, 651,615, 653,158), stdev = 2,372
+  CI (99.9%): [608,339, 694,891] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm":
+  112984064,000 ±(99.9%) 8554120,264 B/op [Average]
+  (min, avg, max) = (112443392,000, 112984064,000, 113278976,000), stdev = 468880,196
+  CI (99.9%): [104429943,736, 121538184,264] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen":
+  0,148 ±(99.9%) 0,035 MB/sec [Average]
+  (min, avg, max) = (0,146, 0,148, 0,150), stdev = 0,002
+  CI (99.9%): [0,113, 0,182] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm":
+  25602,500 ±(99.9%) 5999,039 B/op [Average]
+  (min, avg, max) = (25358,750, 25602,500, 25976,500), stdev = 328,828
+  CI (99.9%): [19603,461, 31601,539] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.count":
+  290,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (95,000, 96,667, 99,000), stdev = 2,082
+  CI (99.9%): [290,000, 290,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.time":
+  109,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (35,000, 36,333, 37,000), stdev = 1,155
+  CI (99.9%): [109,000, 109,000] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt
+# Parameters: (params = PORE_SALARY, rows = 100)
+
+# Run progress: 30,31% complete, ETA 00:06:18
+# Fork: 1 of 1
+# Warmup Iteration   1: 2,407 ms/op
+# Warmup Iteration   2: 2,320 ms/op
+# Warmup Iteration   3: 2,315 ms/op
+Iteration   1: 2,275 ms/op
+                 ·gc.alloc.rate:               647,975 MB/sec
+                 ·gc.alloc.rate.norm:          3271165,841 B/op
+                 ·gc.churn.G1_Eden_Space:      643,784 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 3250008,931 B/op
+                 ·gc.churn.G1_Old_Gen:         0,111 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    560,675 B/op
+                 ·gc.count:                    94,000 counts
+                 ·gc.time:                     37,000 ms
+
+Iteration   2: 2,281 ms/op
+                 ·gc.alloc.rate:               647,108 MB/sec
+                 ·gc.alloc.rate.norm:          3271265,509 B/op
+                 ·gc.churn.G1_Eden_Space:      640,742 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 3239084,468 B/op
+                 ·gc.churn.G1_Old_Gen:         0,107 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    540,545 B/op
+                 ·gc.count:                    96,000 counts
+                 ·gc.time:                     37,000 ms
+
+Iteration   3: 2,283 ms/op
+                 ·gc.alloc.rate:               646,933 MB/sec
+                 ·gc.alloc.rate.norm:          3271324,279 B/op
+                 ·gc.churn.G1_Eden_Space:      642,185 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 3247311,809 B/op
+                 ·gc.churn.G1_Old_Gen:         0,109 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    549,032 B/op
+                 ·gc.count:                    93,000 counts
+                 ·gc.time:                     38,000 ms
+
+
+
+Result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt":
+  2,280 ±(99.9%) 0,073 ms/op [Average]
+  (min, avg, max) = (2,275, 2,280, 2,283), stdev = 0,004
+  CI (99.9%): [2,206, 2,353] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate":
+  647,339 ±(99.9%) 10,176 MB/sec [Average]
+  (min, avg, max) = (646,933, 647,339, 647,975), stdev = 0,558
+  CI (99.9%): [637,163, 657,514] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate.norm":
+  3271251,876 ±(99.9%) 1461,217 B/op [Average]
+  (min, avg, max) = (3271165,841, 3271251,876, 3271324,279), stdev = 80,094
+  CI (99.9%): [3269790,659, 3272713,094] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space":
+  642,237 ±(99.9%) 27,759 MB/sec [Average]
+  (min, avg, max) = (640,742, 642,237, 643,784), stdev = 1,522
+  CI (99.9%): [614,477, 669,996] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm":
+  3245468,403 ±(99.9%) 103820,382 B/op [Average]
+  (min, avg, max) = (3239084,468, 3245468,403, 3250008,931), stdev = 5690,745
+  CI (99.9%): [3141648,021, 3349288,784] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen":
+  0,109 ±(99.9%) 0,038 MB/sec [Average]
+  (min, avg, max) = (0,107, 0,109, 0,111), stdev = 0,002
+  CI (99.9%): [0,071, 0,147] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm":
+  550,084 ±(99.9%) 184,368 B/op [Average]
+  (min, avg, max) = (540,545, 550,084, 560,675), stdev = 10,106
+  CI (99.9%): [365,716, 734,452] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.count":
+  283,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (93,000, 94,333, 96,000), stdev = 1,528
+  CI (99.9%): [283,000, 283,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.time":
+  112,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (37,000, 37,333, 38,000), stdev = 0,577
+  CI (99.9%): [112,000, 112,000] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt
+# Parameters: (params = PORE_SALARY, rows = 1000)
+
+# Run progress: 40,27% complete, ETA 00:05:23
+# Fork: 1 of 1
+# Warmup Iteration   1: 23,923 ms/op
+# Warmup Iteration   2: 23,264 ms/op
+# Warmup Iteration   3: 23,187 ms/op
+Iteration   1: 23,044 ms/op
+                 ·gc.alloc.rate:               639,666 MB/sec
+                 ·gc.alloc.rate.norm:          32616066,741 B/op
+                 ·gc.churn.G1_Eden_Space:      637,695 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 32515565,037 B/op
+                 ·gc.churn.G1_Old_Gen:         0,301 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    15324,593 B/op
+                 ·gc.count:                    91,000 counts
+                 ·gc.time:                     40,000 ms
+
+Iteration   2: 22,945 ms/op
+                 ·gc.alloc.rate:               642,903 MB/sec
+                 ·gc.alloc.rate.norm:          32604487,413 B/op
+                 ·gc.churn.G1_Eden_Space:      643,234 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 32621295,560 B/op
+                 ·gc.churn.G1_Old_Gen:         0,301 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    15257,688 B/op
+                 ·gc.count:                    92,000 counts
+                 ·gc.time:                     41,000 ms
+
+Iteration   3: 23,088 ms/op
+                 ·gc.alloc.rate:               640,581 MB/sec
+                 ·gc.alloc.rate.norm:          32603512,479 B/op
+                 ·gc.churn.G1_Eden_Space:      640,371 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 32592834,654 B/op
+                 ·gc.churn.G1_Old_Gen:         0,283 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    14423,594 B/op
+                 ·gc.count:                    93,000 counts
+                 ·gc.time:                     41,000 ms
+
+
+
+Result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt":
+  23,026 ±(99.9%) 1,335 ms/op [Average]
+  (min, avg, max) = (22,945, 23,026, 23,088), stdev = 0,073
+  CI (99.9%): [21,690, 24,361] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate":
+  641,050 ±(99.9%) 30,443 MB/sec [Average]
+  (min, avg, max) = (639,666, 641,050, 642,903), stdev = 1,669
+  CI (99.9%): [610,606, 671,493] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate.norm":
+  32608022,211 ±(99.9%) 127410,518 B/op [Average]
+  (min, avg, max) = (32603512,479, 32608022,211, 32616066,741), stdev = 6983,800
+  CI (99.9%): [32480611,693, 32735432,729] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space":
+  640,433 ±(99.9%) 50,539 MB/sec [Average]
+  (min, avg, max) = (637,695, 640,433, 643,234), stdev = 2,770
+  CI (99.9%): [589,894, 690,973] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm":
+  32576565,084 ±(99.9%) 998126,730 B/op [Average]
+  (min, avg, max) = (32515565,037, 32576565,084, 32621295,560), stdev = 54710,694
+  CI (99.9%): [31578438,353, 33574691,814] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen":
+  0,295 ±(99.9%) 0,182 MB/sec [Average]
+  (min, avg, max) = (0,283, 0,295, 0,301), stdev = 0,010
+  CI (99.9%): [0,113, 0,477] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm":
+  15001,958 ±(99.9%) 9158,234 B/op [Average]
+  (min, avg, max) = (14423,594, 15001,958, 15324,593), stdev = 501,994
+  CI (99.9%): [5843,725, 24160,192] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.count":
+  276,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (91,000, 92,000, 93,000), stdev = 1,000
+  CI (99.9%): [276,000, 276,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.time":
+  122,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (40,000, 40,667, 41,000), stdev = 0,577
+  CI (99.9%): [122,000, 122,000] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt
+# Parameters: (params = PORE_SALARY, rows = 10000)
+
+# Run progress: 50,22% complete, ETA 00:04:28
+# Fork: 1 of 1
+# Warmup Iteration   1: 236,082 ms/op
+# Warmup Iteration   2: 244,129 ms/op
+# Warmup Iteration   3: 245,610 ms/op
+Iteration   1: 233,106 ms/op
+                 ·gc.alloc.rate:                   631,262 MB/sec
+                 ·gc.alloc.rate.norm:              324784819,636 B/op
+                 ·gc.churn.G1_Eden_Space:          628,181 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm:     323199720,727 B/op
+                 ·gc.churn.G1_Old_Gen:             0,700 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:        360371,273 B/op
+                 ·gc.churn.G1_Survivor_Space:      0,556 MB/sec
+                 ·gc.churn.G1_Survivor_Space.norm: 285975,273 B/op
+                 ·gc.count:                        63,000 counts
+                 ·gc.time:                         68,000 ms
+
+Iteration   2: 228,730 ms/op
+                 ·gc.alloc.rate:                   641,905 MB/sec
+                 ·gc.alloc.rate.norm:              325174652,000 B/op
+                 ·gc.churn.G1_Eden_Space:          633,961 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm:     321150231,273 B/op
+                 ·gc.churn.G1_Old_Gen:             0,728 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:        369025,455 B/op
+                 ·gc.churn.G1_Survivor_Space:      0,565 MB/sec
+                 ·gc.churn.G1_Survivor_Space.norm: 285975,273 B/op
+                 ·gc.count:                        64,000 counts
+                 ·gc.time:                         65,000 ms
+
+Iteration   3: 229,734 ms/op
+                 ·gc.alloc.rate:                   639,583 MB/sec
+                 ·gc.alloc.rate.norm:              325471101,091 B/op
+                 ·gc.churn.G1_Eden_Space:          632,029 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm:     321626856,727 B/op
+                 ·gc.churn.G1_Old_Gen:             0,945 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:        481093,818 B/op
+                 ·gc.churn.G1_Survivor_Space:      1,030 MB/sec
+                 ·gc.churn.G1_Survivor_Space.norm: 524288,000 B/op
+                 ·gc.count:                        67,000 counts
+                 ·gc.time:                         66,000 ms
+
+
+
+Result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt":
+  230,523 ±(99.9%) 41,824 ms/op [Average]
+  (min, avg, max) = (228,730, 230,523, 233,106), stdev = 2,293
+  CI (99.9%): [188,699, 272,347] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate":
+  637,583 ±(99.9%) 102,103 MB/sec [Average]
+  (min, avg, max) = (631,262, 637,583, 641,905), stdev = 5,597
+  CI (99.9%): [535,480, 739,687] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate.norm":
+  325143524,242 ±(99.9%) 6279452,814 B/op [Average]
+  (min, avg, max) = (324784819,636, 325143524,242, 325471101,091), stdev = 344197,998
+  CI (99.9%): [318864071,429, 331422977,056] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space":
+  631,390 ±(99.9%) 53,685 MB/sec [Average]
+  (min, avg, max) = (628,181, 631,390, 633,961), stdev = 2,943
+  CI (99.9%): [577,706, 685,075] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm":
+  321992269,576 ±(99.9%) 19566311,066 B/op [Average]
+  (min, avg, max) = (321150231,273, 321992269,576, 323199720,727), stdev = 1072495,533
+  CI (99.9%): [302425958,510, 341558580,641] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen":
+  0,791 ±(99.9%) 2,446 MB/sec [Average]
+  (min, avg, max) = (0,700, 0,791, 0,945), stdev = 0,134
+  CI (99.9%): [≈ 0, 3,237] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm":
+  403496,848 ±(99.9%) 1228534,370 B/op [Average]
+  (min, avg, max) = (360371,273, 403496,848, 481093,818), stdev = 67340,114
+  CI (99.9%): [≈ 0, 1632031,218] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Survivor_Space":
+  0,717 ±(99.9%) 4,952 MB/sec [Average]
+  (min, avg, max) = (0,556, 0,717, 1,030), stdev = 0,271
+  CI (99.9%): [≈ 0, 5,669] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Survivor_Space.norm":
+  365412,848 ±(99.9%) 2510152,292 B/op [Average]
+  (min, avg, max) = (285975,273, 365412,848, 524288,000), stdev = 137589,917
+  CI (99.9%): [≈ 0, 2875565,140] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.count":
+  194,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (63,000, 64,667, 67,000), stdev = 2,082
+  CI (99.9%): [194,000, 194,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.DecryptionTimePOREBenchmark.decrypt:·gc.time":
+  199,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (65,000, 66,333, 68,000), stdev = 1,528
+  CI (99.9%): [199,000, 199,000] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt
+# Parameters: (params = PORE_AGE, rows = 100)
+
+# Run progress: 60,18% complete, ETA 00:03:35
+# Fork: 1 of 1
+# Warmup Iteration   1: 0,888 ms/op
+# Warmup Iteration   2: 0,814 ms/op
+# Warmup Iteration   3: 0,806 ms/op
+Iteration   1: 0,808 ms/op
+                 ·gc.alloc.rate:               675,213 MB/sec
+                 ·gc.alloc.rate.norm:          642129,774 B/op
+                 ·gc.churn.G1_Eden_Space:      667,813 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 635092,025 B/op
+                 ·gc.churn.G1_Old_Gen:         0,182 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    173,304 B/op
+                 ·gc.count:                    56,000 counts
+                 ·gc.time:                     24,000 ms
+
+Iteration   2: 0,810 ms/op
+                 ·gc.alloc.rate:               673,597 MB/sec
+                 ·gc.alloc.rate.norm:          642008,406 B/op
+                 ·gc.churn.G1_Eden_Space:      667,772 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 636456,009 B/op
+                 ·gc.churn.G1_Old_Gen:         0,187 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    177,942 B/op
+                 ·gc.count:                    56,000 counts
+                 ·gc.time:                     23,000 ms
+
+Iteration   3: 0,810 ms/op
+                 ·gc.alloc.rate:               671,749 MB/sec
+                 ·gc.alloc.rate.norm:          642529,440 B/op
+                 ·gc.churn.G1_Eden_Space:      665,619 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 636666,373 B/op
+                 ·gc.churn.G1_Old_Gen:         0,184 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    175,978 B/op
+                 ·gc.count:                    56,000 counts
+                 ·gc.time:                     25,000 ms
+
+
+
+Result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt":
+  0,810 ±(99.9%) 0,021 ms/op [Average]
+  (min, avg, max) = (0,808, 0,810, 0,810), stdev = 0,001
+  CI (99.9%): [0,788, 0,831] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate":
+  673,520 ±(99.9%) 31,626 MB/sec [Average]
+  (min, avg, max) = (671,749, 673,520, 675,213), stdev = 1,734
+  CI (99.9%): [641,894, 705,145] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate.norm":
+  642222,540 ±(99.9%) 4973,657 B/op [Average]
+  (min, avg, max) = (642008,406, 642222,540, 642529,440), stdev = 272,623
+  CI (99.9%): [637248,883, 647196,197] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space":
+  667,068 ±(99.9%) 22,892 MB/sec [Average]
+  (min, avg, max) = (665,619, 667,068, 667,813), stdev = 1,255
+  CI (99.9%): [644,176, 689,960] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space.norm":
+  636071,469 ±(99.9%) 15593,275 B/op [Average]
+  (min, avg, max) = (635092,025, 636071,469, 636666,373), stdev = 854,720
+  CI (99.9%): [620478,194, 651664,744] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen":
+  0,184 ±(99.9%) 0,041 MB/sec [Average]
+  (min, avg, max) = (0,182, 0,184, 0,187), stdev = 0,002
+  CI (99.9%): [0,143, 0,225] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen.norm":
+  175,741 ±(99.9%) 42,464 B/op [Average]
+  (min, avg, max) = (173,304, 175,741, 177,942), stdev = 2,328
+  CI (99.9%): [133,277, 218,206] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.count":
+  168,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (56,000, 56,000, 56,000), stdev = 0,001
+  CI (99.9%): [168,000, 168,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.time":
+  72,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (23,000, 24,000, 25,000), stdev = 1,000
+  CI (99.9%): [72,000, 72,000] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt
+# Parameters: (params = PORE_AGE, rows = 1000)
+
+# Run progress: 66,81% complete, ETA 00:03:00
+# Fork: 1 of 1
+# Warmup Iteration   1: 8,440 ms/op
+# Warmup Iteration   2: 7,991 ms/op
+# Warmup Iteration   3: 7,951 ms/op
+Iteration   1: 7,926 ms/op
+                 ·gc.alloc.rate:               655,591 MB/sec
+                 ·gc.alloc.rate.norm:          6100651,910 B/op
+                 ·gc.churn.G1_Eden_Space:      652,650 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 6073284,542 B/op
+                 ·gc.churn.G1_Old_Gen:         0,194 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    1808,452 B/op
+                 ·gc.count:                    55,000 counts
+                 ·gc.time:                     20,000 ms
+
+Iteration   2: 7,985 ms/op
+                 ·gc.alloc.rate:               650,551 MB/sec
+                 ·gc.alloc.rate.norm:          6097066,039 B/op
+                 ·gc.churn.G1_Eden_Space:      637,147 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 5971436,052 B/op
+                 ·gc.churn.G1_Old_Gen:         0,186 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    1747,442 B/op
+                 ·gc.count:                    54,000 counts
+                 ·gc.time:                     21,000 ms
+
+Iteration   3: 7,886 ms/op
+                 ·gc.alloc.rate:               658,096 MB/sec
+                 ·gc.alloc.rate.norm:          6102878,000 B/op
+                 ·gc.churn.G1_Eden_Space:      650,707 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 6034353,231 B/op
+                 ·gc.churn.G1_Old_Gen:         0,188 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    1743,603 B/op
+                 ·gc.count:                    55,000 counts
+                 ·gc.time:                     21,000 ms
+
+
+
+Result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt":
+  7,932 ±(99.9%) 0,909 ms/op [Average]
+  (min, avg, max) = (7,886, 7,932, 7,985), stdev = 0,050
+  CI (99.9%): [7,023, 8,841] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate":
+  654,746 ±(99.9%) 70,109 MB/sec [Average]
+  (min, avg, max) = (650,551, 654,746, 658,096), stdev = 3,843
+  CI (99.9%): [584,637, 724,855] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate.norm":
+  6100198,650 ±(99.9%) 53497,384 B/op [Average]
+  (min, avg, max) = (6097066,039, 6100198,650, 6102878,000), stdev = 2932,372
+  CI (99.9%): [6046701,266, 6153696,034] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space":
+  646,834 ±(99.9%) 154,087 MB/sec [Average]
+  (min, avg, max) = (637,147, 646,834, 652,650), stdev = 8,446
+  CI (99.9%): [492,748, 800,921] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space.norm":
+  6026357,942 ±(99.9%) 937596,403 B/op [Average]
+  (min, avg, max) = (5971436,052, 6026357,942, 6073284,542), stdev = 51392,823
+  CI (99.9%): [5088761,539, 6963954,344] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen":
+  0,190 ±(99.9%) 0,076 MB/sec [Average]
+  (min, avg, max) = (0,186, 0,190, 0,194), stdev = 0,004
+  CI (99.9%): [0,113, 0,266] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen.norm":
+  1766,499 ±(99.9%) 663,763 B/op [Average]
+  (min, avg, max) = (1743,603, 1766,499, 1808,452), stdev = 36,383
+  CI (99.9%): [1102,736, 2430,261] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.count":
+  164,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (54,000, 54,667, 55,000), stdev = 0,577
+  CI (99.9%): [164,000, 164,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.time":
+  62,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (20,000, 20,667, 21,000), stdev = 0,577
+  CI (99.9%): [62,000, 62,000] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt
+# Parameters: (params = PORE_AGE, rows = 10000)
+
+# Run progress: 73,45% complete, ETA 00:02:25
+# Fork: 1 of 1
+# Warmup Iteration   1: 82,100 ms/op
+# Warmup Iteration   2: 79,727 ms/op
+# Warmup Iteration   3: 79,676 ms/op
+Iteration   1: 79,725 ms/op
+                 ·gc.alloc.rate:               649,311 MB/sec
+                 ·gc.alloc.rate.norm:          60719978,968 B/op
+                 ·gc.churn.G1_Eden_Space:      640,767 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 59921044,645 B/op
+                 ·gc.churn.G1_Old_Gen:         0,199 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    18648,516 B/op
+                 ·gc.count:                    56,000 counts
+                 ·gc.time:                     20,000 ms
+
+Iteration   2: 79,722 ms/op
+                 ·gc.alloc.rate:               647,309 MB/sec
+                 ·gc.alloc.rate.norm:          60529605,161 B/op
+                 ·gc.churn.G1_Eden_Space:      634,471 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 59329106,581 B/op
+                 ·gc.churn.G1_Old_Gen:         0,246 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    22969,806 B/op
+                 ·gc.count:                    54,000 counts
+                 ·gc.time:                     22,000 ms
+
+Iteration   3: 79,551 ms/op
+                 ·gc.alloc.rate:               646,944 MB/sec
+                 ·gc.alloc.rate.norm:          60463305,935 B/op
+                 ·gc.churn.G1_Eden_Space:      641,142 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 59921044,645 B/op
+                 ·gc.churn.G1_Old_Gen:         0,195 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    18263,742 B/op
+                 ·gc.count:                    56,000 counts
+                 ·gc.time:                     20,000 ms
+
+
+
+Result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt":
+  79,666 ±(99.9%) 1,819 ms/op [Average]
+  (min, avg, max) = (79,551, 79,666, 79,725), stdev = 0,100
+  CI (99.9%): [77,847, 81,485] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate":
+  647,854 ±(99.9%) 23,247 MB/sec [Average]
+  (min, avg, max) = (646,944, 647,854, 649,311), stdev = 1,274
+  CI (99.9%): [624,607, 671,102] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate.norm":
+  60570963,355 ±(99.9%) 2430809,964 B/op [Average]
+  (min, avg, max) = (60463305,935, 60570963,355, 60719978,968), stdev = 133240,897
+  CI (99.9%): [58140153,391, 63001773,318] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space":
+  638,793 ±(99.9%) 68,382 MB/sec [Average]
+  (min, avg, max) = (634,471, 638,793, 641,142), stdev = 3,748
+  CI (99.9%): [570,411, 707,176] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space.norm":
+  59723731,957 ±(99.9%) 6234894,402 B/op [Average]
+  (min, avg, max) = (59329106,581, 59723731,957, 59921044,645), stdev = 341755,601
+  CI (99.9%): [53488837,555, 65958626,359] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen":
+  0,213 ±(99.9%) 0,509 MB/sec [Average]
+  (min, avg, max) = (0,195, 0,213, 0,246), stdev = 0,028
+  CI (99.9%): [≈ 0, 0,723] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen.norm":
+  19960,688 ±(99.9%) 47672,029 B/op [Average]
+  (min, avg, max) = (18263,742, 19960,688, 22969,806), stdev = 2613,065
+  CI (99.9%): [≈ 0, 67632,717] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.count":
+  166,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (54,000, 55,333, 56,000), stdev = 1,155
+  CI (99.9%): [166,000, 166,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.time":
+  62,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (20,000, 20,667, 22,000), stdev = 1,155
+  CI (99.9%): [62,000, 62,000] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt
+# Parameters: (params = PORE_SALARY, rows = 100)
+
+# Run progress: 80,09% complete, ETA 00:01:49
+# Fork: 1 of 1
+# Warmup Iteration   1: 2,496 ms/op
+# Warmup Iteration   2: 2,419 ms/op
+# Warmup Iteration   3: 2,362 ms/op
+Iteration   1: 2,357 ms/op
+                 ·gc.alloc.rate:               644,127 MB/sec
+                 ·gc.alloc.rate.norm:          1771727,737 B/op
+                 ·gc.churn.G1_Eden_Space:      640,695 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 1762287,405 B/op
+                 ·gc.churn.G1_Old_Gen:         0,184 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    506,036 B/op
+                 ·gc.count:                    55,000 counts
+                 ·gc.time:                     23,000 ms
+
+Iteration   2: 2,307 ms/op
+                 ·gc.alloc.rate:               658,122 MB/sec
+                 ·gc.alloc.rate.norm:          1771733,372 B/op
+                 ·gc.churn.G1_Eden_Space:      655,953 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 1765893,973 B/op
+                 ·gc.churn.G1_Old_Gen:         0,184 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    495,272 B/op
+                 ·gc.count:                    56,000 counts
+                 ·gc.time:                     22,000 ms
+
+Iteration   3: 2,337 ms/op
+                 ·gc.alloc.rate:               648,468 MB/sec
+                 ·gc.alloc.rate.norm:          1772228,246 B/op
+                 ·gc.churn.G1_Eden_Space:      639,345 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 1747296,302 B/op
+                 ·gc.churn.G1_Old_Gen:         0,184 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    503,285 B/op
+                 ·gc.count:                    55,000 counts
+                 ·gc.time:                     20,000 ms
+
+
+
+Result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt":
+  2,334 ±(99.9%) 0,453 ms/op [Average]
+  (min, avg, max) = (2,307, 2,334, 2,357), stdev = 0,025
+  CI (99.9%): [1,881, 2,787] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate":
+  650,239 ±(99.9%) 130,689 MB/sec [Average]
+  (min, avg, max) = (644,127, 650,239, 658,122), stdev = 7,163
+  CI (99.9%): [519,550, 780,928] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate.norm":
+  1771896,452 ±(99.9%) 5242,444 B/op [Average]
+  (min, avg, max) = (1771727,737, 1771896,452, 1772228,246), stdev = 287,356
+  CI (99.9%): [1766654,008, 1777138,896] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space":
+  645,331 ±(99.9%) 168,270 MB/sec [Average]
+  (min, avg, max) = (639,345, 645,331, 655,953), stdev = 9,223
+  CI (99.9%): [477,061, 813,602] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space.norm":
+  1758492,560 ±(99.9%) 179928,777 B/op [Average]
+  (min, avg, max) = (1747296,302, 1758492,560, 1765893,973), stdev = 9862,503
+  CI (99.9%): [1578563,784, 1938421,337] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen":
+  0,184 ±(99.9%) 0,002 MB/sec [Average]
+  (min, avg, max) = (0,184, 0,184, 0,184), stdev = 0,001
+  CI (99.9%): [0,182, 0,186] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen.norm":
+  501,531 ±(99.9%) 102,026 B/op [Average]
+  (min, avg, max) = (495,272, 501,531, 506,036), stdev = 5,592
+  CI (99.9%): [399,505, 603,557] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.count":
+  166,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (55,000, 55,333, 56,000), stdev = 0,577
+  CI (99.9%): [166,000, 166,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.time":
+  65,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (20,000, 21,667, 23,000), stdev = 1,528
+  CI (99.9%): [65,000, 65,000] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt
+# Parameters: (params = PORE_SALARY, rows = 1000)
+
+# Run progress: 86,73% complete, ETA 00:01:13
+# Fork: 1 of 1
+# Warmup Iteration   1: 24,348 ms/op
+# Warmup Iteration   2: 23,519 ms/op
+# Warmup Iteration   3: 23,258 ms/op
+Iteration   1: 23,216 ms/op
+                 ·gc.alloc.rate:               643,657 MB/sec
+                 ·gc.alloc.rate.norm:          17456248,451 B/op
+                 ·gc.churn.G1_Eden_Space:      636,772 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 17269505,202 B/op
+                 ·gc.churn.G1_Old_Gen:         0,197 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    5342,873 B/op
+                 ·gc.count:                    54,000 counts
+                 ·gc.time:                     24,000 ms
+
+Iteration   2: 23,234 ms/op
+                 ·gc.alloc.rate:               643,425 MB/sec
+                 ·gc.alloc.rate.norm:          17459335,023 B/op
+                 ·gc.churn.G1_Eden_Space:      636,430 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 17269505,202 B/op
+                 ·gc.churn.G1_Old_Gen:         0,207 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    5604,920 B/op
+                 ·gc.count:                    54,000 counts
+                 ·gc.time:                     26,000 ms
+
+Iteration   3: 23,220 ms/op
+                 ·gc.alloc.rate:               642,291 MB/sec
+                 ·gc.alloc.rate.norm:          17453139,268 B/op
+                 ·gc.churn.G1_Eden_Space:      635,533 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm: 17269505,202 B/op
+                 ·gc.churn.G1_Old_Gen:         0,199 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:    5404,845 B/op
+                 ·gc.count:                    54,000 counts
+                 ·gc.time:                     26,000 ms
+
+
+
+Result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt":
+  23,223 ±(99.9%) 0,177 ms/op [Average]
+  (min, avg, max) = (23,216, 23,223, 23,234), stdev = 0,010
+  CI (99.9%): [23,047, 23,400] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate":
+  643,125 ±(99.9%) 13,334 MB/sec [Average]
+  (min, avg, max) = (642,291, 643,125, 643,657), stdev = 0,731
+  CI (99.9%): [629,790, 656,459] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate.norm":
+  17456240,914 ±(99.9%) 56516,951 B/op [Average]
+  (min, avg, max) = (17453139,268, 17456240,914, 17459335,023), stdev = 3097,885
+  CI (99.9%): [17399723,963, 17512757,865] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space":
+  636,245 ±(99.9%) 11,664 MB/sec [Average]
+  (min, avg, max) = (635,533, 636,245, 636,772), stdev = 0,639
+  CI (99.9%): [624,580, 647,909] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space.norm":
+  17269505,202 ±(99.9%) 0,001 B/op [Average]
+  (min, avg, max) = (17269505,202, 17269505,202, 17269505,202), stdev = 0,001
+  CI (99.9%): [17269505,202, 17269505,202] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen":
+  0,201 ±(99.9%) 0,092 MB/sec [Average]
+  (min, avg, max) = (0,197, 0,201, 0,207), stdev = 0,005
+  CI (99.9%): [0,109, 0,293] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen.norm":
+  5450,879 ±(99.9%) 2498,559 B/op [Average]
+  (min, avg, max) = (5342,873, 5450,879, 5604,920), stdev = 136,954
+  CI (99.9%): [2952,320, 7949,439] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.count":
+  162,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (54,000, 54,000, 54,000), stdev = 0,001
+  CI (99.9%): [162,000, 162,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.time":
+  76,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (24,000, 25,333, 26,000), stdev = 1,155
+  CI (99.9%): [76,000, 76,000] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=46655:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt
+# Parameters: (params = PORE_SALARY, rows = 10000)
+
+# Run progress: 93,36% complete, ETA 00:00:36
+# Fork: 1 of 1
+# Warmup Iteration   1: 248,536 ms/op
+# Warmup Iteration   2: 236,776 ms/op
+# Warmup Iteration   3: 234,651 ms/op
+Iteration   1: 232,099 ms/op
+                 ·gc.alloc.rate:                   646,630 MB/sec
+                 ·gc.alloc.rate.norm:              174824598,909 B/op
+                 ·gc.churn.G1_Eden_Space:          628,654 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm:     169964637,091 B/op
+                 ·gc.churn.G1_Old_Gen:             7,591 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:        2052413,091 B/op
+                 ·gc.churn.G1_Survivor_Space:      1,058 MB/sec
+                 ·gc.churn.G1_Survivor_Space.norm: 285975,273 B/op
+                 ·gc.count:                        41,000 counts
+                 ·gc.time:                         41,000 ms
+
+Iteration   2: 233,487 ms/op
+                 ·gc.alloc.rate:                   643,082 MB/sec
+                 ·gc.alloc.rate.norm:              174789478,545 B/op
+                 ·gc.churn.G1_Eden_Space:          634,800 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm:     172538414,545 B/op
+                 ·gc.churn.G1_Old_Gen:             7,661 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:        2082203,636 B/op
+                 ·gc.churn.G1_Survivor_Space:      0,877 MB/sec
+                 ·gc.churn.G1_Survivor_Space.norm: 238312,727 B/op
+                 ·gc.count:                        40,000 counts
+                 ·gc.time:                         41,000 ms
+
+Iteration   3: 232,810 ms/op
+                 ·gc.alloc.rate:                   643,860 MB/sec
+                 ·gc.alloc.rate.norm:              174859040,727 B/op
+                 ·gc.churn.G1_Eden_Space:          621,275 MB/sec
+                 ·gc.churn.G1_Eden_Space.norm:     168725410,909 B/op
+                 ·gc.churn.G1_Old_Gen:             7,577 MB/sec
+                 ·gc.churn.G1_Old_Gen.norm:        2057814,545 B/op
+                 ·gc.churn.G1_Survivor_Space:      1,053 MB/sec
+                 ·gc.churn.G1_Survivor_Space.norm: 285975,273 B/op
+                 ·gc.count:                        41,000 counts
+                 ·gc.time:                         39,000 ms
+
+
+
+Result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt":
+  232,799 ±(99.9%) 12,656 ms/op [Average]
+  (min, avg, max) = (232,099, 232,799, 233,487), stdev = 0,694
+  CI (99.9%): [220,143, 245,454] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate":
+  644,524 ±(99.9%) 34,022 MB/sec [Average]
+  (min, avg, max) = (643,082, 644,524, 646,630), stdev = 1,865
+  CI (99.9%): [610,502, 678,546] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate.norm":
+  174824372,727 ±(99.9%) 634546,639 B/op [Average]
+  (min, avg, max) = (174789478,545, 174824372,727, 174859040,727), stdev = 34781,642
+  CI (99.9%): [174189826,088, 175458919,367] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space":
+  628,243 ±(99.9%) 123,543 MB/sec [Average]
+  (min, avg, max) = (621,275, 628,243, 634,800), stdev = 6,772
+  CI (99.9%): [504,700, 751,786] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space.norm":
+  170409487,515 ±(99.9%) 35484711,740 B/op [Average]
+  (min, avg, max) = (168725410,909, 170409487,515, 172538414,545), stdev = 1945036,788
+  CI (99.9%): [134924775,775, 205894199,255] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen":
+  7,610 ±(99.9%) 0,816 MB/sec [Average]
+  (min, avg, max) = (7,577, 7,610, 7,661), stdev = 0,045
+  CI (99.9%): [6,793, 8,426] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen.norm":
+  2064143,758 ±(99.9%) 289560,320 B/op [Average]
+  (min, avg, max) = (2052413,091, 2064143,758, 2082203,636), stdev = 15871,778
+  CI (99.9%): [1774583,437, 2353704,078] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Survivor_Space":
+  0,996 ±(99.9%) 1,882 MB/sec [Average]
+  (min, avg, max) = (0,877, 0,996, 1,058), stdev = 0,103
+  CI (99.9%): [≈ 0, 2,877] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Survivor_Space.norm":
+  270087,758 ±(99.9%) 502030,458 B/op [Average]
+  (min, avg, max) = (238312,727, 270087,758, 285975,273), stdev = 27517,983
+  CI (99.9%): [≈ 0, 772118,216] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.count":
+  122,000 ±(99.9%) 0,001 counts [Sum]
+  (min, avg, max) = (40,000, 40,667, 41,000), stdev = 0,577
+  CI (99.9%): [122,000, 122,000] (assumes normal distribution)
+
+Secondary result "org.galois.core.benchmark.EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.time":
+  121,000 ±(99.9%) 0,001 ms [Sum]
+  (min, avg, max) = (39,000, 40,333, 41,000), stdev = 1,155
+  CI (99.9%): [121,000, 121,000] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:09:15
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                                                                       (params)  (rows)  Mode  Cnt          Score          Error   Units
+BaselineBenchmark.baseline                                                           N/A     N/A  avgt              ≈ 10⁻⁶                  ms/op
+BaselineBenchmark.baseline:·gc.alloc.rate                                            N/A     N/A  avgt              ≈ 10⁻⁴                 MB/sec
+BaselineBenchmark.baseline:·gc.alloc.rate.norm                                       N/A     N/A  avgt              ≈ 10⁻⁷                   B/op
+BaselineBenchmark.baseline:·gc.count                                                 N/A     N/A  avgt                 ≈ 0                 counts
+DecryptionTimePOREBenchmark.decrypt                                             PORE_AGE     100  avgt    3          0,800 ±        0,029   ms/op
+DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate                              PORE_AGE     100  avgt    3        651,522 ±       24,353  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate.norm                         PORE_AGE     100  avgt    3    1154877,112 ±     1324,194    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space                     PORE_AGE     100  avgt    3        651,034 ±       26,762  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm                PORE_AGE     100  avgt    3    1154012,801 ±    10342,450    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen                        PORE_AGE     100  avgt    3          0,101 ±        0,017  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm                   PORE_AGE     100  avgt    3        178,662 ±       24,465    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.count                                   PORE_AGE     100  avgt    3        288,000                 counts
+DecryptionTimePOREBenchmark.decrypt:·gc.time                                    PORE_AGE     100  avgt    3        107,000                     ms
+DecryptionTimePOREBenchmark.decrypt                                             PORE_AGE    1000  avgt    3          7,881 ±        0,737   ms/op
+DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate                              PORE_AGE    1000  avgt    3        649,208 ±       55,826  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate.norm                         PORE_AGE    1000  avgt    3   11346301,002 ±    96247,464    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space                     PORE_AGE    1000  avgt    3        645,159 ±      111,891  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm                PORE_AGE    1000  avgt    3   11275380,521 ±  1035333,597    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen                        PORE_AGE    1000  avgt    3          0,102 ±        0,024  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm                   PORE_AGE    1000  avgt    3       1779,567 ±      520,027    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.count                                   PORE_AGE    1000  avgt    3        293,000                 counts
+DecryptionTimePOREBenchmark.decrypt:·gc.time                                    PORE_AGE    1000  avgt    3        107,000                     ms
+DecryptionTimePOREBenchmark.decrypt                                             PORE_AGE   10000  avgt    3         78,183 ±        2,546   ms/op
+DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate                              PORE_AGE   10000  avgt    3        653,030 ±        7,202  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate.norm                         PORE_AGE   10000  avgt    3  113229175,542 ±   219072,136    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space                     PORE_AGE   10000  avgt    3        651,615 ±       43,276  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm                PORE_AGE   10000  avgt    3  112984064,000 ±  8554120,264    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen                        PORE_AGE   10000  avgt    3          0,148 ±        0,035  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm                   PORE_AGE   10000  avgt    3      25602,500 ±     5999,039    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.count                                   PORE_AGE   10000  avgt    3        290,000                 counts
+DecryptionTimePOREBenchmark.decrypt:·gc.time                                    PORE_AGE   10000  avgt    3        109,000                     ms
+DecryptionTimePOREBenchmark.decrypt                                          PORE_SALARY     100  avgt    3          2,280 ±        0,073   ms/op
+DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate                           PORE_SALARY     100  avgt    3        647,339 ±       10,176  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate.norm                      PORE_SALARY     100  avgt    3    3271251,876 ±     1461,217    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space                  PORE_SALARY     100  avgt    3        642,237 ±       27,759  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm             PORE_SALARY     100  avgt    3    3245468,403 ±   103820,382    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen                     PORE_SALARY     100  avgt    3          0,109 ±        0,038  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm                PORE_SALARY     100  avgt    3        550,084 ±      184,368    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.count                                PORE_SALARY     100  avgt    3        283,000                 counts
+DecryptionTimePOREBenchmark.decrypt:·gc.time                                 PORE_SALARY     100  avgt    3        112,000                     ms
+DecryptionTimePOREBenchmark.decrypt                                          PORE_SALARY    1000  avgt    3         23,026 ±        1,335   ms/op
+DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate                           PORE_SALARY    1000  avgt    3        641,050 ±       30,443  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate.norm                      PORE_SALARY    1000  avgt    3   32608022,211 ±   127410,518    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space                  PORE_SALARY    1000  avgt    3        640,433 ±       50,539  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm             PORE_SALARY    1000  avgt    3   32576565,084 ±   998126,730    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen                     PORE_SALARY    1000  avgt    3          0,295 ±        0,182  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm                PORE_SALARY    1000  avgt    3      15001,958 ±     9158,234    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.count                                PORE_SALARY    1000  avgt    3        276,000                 counts
+DecryptionTimePOREBenchmark.decrypt:·gc.time                                 PORE_SALARY    1000  avgt    3        122,000                     ms
+DecryptionTimePOREBenchmark.decrypt                                          PORE_SALARY   10000  avgt    3        230,523 ±       41,824   ms/op
+DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate                           PORE_SALARY   10000  avgt    3        637,583 ±      102,103  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.alloc.rate.norm                      PORE_SALARY   10000  avgt    3  325143524,242 ±  6279452,814    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space                  PORE_SALARY   10000  avgt    3        631,390 ±       53,685  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Eden_Space.norm             PORE_SALARY   10000  avgt    3  321992269,576 ± 19566311,066    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen                     PORE_SALARY   10000  avgt    3          0,791 ±        2,446  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Old_Gen.norm                PORE_SALARY   10000  avgt    3     403496,848 ±  1228534,370    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Survivor_Space              PORE_SALARY   10000  avgt    3          0,717 ±        4,952  MB/sec
+DecryptionTimePOREBenchmark.decrypt:·gc.churn.G1_Survivor_Space.norm         PORE_SALARY   10000  avgt    3     365412,848 ±  2510152,292    B/op
+DecryptionTimePOREBenchmark.decrypt:·gc.count                                PORE_SALARY   10000  avgt    3        194,000                 counts
+DecryptionTimePOREBenchmark.decrypt:·gc.time                                 PORE_SALARY   10000  avgt    3        199,000                     ms
+EncryptionTimeAndSizePOREBenchmark.encrypt                                      PORE_AGE     100  avgt    3          0,810 ±        0,021   ms/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate                       PORE_AGE     100  avgt    3        673,520 ±       31,626  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate.norm                  PORE_AGE     100  avgt    3     642222,540 ±     4973,657    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space              PORE_AGE     100  avgt    3        667,068 ±       22,892  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space.norm         PORE_AGE     100  avgt    3     636071,469 ±    15593,275    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen                 PORE_AGE     100  avgt    3          0,184 ±        0,041  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen.norm            PORE_AGE     100  avgt    3        175,741 ±       42,464    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.count                            PORE_AGE     100  avgt    3        168,000                 counts
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.time                             PORE_AGE     100  avgt    3         72,000                     ms
+EncryptionTimeAndSizePOREBenchmark.encrypt                                      PORE_AGE    1000  avgt    3          7,932 ±        0,909   ms/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate                       PORE_AGE    1000  avgt    3        654,746 ±       70,109  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate.norm                  PORE_AGE    1000  avgt    3    6100198,650 ±    53497,384    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space              PORE_AGE    1000  avgt    3        646,834 ±      154,087  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space.norm         PORE_AGE    1000  avgt    3    6026357,942 ±   937596,403    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen                 PORE_AGE    1000  avgt    3          0,190 ±        0,076  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen.norm            PORE_AGE    1000  avgt    3       1766,499 ±      663,763    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.count                            PORE_AGE    1000  avgt    3        164,000                 counts
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.time                             PORE_AGE    1000  avgt    3         62,000                     ms
+EncryptionTimeAndSizePOREBenchmark.encrypt                                      PORE_AGE   10000  avgt    3         79,666 ±        1,819   ms/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate                       PORE_AGE   10000  avgt    3        647,854 ±       23,247  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate.norm                  PORE_AGE   10000  avgt    3   60570963,355 ±  2430809,964    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space              PORE_AGE   10000  avgt    3        638,793 ±       68,382  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space.norm         PORE_AGE   10000  avgt    3   59723731,957 ±  6234894,402    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen                 PORE_AGE   10000  avgt    3          0,213 ±        0,509  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen.norm            PORE_AGE   10000  avgt    3      19960,688 ±    47672,029    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.count                            PORE_AGE   10000  avgt    3        166,000                 counts
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.time                             PORE_AGE   10000  avgt    3         62,000                     ms
+EncryptionTimeAndSizePOREBenchmark.encrypt                                   PORE_SALARY     100  avgt    3          2,334 ±        0,453   ms/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate                    PORE_SALARY     100  avgt    3        650,239 ±      130,689  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate.norm               PORE_SALARY     100  avgt    3    1771896,452 ±     5242,444    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space           PORE_SALARY     100  avgt    3        645,331 ±      168,270  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space.norm      PORE_SALARY     100  avgt    3    1758492,560 ±   179928,777    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen              PORE_SALARY     100  avgt    3          0,184 ±        0,002  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen.norm         PORE_SALARY     100  avgt    3        501,531 ±      102,026    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.count                         PORE_SALARY     100  avgt    3        166,000                 counts
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.time                          PORE_SALARY     100  avgt    3         65,000                     ms
+EncryptionTimeAndSizePOREBenchmark.encrypt                                   PORE_SALARY    1000  avgt    3         23,223 ±        0,177   ms/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate                    PORE_SALARY    1000  avgt    3        643,125 ±       13,334  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate.norm               PORE_SALARY    1000  avgt    3   17456240,914 ±    56516,951    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space           PORE_SALARY    1000  avgt    3        636,245 ±       11,664  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space.norm      PORE_SALARY    1000  avgt    3   17269505,202 ±        0,001    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen              PORE_SALARY    1000  avgt    3          0,201 ±        0,092  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen.norm         PORE_SALARY    1000  avgt    3       5450,879 ±     2498,559    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.count                         PORE_SALARY    1000  avgt    3        162,000                 counts
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.time                          PORE_SALARY    1000  avgt    3         76,000                     ms
+EncryptionTimeAndSizePOREBenchmark.encrypt                                   PORE_SALARY   10000  avgt    3        232,799 ±       12,656   ms/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate                    PORE_SALARY   10000  avgt    3        644,524 ±       34,022  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.alloc.rate.norm               PORE_SALARY   10000  avgt    3  174824372,727 ±   634546,639    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space           PORE_SALARY   10000  avgt    3        628,243 ±      123,543  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Eden_Space.norm      PORE_SALARY   10000  avgt    3  170409487,515 ± 35484711,740    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen              PORE_SALARY   10000  avgt    3          7,610 ±        0,816  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Old_Gen.norm         PORE_SALARY   10000  avgt    3    2064143,758 ±   289560,320    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Survivor_Space       PORE_SALARY   10000  avgt    3          0,996 ±        1,882  MB/sec
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.churn.G1_Survivor_Space.norm  PORE_SALARY   10000  avgt    3     270087,758 ±   502030,458    B/op
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.count                         PORE_SALARY   10000  avgt    3        122,000                 counts
+EncryptionTimeAndSizePOREBenchmark.encrypt:·gc.time                          PORE_SALARY   10000  avgt    3        121,000                     ms
+
+Benchmark result is saved to benchmarks/pore_benchmark_result.csv

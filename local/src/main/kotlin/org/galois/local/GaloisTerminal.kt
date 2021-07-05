@@ -67,11 +67,12 @@ class GaloisTerminal {
             return 10
         }
 
+        println(dataset.print())
+
         val engine = GaloisEngine(dataset, config)
         val computedDataset: Table
 
         println("Started ${if (config.mode == EngineMode.ENCRYPT) "encrypting" else "decrypting"}")
-
 
         val time = try {
             measureTimeMillis { runBlocking { computedDataset = engine.compute() } }
@@ -85,6 +86,8 @@ class GaloisTerminal {
             System.err.println(e.localizedMessage)
             return 20
         }
+
+        println(computedDataset.print())
 
         println("${if (config.mode == EngineMode.ENCRYPT) "Encrypted" else "Decrypted"} ${dataset.rowCount()} lines in $time ms")
         println("Saving files to directory ${config.outputDir}...")

@@ -1,0 +1,25 @@
+{
+  "output_filename" : "encrypted.csv",
+  "mode" : "encrypt",
+  "encryption_details" : [ {
+    "column_name" : "age",
+    "cipher" : "FastOPE"
+  }, {
+    "column_name" : "ip-address",
+    "cipher" : "CryptoPAn",
+    "params" : {
+      "ip" : "4",
+      "suffix" : false
+    }
+  }, {
+    "column_name" : "native-country",
+    "cipher" : "AES"
+  }, {
+    "column_name" : "ccn",
+    "cipher" : "FF3",
+    "params" : {
+      "radix" : 10,
+      "tweak" : "e2db0d2d0049263d"
+    }
+  } ]
+}

@@ -39,7 +39,7 @@ function alertError(msg) {
   } else {
     alertNode = container.find('.alert')
     alertNode.find('div').text(msg)
-    clearTimeout(removeAlert)
+    clearTimeout(removeAlertTimeout)
   }
 
   removeAlertTimeout = setTimeout(function(){
@@ -152,21 +152,37 @@ function createTaxonomyInput(column) {
   var id = column + "-taxonomy"
 
   var div = $('<div></div>').addClass('mb-3')
+
+  var inputGroup = $('<div></div>').addClass('input-group')
   var input = $('<input>').addClass('form-control').attr({
     type: "file",
-    id: id + '-file'
+    id: id + '-file',
+    'aria-describedby': id + '-reset'
   })
+  var resetButton = $('<button></button>').addClass('btn btn-outline-primary').attr({
+    type: 'button',
+    id: id + '-reset',
+  }).html('Reset')
+
+  inputGroup.append(input)
+  inputGroup.append(resetButton)
+
   var label = $('<label></label>').addClass('form-label mt-2').attr("for", id + '-file').text('Upload a taxonomy tree (in JSON)')
 
   var p = $('<p></p>').addClass('mt-3 mb-2').text('...and edit it if you need to')
   var blackboard = $('<pre></pre>').addClass('overflow-auto mb-3 rounded-2').attr('id', id).css('height', '300px')
 
   div.append(label)
-  div.append(input)
+  div.append(inputGroup)
   div.append(p)
   div.append(blackboard)
 
-  $(input).on('change', function() {
+  resetButton.on('click', function() {
+    input.val('')
+    blackboard.html('')
+  })
+
+  input.on('change', function() {
     var file = this.files[0];
     if (file) {
       var reader = new FileReader();
@@ -415,7 +431,6 @@ $(window).on('load', function() {
             if (detail.key_size != null && keySizeInput != null) keySizeInput.val(detail.key_size)
 
             if (detail.taxonomy_tree != null) jsonEditors[column].load(detail.taxonomy_tree.tree)
-            else jsonEditors[column].load({})
 
             for (var param in detail.params) {
               var paramInput = $('#' + column + '-param-' + param)
@@ -453,6 +468,7 @@ $(window).on('load', function() {
         if(invalid) return false
 
         config = getConfig(previousMode, previousColumns)
+        if (config == {}) return false
         var summaryEditor = new JsonEditor('#summary', config)
       }
 
@@ -519,7 +535,7 @@ $(window).on('load', function() {
         }
         closeAlertMessage()
         $('#output-filename').val(uploadedConfig.output_filename)
-        $("input[name=mode-radio][value=" + uploadedConfig.mode + "-mode]").prop('checked', true);
+        $("input[name='mode-radio'][value='" + uploadedConfig.mode + "']").prop('checked', true);
       }
     }
     reader.readAsText(file)
@@ -539,45 +555,50 @@ function getConfig(mode, columns) {
     mode: mode,
     encryption_details: []
   }
-  $.each(columns, function(i, column) {
-    var algorithm = $('#' + column + '-algorithm-choice').val()
-    var detail = {
-      column_name: column,
-      cipher: algorithm,
-    }
-
-    var key = $('#' + column + '-key').val()
-    if (key != null && key != '') detail.key = key
-
-    var params = {}
-
-    try {
-      var tree = jsonEditors[column].get()
-      if (!$.isEmptyObject(tree)) {
-        params.taxonomy_tree = {}
-        params.taxonomy_tree.tree = tree
+  try {
+    $.each(columns, function(i, column) {
+      var algorithm = $('#' + column + '-algorithm-choice').val()
+      var detail = {
+        column_name: column,
+        cipher: algorithm,
       }
-    } catch (ex) {
-      alertError("Please check that the taxonomy tree of " + column + " is a valid JSON document")
-      return {}
-    }
 
-    var keySize = $('#' + column + '-key-size')
-    if (keySize != undefined && keySize != null) params.key_size = keySize.val()
+      var key = $('#' + column + '-key').val()
+      if (key != null && key != '') detail.key = key
 
-    var parameters = algorithmsDetails.find(x => algorithm == x.name).parameters
-    $.each(parameters, function(i, param) {
-      var input = $('#' + column + "-param-" + param.field)
-      if (input != null && input.val() != '') {
-        if (input.is(':checkbox')) params[param.field] = input.is(':checked')
-        else if (input.attr('type') == 'number') params[param.field] = parseInt(input.val())
-        else params[param.field] = input.val()
+      var params = {}
+
+      try {
+        if ($('.json-editor-blackboard#' + column + '-taxonomy').html() != "") {
+          var tree = jsonEditors[column].get()
+          if(!$.isEmptyObject(tree)) {
+            params.taxonomy_tree = {}
+            params.taxonomy_tree.tree = tree
+          }
+        }
+      } catch (ex) {
+        throw "Please check that the taxonomy tree of " + column + " is a valid JSON document"
       }
+
+      var keySize = $('#' + column + '-key-size')
+      if (keySize != undefined && keySize != null) params.key_size = keySize.val()
+
+      var parameters = algorithmsDetails.find(x => algorithm == x.name).parameters
+      $.each(parameters, function(i, param) {
+        var input = $('#' + column + "-param-" + param.field)
+        if (input != null && input.val() != '') {
+          if (input.is(':checkbox')) params[param.field] = input.is(':checked')
+          else if (input.attr('type') == 'number') params[param.field] = parseInt(input.val())
+          else params[param.field] = input.val()
+        }
+      })
+
+      detail.params = params
+      config.encryption_details[i] = detail
     })
-
-    detail.params = params
-    config.encryption_details[i] = detail
-  })
-
-  return config
+    return config
+  } catch (ex) {
+    alertError(ex)
+    return {}
+  }
 }

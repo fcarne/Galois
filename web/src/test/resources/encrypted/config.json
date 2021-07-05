@@ -1,0 +1,139 @@
+{
+  "output_filename" : "encrypted.csv",
+  "mode" : "decrypt",
+  "encryption_details" : [ {
+    "column_name" : "age",
+    "cipher" : "FastOPE",
+    "key" : "QXQ+eLAAAAA/0eFHZ135aj/B5mspK17HB9ddWJb7oHE=",
+    "params" : {
+      "key_size" : 256
+    }
+  }, {
+    "column_name" : "ip-address",
+    "cipher" : "CryptoPAn",
+    "key" : "iL822dG2yW49ZlhQBEbiyftVL6BMgHGq0UF7RP315gw=",
+    "params" : {
+      "key_size" : 256,
+      "ip" : "4",
+      "suffix" : false
+    }
+  }, {
+    "column_name" : "native-country",
+    "cipher" : "AES",
+    "key" : "6F+g9c5uPKCx2IifdNYtzA==",
+    "params" : {
+      "key_size" : 128,
+      "taxonomy_tree" : {
+        "tree" : {
+          "cat" : "0i6tRXdz2DdBtGLoJfFCvg==",
+          "subcats" : [ {
+            "cat" : "PKNZIw15zrDqrfmaBbxn2g==",
+            "subcats" : [ {
+              "cat" : "ycAtG1bQkVmVvrJFU5jZiA=="
+            }, {
+              "cat" : "ncpdDfS1KU4OKoncT6DCDQ=="
+            }, {
+              "cat" : "GLdKrLee6hguI6y222s/Ag=="
+            }, {
+              "cat" : "X4ZPS4C8JVyWZtQRDnMqyA=="
+            }, {
+              "cat" : "yNj+biJ4ei6dEOFYX0sYFg=="
+            }, {
+              "cat" : "ixqptBsZEi0zwltCRgsT+MRtBeUIwKEcjts78B/OH/s="
+            }, {
+              "cat" : "zEEMaCSzuRLaGPljCgCmqg=="
+            }, {
+              "cat" : "RuL08/nJo0GWScZjaZGw3A=="
+            }, {
+              "cat" : "chfiWRrPulvKDlYAKm/Lvw=="
+            }, {
+              "cat" : "QM/f/qJTW0ue1lMvp9p5zA=="
+            }, {
+              "cat" : "buPhYwQKU5OzWlxcyN75+w=="
+            }, {
+              "cat" : "AMqd3Ey4HXSVEaPJzawCxA=="
+            }, {
+              "cat" : "2BssHGvwXzRTtMowD/1Oyg=="
+            } ]
+          }, {
+            "cat" : "rm+vxHteuJAbPdW5rJJcqQ==",
+            "subcats" : [ {
+              "cat" : "rT9YPary2c5V56Bj0UrRhg=="
+            }, {
+              "cat" : "QyQN5TvENjFStfIWBfGERg=="
+            }, {
+              "cat" : "J3xigzOJ2LtxJY/ApYFsOg=="
+            }, {
+              "cat" : "3AgXjpr1qdPxTObUJ+xMbg=="
+            }, {
+              "cat" : "L0PtEVGGZpvesPkEa+g4RA=="
+            }, {
+              "cat" : "Y+BhSZTL9qEYh2uCPbccGA=="
+            }, {
+              "cat" : "Ms69zSIUF8s6T0Le+zUM7Q=="
+            }, {
+              "cat" : "ex/ta9eAATSG51db18HduQ=="
+            }, {
+              "cat" : "2MOUFB2ugck/aAO0EY7Gcw=="
+            }, {
+              "cat" : "A069Iu7qRBHthWz3fk24Qlr3hYI6JSuugYsafOPvbSs="
+            }, {
+              "cat" : "KwnE8UxxZVjQ4H+JyreqRw=="
+            }, {
+              "cat" : "lfOMtXPzOOcXn1GayGMhpnbYxNZtkIhkiRBUUjgdpF4="
+            }, {
+              "cat" : "TKAOoUHf++Vrol1JZWCouA=="
+            }, {
+              "cat" : "ivGNjbjyYNBtWg0NHDZylg=="
+            } ]
+          }, {
+            "cat" : "CYnPFWAIVhd+IpcvjSKcFA==",
+            "subcats" : [ {
+              "cat" : "cdtZBsTy281j1Endhz5EaQ=="
+            }, {
+              "cat" : "IOILMPxOzrhM1Bzh4RBCvQ=="
+            }, {
+              "cat" : "GcJpRWI1unePRZs/BqQRPQ=="
+            }, {
+              "cat" : "WZRg0oItN/20LbXNlAbcQg=="
+            } ]
+          }, {
+            "cat" : "LGiOTIb4KreQC9eXbqWs2Q==",
+            "subcats" : [ {
+              "cat" : "HV5uyCbKDq5WsdHaP628Jw=="
+            }, {
+              "cat" : "ilCQWIpzjWmsNfLLd5nx8Q=="
+            }, {
+              "cat" : "ZD6D+itScoz+gLagMMB7ww=="
+            }, {
+              "cat" : "NWig5qa7vjyINU5YH8P+QQ=="
+            }, {
+              "cat" : "K0fb4RJ6Sv5owpjsrz/YJA=="
+            }, {
+              "cat" : "7VEGbVL/CpPAaGwtXQ+W8A=="
+            }, {
+              "cat" : "os+u+0LPTD8bd5BEmbB31Q=="
+            }, {
+              "cat" : "2WXvvQTWrS4JPgUBcX2iOg=="
+            }, {
+              "cat" : "PKrs0jrs3wR4CMVtQpHpXA=="
+            }, {
+              "cat" : "pCF+2vW66DNI1+eGE8/rsQ=="
+            }, {
+              "cat" : "PlJ7OiKemDiy4dq4Yi993A=="
+            } ]
+          } ]
+        }
+      }
+    }
+  }, {
+    "column_name" : "ccn",
+    "cipher" : "FF3",
+    "key" : "/ZB07kZQFBRjZOyRd5tSGqGlnmQYg+Rpo96kyOeAa+w=",
+    "params" : {
+      "key_size" : 256,
+      "radix" : 10,
+      "tweak" : "e2db0d2d0049263d"
+    }
+  } ]
+}
