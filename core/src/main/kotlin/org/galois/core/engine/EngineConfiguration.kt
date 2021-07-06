@@ -33,13 +33,22 @@ data class EncryptionDetail(
             override fun hashCode() = javaClass.hashCode()
         }
     }
+
+    fun copy(): EncryptionDetail = EncryptionDetail(columnName, cipher, key, params.copy())
+
 }
 
 data class EncryptionParams(
     var keySize: Int? = null,
     val taxonomyTree: TaxonomyTree? = null,
     @get:[JsonIgnore JsonAnyGetter] @JsonAnySetter var cipherSpecific: MutableMap<String, Any> = HashMap()
-)
+) {
+    fun copy(): EncryptionParams = EncryptionParams(
+        keySize,
+        taxonomyTree?.let { TaxonomyTree(it.root.copy()) },
+        HashMap(cipherSpecific)
+    )
+}
 
 open class TaxonomyTree(@JsonProperty("tree") var root: TaxonomyNode)
 

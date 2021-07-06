@@ -14,6 +14,7 @@ import org.openjdk.jmh.runner.Runner
 import org.openjdk.jmh.runner.options.OptionsBuilder
 import tech.tablesaw.api.Table
 import java.awt.Desktop
+import java.awt.Toolkit
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileWriter
@@ -204,8 +205,4 @@ fun main() {
     val stop = LocalDateTime.now()
     println("===== ${stop.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))} BENCHMARKING FINISHED =====")
     println("===== ELAPSED TIME: ${Duration.between(start, stop).toMinutes()} minutes =====")
-
-    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-        Desktop.getDesktop().browse(URI("https://www.youtube.com/watch?v=CSvFpBOe8eY"))
-    }
 }

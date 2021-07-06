@@ -234,7 +234,7 @@ class GaloisEngine(private val dataset: Table, configuration: EngineConfiguratio
                 val parameterSpec = POREParameterSpec()
                 parameterSpec.n = (detail.params.cipherSpecific["n"] as? Number)?.toByte()
                     ?: ceil(log2(values.maxByOrNull { it.toString().toLong() }.toString().toDouble())).toInt().toByte()
-                parameterSpec.q = detail.params.cipherSpecific["q"] as? Short ?: parameterSpec.q
+                parameterSpec.q = (detail.params.cipherSpecific["q"] as? Number)?.toShort() ?: parameterSpec.q
 
                 parameterSpec
             }
