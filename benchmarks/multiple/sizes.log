@@ -1,51 +1,30 @@
 FOPE_8 - 1000. Initial size: 3004 Bytes. 
-Increment: 7416,013 Bytes (246,871%)
-Min: 1137. Max: 41000
+Increment: 7268,801 Bytes (241,971%)
+Min: 1095. Max: 31000
 FOPE_32 - 1000. Initial size: 3004 Bytes. 
-Increment: 7895,822 Bytes (262,844%)
-Min: 2000. Max: 31000
+Increment: 7981,004 Bytes (265,679%)
+Min: 2000. Max: 36000
 FOPE_64 - 1000. Initial size: 3004 Bytes. 
-Increment: 8304,852 Bytes (276,460%)
-Min: 2044. Max: 37000
+Increment: 8309,671 Bytes (276,620%)
+Min: 2009. Max: 37000
 PORE_3 - 1000. Initial size: 3004 Bytes. 
-Increment: 19050,894 Bytes (634,184%)
-Min: 14132. Max: 20000
+Increment: 1497,765 Bytes (49,859%)
+Min: 377. Max: 2000
 PORE_512 - 1000. Initial size: 3004 Bytes. 
-Increment: 19053,628 Bytes (634,275%)
-Min: 16044. Max: 20000
+Increment: 16882,196 Bytes (561,991%)
+Min: 13088. Max: 17000
 PORE_4096 - 1000. Initial size: 3004 Bytes. 
-Increment: 19049,929 Bytes (634,152%)
-Min: 16044. Max: 20000
+Increment: 23426,002 Bytes (779,827%)
+Min: 20000. Max: 24000
 HPCBC_1 - 1000. Initial size: 40005 Bytes. 
-Increment: 13000,000 Bytes (32,496%)
-Min: 13000. Max: 13000
-FOPE_8 - 1000. Initial size: 3004 Bytes. 
-Increment: 7320,628 Bytes (243,696%)
-Min: 1194. Max: 32000
-FOPE_32 - 1000. Initial size: 3004 Bytes. 
-Increment: 7926,413 Bytes (263,862%)
-Min: 2000. Max: 37000
-FOPE_64 - 1000. Initial size: 3004 Bytes. 
-Increment: 8137,442 Bytes (270,887%)
-Min: 2044. Max: 42000
-PORE_3 - 1000. Initial size: 3004 Bytes. 
-Increment: 19031,626 Bytes (633,543%)
-Min: 16044. Max: 20000
-PORE_512 - 1000. Initial size: 3004 Bytes. 
-Increment: 19048,125 Bytes (634,092%)
-Min: 16044. Max: 20000
-PORE_4096 - 1000. Initial size: 3004 Bytes. 
-Increment: 19062,152 Bytes (634,559%)
-Min: 16044. Max: 20000
-HPCBC_1 - 1000. Initial size: 40005 Bytes. 
-Increment: -539,520 Bytes (-1,349%)
-Min: -579. Max: -504
+Increment: -531,340 Bytes (-1,328%)
+Min: -583. Max: -489
 HPCBC_2 - 1000. Initial size: 40005 Bytes. 
-Increment: -534,274 Bytes (-1,336%)
-Min: -586. Max: -476
+Increment: -528,316 Bytes (-1,321%)
+Min: -581. Max: -483
 HPCBC_6 - 1000. Initial size: 40005 Bytes. 
-Increment: -531,210 Bytes (-1,328%)
-Min: -599. Max: -469
+Increment: -531,442 Bytes (-1,328%)
+Min: -593. Max: -470
 HPCBC_8 - 1000. Initial size: 40005 Bytes. 
-Increment: -533,833 Bytes (-1,334%)
-Min: -600. Max: -469
+Increment: -533,415 Bytes (-1,333%)
+Min: -593. Max: -445
