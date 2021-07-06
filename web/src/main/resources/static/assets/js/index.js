@@ -147,67 +147,8 @@ function createKeySizeSelector(column) {
   return div
 }
 
-function createTaxonomyInput(column) {
-
-  var id = column + "-taxonomy"
-
-  var div = $('<div></div>').addClass('mb-3')
-
-  var inputGroup = $('<div></div>').addClass('input-group')
-  var input = $('<input>').addClass('form-control').attr({
-    type: "file",
-    id: id + '-file',
-    'aria-describedby': id + '-reset'
-  })
-  var resetButton = $('<button></button>').addClass('btn btn-outline-primary').attr({
-    type: 'button',
-    id: id + '-reset',
-  }).html('Reset')
-
-  inputGroup.append(input)
-  inputGroup.append(resetButton)
-
-  var label = $('<label></label>').addClass('form-label mt-2').attr("for", id + '-file').text('Upload a taxonomy tree (in JSON)')
-
-  var p = $('<p></p>').addClass('mt-3 mb-2').text('...and edit it if you need to')
-  var blackboard = $('<pre></pre>').addClass('overflow-auto mb-3 rounded-2').attr('id', id).css('height', '300px')
-
-  div.append(label)
-  div.append(inputGroup)
-  div.append(p)
-  div.append(blackboard)
-
-  resetButton.on('click', function() {
-    input.val('')
-    blackboard.html('')
-  })
-
-  input.on('change', function() {
-    var file = this.files[0];
-    if (file) {
-      var reader = new FileReader();
-      reader.onload = function(event) {
-        var json = event.target.result;
-        try {
-          var result = JSON.parse(json)
-          var editor = new JsonEditor('#' + id, algorithmsDetails, {})
-          editor.load(result)
-          $(this).val('')
-        } catch(e) {
-          alertError("Please check that the JSON file is valid")
-        }
-      }
-    }
-    reader.readAsText(file)
-  });
-
-  return div
-}
-
 function createParamInput(column, family, param, mode) {
   var id = column + "-param-" + param.field
-
-  if (family == 'OPE' && mode == 'decrypt') return
 
   var div = $('<div></div>').addClass('form-floating').attr({
     'data-bs-toggle': "tooltip",
@@ -271,6 +212,63 @@ function createParamInput(column, family, param, mode) {
   return div
 }
 
+function createTaxonomyInput(column) {
+
+  var id = column + "-taxonomy"
+
+  var div = $('<div></div>').addClass('mb-3')
+
+  var inputGroup = $('<div></div>').addClass('input-group')
+  var input = $('<input>').addClass('form-control').attr({
+    type: "file",
+    id: id + '-file',
+    'aria-describedby': id + '-reset'
+  })
+  var resetButton = $('<button></button>').addClass('btn btn-outline-primary').attr({
+    type: 'button',
+    id: id + '-reset',
+  }).html('Reset')
+
+  inputGroup.append(input)
+  inputGroup.append(resetButton)
+
+  var label = $('<label></label>').addClass('form-label mt-2').attr("for", id + '-file').text('Upload a taxonomy tree (in JSON)')
+
+  var p = $('<p></p>').addClass('mt-3 mb-2').text('...and edit it if you need to')
+  var blackboard = $('<pre></pre>').addClass('overflow-auto mb-3 rounded-2').attr('id', id).css('height', '300px')
+
+  div.append(label)
+  div.append(inputGroup)
+  div.append(p)
+  div.append(blackboard)
+
+  resetButton.on('click', function() {
+    input.val('')
+    blackboard.html('')
+  })
+
+  input.on('change', function() {
+    var file = this.files[0];
+    if (file) {
+      var reader = new FileReader();
+      reader.onload = function(event) {
+        var json = event.target.result;
+        try {
+          var result = JSON.parse(json)
+          var editor = new JsonEditor('#' + id, algorithmsDetails, {})
+          editor.load(result)
+          $(this).val('')
+        } catch(e) {
+          alertError("Please check that the JSON file is valid")
+        }
+      }
+    }
+    reader.readAsText(file)
+  });
+
+  return div
+}
+
 function createDetailsAccordion(column, mode) {
   var id = column + "-accordion"
 
@@ -313,7 +311,6 @@ function createDetailsAccordion(column, mode) {
       })
     })
   }
-  itemBody.append(createTaxonomyInput(column))
 
   var parametersRow = $('<div></div>').addClass('d-grid gap-3')
   itemBody.append(parametersRow)
@@ -321,18 +318,21 @@ function createDetailsAccordion(column, mode) {
   algorithmSelector.children('select').on('change', function() {
     var algorithm = algorithmsDetails.find(x => this.value == x.name)
     parametersRow.empty()
-    if (algorithm.parameters != null && algorithm.parameters.length != 0)
-    parametersRow.append($('<div class="col-12"><p style="margin: -0.5rem">Algorithm specific parameters: </p></div>'))
+    if (algorithm.parameters != null && algorithm.parameters.length != 0 && !(algorithm.family == 'OPE' && mode == 'decrypt')) {
+      parametersRow.append($('<div class="col-12"><p style="margin: 0 0 -0.5rem ">Algorithm specific parameters: </p></div>'))
 
-    $.each(algorithm.parameters, function(i, param) {
-      var div = $('<div></div>').addClass('row').append($('<div></div>').addClass('col-12'))
-      div.children('div').append(createParamInput(column, algorithm.family, param, mode))
-      parametersRow.append(div)
-    })
-    initTooltips()
+      $.each(algorithm.parameters, function(i, param) {
+        var div = $('<div></div>').addClass('row').append($('<div></div>').addClass('col-sm-12 vol-md-6'))
+        div.children('div').append(createParamInput(column, algorithm.family, param, mode))
+        parametersRow.append(div)
+      })
+      initTooltips()
+    }
   })
 
   algorithmSelector.children('select').change();
+
+  itemBody.append(createTaxonomyInput(column))
 
   item.append(itemBody)
   div.append(title)
@@ -425,18 +425,18 @@ $(window).on('load', function() {
 
             $('#' + column + "-algorithm-choice").val(detail.cipher).change()
 
-            if (detail.key != null) $('#' + column + "-key").val(detail.key)
-
-            var keySizeInput = $('#' + column + "-key-size")
-            if (detail.key_size != null && keySizeInput != null) keySizeInput.val(detail.key_size)
-
-            if (detail.taxonomy_tree != null) jsonEditors[column].load(detail.taxonomy_tree.tree)
+            if ('key' in detail) $('#' + column + "-key").val(detail.key)
 
             for (var param in detail.params) {
-              var paramInput = $('#' + column + '-param-' + param)
-              if (paramInput != null) {
-                if (paramInput.is(':checkbox')) paramInput.prop('checked', detail.params[param])
-                else paramInput.val(detail.params[param])
+              var value = detail.params[param]
+              if (param == 'key_size') { $('#' + column + "-key-size").val(value)  }
+              else if (param == 'taxonomy_tree' && 'tree' in value) { jsonEditors[column].load(value.tree) }
+              else {
+                var paramInput = $('#' + column + '-param-' + param)
+                if (paramInput != null) {
+                  if (paramInput.is(':checkbox')) paramInput.prop('checked', value)
+                  else paramInput.val(value)
+                }
               }
             }
           })
