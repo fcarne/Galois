@@ -1,0 +1,18 @@
+PORE_AGE - 100. Initial size: 304 Bytes. 
+Increment: 1906,083 Bytes (627,001%)
+Min: 1504. Max: 2000
+PORE_AGE - 1000. Initial size: 3004 Bytes. 
+Increment: 19060,203 Bytes (634,494%)
+Min: 16044. Max: 20000
+PORE_AGE - 10000. Initial size: 30004 Bytes. 
+Increment: 190484,005 Bytes (634,862%)
+Min: 170000. Max: 200000
+PORE_SALARY - 100. Initial size: 699 Bytes. 
+Increment: 5438,373 Bytes (778,022%)
+Min: 5094. Max: 5508
+PORE_SALARY - 1000. Initial size: 6954 Bytes. 
+Increment: 54332,911 Bytes (781,319%)
+Min: 51557. Max: 55053
+PORE_SALARY - 10000. Initial size: 69427 Bytes. 
+Increment: 543602,682 Bytes (782,985%)
+Min: 530580. Max: 550580

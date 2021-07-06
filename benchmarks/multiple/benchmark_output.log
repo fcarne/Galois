@@ -1,0 +1,634 @@
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, 1 s each
+# Measurement: 1 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.BaselineBenchmark.baseline
+
+# Run progress: 0,00% complete, ETA 00:15:02
+# Fork: 1 of 1
+# Warmup Iteration   1: ≈ 10⁻⁶ ms/op
+Iteration   1: ≈ 10⁻⁶ ms/op
+
+
+Result "org.galois.core.benchmark.BaselineBenchmark.baseline":
+  ≈ 10⁻⁶ ms/op
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt
+# Parameters: (params = FOPE_8)
+
+# Run progress: 0,22% complete, ETA 00:28:30
+# Fork: 1 of 1
+# Warmup Iteration   1: 9,520 ms/op
+# Warmup Iteration   2: 9,106 ms/op
+# Warmup Iteration   3: 9,052 ms/op
+Iteration   1: 9,012 ms/op
+Iteration   2: 8,971 ms/op
+Iteration   3: 8,953 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt":
+  8,979 ±(99.9%) 0,557 ms/op [Average]
+  (min, avg, max) = (8,953, 8,979, 9,012), stdev = 0,031
+  CI (99.9%): [8,422, 9,536] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt
+# Parameters: (params = FOPE_32)
+
+# Run progress: 5,21% complete, ETA 00:16:19
+# Fork: 1 of 1
+# Warmup Iteration   1: 9,572 ms/op
+# Warmup Iteration   2: 9,055 ms/op
+# Warmup Iteration   3: 9,063 ms/op
+Iteration   1: 8,984 ms/op
+Iteration   2: 8,967 ms/op
+Iteration   3: 9,007 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt":
+  8,986 ±(99.9%) 0,369 ms/op [Average]
+  (min, avg, max) = (8,967, 8,986, 9,007), stdev = 0,020
+  CI (99.9%): [8,617, 9,356] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt
+# Parameters: (params = FOPE_64)
+
+# Run progress: 10,20% complete, ETA 00:15:15
+# Fork: 1 of 1
+# Warmup Iteration   1: 9,564 ms/op
+# Warmup Iteration   2: 9,114 ms/op
+# Warmup Iteration   3: 9,083 ms/op
+Iteration   1: 9,108 ms/op
+Iteration   2: 9,153 ms/op
+Iteration   3: 9,248 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt":
+  9,170 ±(99.9%) 1,303 ms/op [Average]
+  (min, avg, max) = (9,108, 9,170, 9,248), stdev = 0,071
+  CI (99.9%): [7,867, 10,473] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt
+# Parameters: (params = PORE_3)
+
+# Run progress: 15,19% complete, ETA 00:14:19
+# Fork: 1 of 1
+# Warmup Iteration   1: 8,241 ms/op
+# Warmup Iteration   2: 7,926 ms/op
+# Warmup Iteration   3: 7,874 ms/op
+Iteration   1: 7,836 ms/op
+Iteration   2: 7,847 ms/op
+Iteration   3: 7,856 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt":
+  7,846 ±(99.9%) 0,178 ms/op [Average]
+  (min, avg, max) = (7,836, 7,846, 7,856), stdev = 0,010
+  CI (99.9%): [7,668, 8,025] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt
+# Parameters: (params = PORE_512)
+
+# Run progress: 20,18% complete, ETA 00:13:26
+# Fork: 1 of 1
+# Warmup Iteration   1: 8,300 ms/op
+# Warmup Iteration   2: 8,034 ms/op
+# Warmup Iteration   3: 8,017 ms/op
+Iteration   1: 7,922 ms/op
+Iteration   2: 7,906 ms/op
+Iteration   3: 7,905 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt":
+  7,911 ±(99.9%) 0,175 ms/op [Average]
+  (min, avg, max) = (7,905, 7,911, 7,922), stdev = 0,010
+  CI (99.9%): [7,737, 8,086] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt
+# Parameters: (params = PORE_4096)
+
+# Run progress: 25,17% complete, ETA 00:12:35
+# Fork: 1 of 1
+# Warmup Iteration   1: 8,304 ms/op
+# Warmup Iteration   2: 8,002 ms/op
+# Warmup Iteration   3: 7,967 ms/op
+Iteration   1: 7,891 ms/op
+Iteration   2: 7,868 ms/op
+Iteration   3: 7,974 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt":
+  7,911 ±(99.9%) 1,015 ms/op [Average]
+  (min, avg, max) = (7,868, 7,911, 7,974), stdev = 0,056
+  CI (99.9%): [6,896, 8,926] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt
+# Parameters: (params = HPCBC_1)
+
+# Run progress: 30,16% complete, ETA 00:11:44
+# Fork: 1 of 1
+# Warmup Iteration   1: 979,589 ms/op
+# Warmup Iteration   2: 962,411 ms/op
+# Warmup Iteration   3: 948,264 ms/op
+Iteration   1: 949,905 ms/op
+Iteration   2: 944,199 ms/op
+Iteration   3: 942,615 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt":
+  945,573 ±(99.9%) 69,954 ms/op [Average]
+  (min, avg, max) = (942,615, 945,573, 949,905), stdev = 3,834
+  CI (99.9%): [875,619, 1015,527] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt
+# Parameters: (params = HPCBC_2)
+
+# Run progress: 35,14% complete, ETA 00:11:06
+# Fork: 1 of 1
+# Warmup Iteration   1: 499,848 ms/op
+# Warmup Iteration   2: 484,969 ms/op
+# Warmup Iteration   3: 492,871 ms/op
+Iteration   1: 494,341 ms/op
+Iteration   2: 495,600 ms/op
+Iteration   3: 491,480 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt":
+  493,807 ±(99.9%) 38,517 ms/op [Average]
+  (min, avg, max) = (491,480, 493,807, 495,600), stdev = 2,111
+  CI (99.9%): [455,290, 532,324] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt
+# Parameters: (params = HPCBC_6)
+
+# Run progress: 40,13% complete, ETA 00:10:19
+# Fork: 1 of 1
+# Warmup Iteration   1: 222,249 ms/op
+# Warmup Iteration   2: 216,903 ms/op
+# Warmup Iteration   3: 215,869 ms/op
+Iteration   1: 214,470 ms/op
+Iteration   2: 214,317 ms/op
+Iteration   3: 214,158 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt":
+  214,315 ±(99.9%) 2,854 ms/op [Average]
+  (min, avg, max) = (214,158, 214,315, 214,470), stdev = 0,156
+  CI (99.9%): [211,461, 217,169] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt
+# Parameters: (params = HPCBC_8)
+
+# Run progress: 45,12% complete, ETA 00:09:28
+# Fork: 1 of 1
+# Warmup Iteration   1: 163,712 ms/op
+# Warmup Iteration   2: 158,777 ms/op
+# Warmup Iteration   3: 159,326 ms/op
+Iteration   1: 159,914 ms/op
+Iteration   2: 159,196 ms/op
+Iteration   3: 157,766 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsDecryptionTimeBenchmark.decrypt":
+  158,959 ±(99.9%) 19,947 ms/op [Average]
+  (min, avg, max) = (157,766, 158,959, 159,914), stdev = 1,093
+  CI (99.9%): [139,011, 178,906] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt
+# Parameters: (params = FOPE_8)
+
+# Run progress: 50,11% complete, ETA 00:08:35
+# Fork: 1 of 1
+# Warmup Iteration   1: 9,789 ms/op
+# Warmup Iteration   2: 9,134 ms/op
+# Warmup Iteration   3: 9,019 ms/op
+Iteration   1: 9,003 ms/op
+Iteration   2: 8,993 ms/op
+Iteration   3: 8,995 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt":
+  8,997 ±(99.9%) 0,087 ms/op [Average]
+  (min, avg, max) = (8,993, 8,997, 9,003), stdev = 0,005
+  CI (99.9%): [8,910, 9,084] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt
+# Parameters: (params = FOPE_32)
+
+# Run progress: 55,10% complete, ETA 00:07:42
+# Fork: 1 of 1
+# Warmup Iteration   1: 9,589 ms/op
+# Warmup Iteration   2: 9,041 ms/op
+# Warmup Iteration   3: 9,068 ms/op
+Iteration   1: 9,002 ms/op
+Iteration   2: 9,020 ms/op
+Iteration   3: 8,962 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt":
+  8,995 ±(99.9%) 0,546 ms/op [Average]
+  (min, avg, max) = (8,962, 8,995, 9,020), stdev = 0,030
+  CI (99.9%): [8,449, 9,540] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt
+# Parameters: (params = FOPE_64)
+
+# Run progress: 60,09% complete, ETA 00:06:50
+# Fork: 1 of 1
+# Warmup Iteration   1: 9,684 ms/op
+# Warmup Iteration   2: 9,066 ms/op
+# Warmup Iteration   3: 9,006 ms/op
+Iteration   1: 8,944 ms/op
+Iteration   2: 8,923 ms/op
+Iteration   3: 8,943 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt":
+  8,936 ±(99.9%) 0,212 ms/op [Average]
+  (min, avg, max) = (8,923, 8,936, 8,944), stdev = 0,012
+  CI (99.9%): [8,724, 9,149] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt
+# Parameters: (params = PORE_3)
+
+# Run progress: 65,08% complete, ETA 00:05:58
+# Fork: 1 of 1
+# Warmup Iteration   1: 8,452 ms/op
+# Warmup Iteration   2: 8,102 ms/op
+# Warmup Iteration   3: 8,010 ms/op
+Iteration   1: 7,930 ms/op
+Iteration   2: 7,940 ms/op
+Iteration   3: 7,869 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt":
+  7,913 ±(99.9%) 0,696 ms/op [Average]
+  (min, avg, max) = (7,869, 7,913, 7,940), stdev = 0,038
+  CI (99.9%): [7,217, 8,609] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt
+# Parameters: (params = PORE_512)
+
+# Run progress: 70,07% complete, ETA 00:05:06
+# Fork: 1 of 1
+# Warmup Iteration   1: 8,565 ms/op
+# Warmup Iteration   2: 8,071 ms/op
+# Warmup Iteration   3: 8,099 ms/op
+Iteration   1: 8,073 ms/op
+Iteration   2: 7,949 ms/op
+Iteration   3: 7,959 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt":
+  7,994 ±(99.9%) 1,252 ms/op [Average]
+  (min, avg, max) = (7,949, 7,994, 8,073), stdev = 0,069
+  CI (99.9%): [6,742, 9,245] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt
+# Parameters: (params = PORE_4096)
+
+# Run progress: 75,06% complete, ETA 00:04:15
+# Fork: 1 of 1
+# Warmup Iteration   1: 8,482 ms/op
+# Warmup Iteration   2: 8,006 ms/op
+# Warmup Iteration   3: 7,926 ms/op
+Iteration   1: 7,912 ms/op
+Iteration   2: 7,879 ms/op
+Iteration   3: 7,890 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt":
+  7,894 ±(99.9%) 0,306 ms/op [Average]
+  (min, avg, max) = (7,879, 7,894, 7,912), stdev = 0,017
+  CI (99.9%): [7,588, 8,200] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt
+# Parameters: (params = HPCBC_1)
+
+# Run progress: 80,04% complete, ETA 00:03:23
+# Fork: 1 of 1
+# Warmup Iteration   1: 1017,410 ms/op
+# Warmup Iteration   2: 930,875 ms/op
+# Warmup Iteration   3: 931,813 ms/op
+Iteration   1: 926,971 ms/op
+Iteration   2: 929,706 ms/op
+Iteration   3: 929,523 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt":
+  928,733 ±(99.9%) 27,891 ms/op [Average]
+  (min, avg, max) = (926,971, 928,733, 929,706), stdev = 1,529
+  CI (99.9%): [900,842, 956,624] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt
+# Parameters: (params = HPCBC_2)
+
+# Run progress: 85,03% complete, ETA 00:02:33
+# Fork: 1 of 1
+# Warmup Iteration   1: 532,594 ms/op
+# Warmup Iteration   2: 489,499 ms/op
+# Warmup Iteration   3: 488,034 ms/op
+Iteration   1: 484,378 ms/op
+Iteration   2: 485,705 ms/op
+Iteration   3: 484,965 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt":
+  485,016 ±(99.9%) 12,137 ms/op [Average]
+  (min, avg, max) = (484,378, 485,016, 485,705), stdev = 0,665
+  CI (99.9%): [472,878, 497,153] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt
+# Parameters: (params = HPCBC_6)
+
+# Run progress: 90,02% complete, ETA 00:01:42
+# Fork: 1 of 1
+# Warmup Iteration   1: 244,463 ms/op
+# Warmup Iteration   2: 227,335 ms/op
+# Warmup Iteration   3: 232,937 ms/op
+Iteration   1: 224,399 ms/op
+Iteration   2: 223,614 ms/op
+Iteration   3: 224,033 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt":
+  224,015 ±(99.9%) 7,169 ms/op [Average]
+  (min, avg, max) = (223,614, 224,015, 224,399), stdev = 0,393
+  CI (99.9%): [216,846, 231,185] (assumes normal distribution)
+
+
+# JMH version: 1.32
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -javaagent:/snap/intellij-idea-community/310/lib/idea_rt.jar=44765:/snap/intellij-idea-community/310/bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 3 iterations, 5 s each
+# Measurement: 3 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt
+# Parameters: (params = HPCBC_8)
+
+# Run progress: 95,01% complete, ETA 00:00:51
+# Fork: 1 of 1
+# Warmup Iteration   1: 177,548 ms/op
+# Warmup Iteration   2: 163,977 ms/op
+# Warmup Iteration   3: 163,008 ms/op
+Iteration   1: 161,998 ms/op
+Iteration   2: 162,045 ms/op
+Iteration   3: 161,677 ms/op
+
+
+Result "org.galois.core.benchmark.MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt":
+  161,907 ±(99.9%) 3,650 ms/op [Average]
+  (min, avg, max) = (161,677, 161,907, 162,045), stdev = 0,200
+  CI (99.9%): [158,256, 165,557] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:17:02
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                                              (params)  Mode  Cnt    Score    Error  Units
+BaselineBenchmark.baseline                                  N/A  avgt        ≈ 10⁻⁶           ms/op
+MultipleParamsDecryptionTimeBenchmark.decrypt            FOPE_8  avgt    3    8,979 ±  0,557  ms/op
+MultipleParamsDecryptionTimeBenchmark.decrypt           FOPE_32  avgt    3    8,986 ±  0,369  ms/op
+MultipleParamsDecryptionTimeBenchmark.decrypt           FOPE_64  avgt    3    9,170 ±  1,303  ms/op
+MultipleParamsDecryptionTimeBenchmark.decrypt            PORE_3  avgt    3    7,846 ±  0,178  ms/op
+MultipleParamsDecryptionTimeBenchmark.decrypt          PORE_512  avgt    3    7,911 ±  0,175  ms/op
+MultipleParamsDecryptionTimeBenchmark.decrypt         PORE_4096  avgt    3    7,911 ±  1,015  ms/op
+MultipleParamsDecryptionTimeBenchmark.decrypt           HPCBC_1  avgt    3  945,573 ± 69,954  ms/op
+MultipleParamsDecryptionTimeBenchmark.decrypt           HPCBC_2  avgt    3  493,807 ± 38,517  ms/op
+MultipleParamsDecryptionTimeBenchmark.decrypt           HPCBC_6  avgt    3  214,315 ±  2,854  ms/op
+MultipleParamsDecryptionTimeBenchmark.decrypt           HPCBC_8  avgt    3  158,959 ± 19,947  ms/op
+MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt     FOPE_8  avgt    3    8,997 ±  0,087  ms/op
+MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt    FOPE_32  avgt    3    8,995 ±  0,546  ms/op
+MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt    FOPE_64  avgt    3    8,936 ±  0,212  ms/op
+MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt     PORE_3  avgt    3    7,913 ±  0,696  ms/op
+MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt   PORE_512  avgt    3    7,994 ±  1,252  ms/op
+MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt  PORE_4096  avgt    3    7,894 ±  0,306  ms/op
+MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt    HPCBC_1  avgt    3  928,733 ± 27,891  ms/op
+MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt    HPCBC_2  avgt    3  485,016 ± 12,137  ms/op
+MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt    HPCBC_6  avgt    3  224,015 ±  7,169  ms/op
+MultipleParamsEncryptionTimeAndSizeBenchmark.encrypt    HPCBC_8  avgt    3  161,907 ±  3,650  ms/op
+
+Benchmark result is saved to benchmarks/multiple/benchmark_result.csv

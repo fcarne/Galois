@@ -62,7 +62,7 @@ private fun createEngineConfig(params: BenchmarkConfig): EngineConfiguration {
 
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Warmup(iterations = 3, time = 5, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 5, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @State(Scope.Benchmark)
 class EncryptionTimeAndSizeBenchmark {
 
