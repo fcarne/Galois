@@ -147,7 +147,7 @@ function createKeySizeSelector(column) {
   return div
 }
 
-function createParamInput(column, family, param, mode) {
+function createParamInput(column, param, mode) {
   var id = column + "-param-" + param.field
 
   var div = $('<div></div>').addClass('form-floating').attr({
@@ -215,8 +215,26 @@ function createParamInput(column, family, param, mode) {
 function createTaxonomyInput(column) {
 
   var id = column + "-taxonomy"
+  var accordionId = id + '-accordion'
+  var div = $('<div></div>').addClass('accordion').attr("id", accordionId + '-container')
 
-  var div = $('<div></div>').addClass('mb-3')
+    var accordionItem = $('<div></div>').addClass('accordion-item').attr("id", accordionId)
+    var title = $('<h2></h2>').addClass('accordion-header').attr('id', accordionId + "-header")
+    var controls = $('<button></button>').addClass('accordion-button collapsed').attr({
+      type: "button",
+      'data-bs-toggle': "collapse",
+      'data-bs-target': '#' + accordionId + '-item',
+      'aria-expanded': "false",
+      'aria-controls': accordionId + '-item'
+    }).text('Upload a taxonomy tree (in JSON)')
+    title.append(controls)
+
+    var item = $('<div></div>').addClass('accordion-collapse collapse').attr({
+      id: accordionId + '-item',
+      'aria-labelledby': accordionId + '-header',
+      'data-bs-parent': '#' + accordionId + '-container'
+    })
+    var itemBody = $('<div></div>').addClass('accordion-body')
 
   var inputGroup = $('<div></div>').addClass('input-group')
   var input = $('<input>').addClass('form-control').attr({
@@ -232,15 +250,20 @@ function createTaxonomyInput(column) {
   inputGroup.append(input)
   inputGroup.append(resetButton)
 
-  var label = $('<label></label>').addClass('form-label mt-2').attr("for", id + '-file').text('Upload a taxonomy tree (in JSON)')
+  //var label = $('<label></label>').addClass('form-label mt-2').attr("for", id + '-file').text('Upload a taxonomy tree (in JSON)')
 
-  var p = $('<p></p>').addClass('mt-3 mb-2').text('...and edit it if you need to')
-  var blackboard = $('<pre></pre>').addClass('overflow-auto mb-3 rounded-2').attr('id', id).css('height', '300px')
+  var p = $('<p></p>').addClass('mt-2 mb-2').text('...and edit it if you need to')
+  var blackboard = $('<pre></pre>').addClass('overflow-auto mb-1 rounded-2').attr('id', id).css('height', '300px')
 
-  div.append(label)
-  div.append(inputGroup)
-  div.append(p)
-  div.append(blackboard)
+  //div.append(label)
+  itemBody.append(inputGroup)
+  itemBody.append(p)
+  itemBody.append(blackboard)
+
+  item.append(itemBody)
+  accordionItem.append(title)
+  accordionItem.append(item)
+  div.append(accordionItem)
 
   resetButton.on('click', function() {
     input.val('')
@@ -321,11 +344,13 @@ function createDetailsAccordion(column, mode) {
     if (algorithm.parameters != null && algorithm.parameters.length != 0 && !(algorithm.family == 'OPE' && mode == 'decrypt')) {
       parametersRow.append($('<div class="col-12"><p style="margin: 0 0 -0.5rem ">Algorithm specific parameters: </p></div>'))
 
+      var div = $('<div></div>').addClass('row row-cols-1 row-cols-md-2 gy-3 mb-3')
       $.each(algorithm.parameters, function(i, param) {
-        var div = $('<div></div>').addClass('row').append($('<div></div>').addClass('col-sm-12 vol-md-6'))
-        div.children('div').append(createParamInput(column, algorithm.family, param, mode))
-        parametersRow.append(div)
+        var paramContainer = $('<div></div>').addClass('col')
+        paramContainer.append(createParamInput(column, param, mode))
+        div.append(paramContainer)
       })
+      parametersRow.append(div)
       initTooltips()
     }
   })

@@ -88,7 +88,7 @@ class GaloisTerminal {
         }
 
         println(computedDataset.print())
-
+        File(config.outputDir).mkdir()
         println("${if (config.mode == EngineMode.ENCRYPT) "Encrypted" else "Decrypted"} ${dataset.rowCount()} lines in $time ms")
         println("Saving files to directory ${config.outputDir}...")
 

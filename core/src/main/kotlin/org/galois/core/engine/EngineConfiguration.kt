@@ -28,6 +28,7 @@ data class EncryptionDetail(
     ) val params: EncryptionParams = EncryptionParams()
 ) {
     companion object {
+        // avoid blank brackets in serialization
         class ParamsFilter {
             override fun equals(other: Any?) = if (other == null) true else EncryptionParams() == other
             override fun hashCode() = javaClass.hashCode()
@@ -43,11 +44,7 @@ data class EncryptionParams(
     val taxonomyTree: TaxonomyTree? = null,
     @get:[JsonIgnore JsonAnyGetter] @JsonAnySetter var cipherSpecific: MutableMap<String, Any> = HashMap()
 ) {
-    fun copy(): EncryptionParams = EncryptionParams(
-        keySize,
-        taxonomyTree?.let { TaxonomyTree(it.root.copy()) },
-        HashMap(cipherSpecific)
-    )
+    fun copy(): EncryptionParams = EncryptionParams(keySize, taxonomyTree, HashMap(cipherSpecific))
 }
 
 open class TaxonomyTree(@JsonProperty("tree") var root: TaxonomyNode)
