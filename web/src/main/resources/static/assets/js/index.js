@@ -150,7 +150,7 @@ function createKeySizeSelector(column) {
 function createParamInput(column, param, mode) {
   var id = column + "-param-" + param.field
 
-  var div = $('<div></div>').addClass('form-floating').attr({
+  var div = $('<div></div>').addClass('form-floating w-100').attr({
     'data-bs-toggle': "tooltip",
     'data-bs-placement': "top",
     title: param.description
@@ -346,7 +346,7 @@ function createDetailsAccordion(column, mode) {
 
       var div = $('<div></div>').addClass('row row-cols-1 row-cols-md-2 gy-3 mb-3')
       $.each(algorithm.parameters, function(i, param) {
-        var paramContainer = $('<div></div>').addClass('col')
+        var paramContainer = $('<div></div>').addClass('col d-flex align-items-center')
         paramContainer.append(createParamInput(column, param, mode))
         div.append(paramContainer)
       })
@@ -606,19 +606,19 @@ function getConfig(mode, columns) {
       }
 
       var keySize = $('#' + column + '-key-size')
-      if (keySize != undefined && keySize != null) params.key_size = keySize.val()
+      if (keySize.length) params.key_size = keySize.val()
 
       var parameters = algorithmsDetails.find(x => algorithm == x.name).parameters
       $.each(parameters, function(i, param) {
         var input = $('#' + column + "-param-" + param.field)
-        if (input != null && input.val() != '') {
+        if (input.length && input.val() != '') {
           if (input.is(':checkbox')) params[param.field] = input.is(':checked')
           else if (input.attr('type') == 'number') params[param.field] = parseInt(input.val())
           else params[param.field] = input.val()
         }
       })
 
-      detail.params = params
+      if (!$.isEmptyObject(params)) { detail.params = params }
       config.encryption_details[i] = detail
     })
     return config

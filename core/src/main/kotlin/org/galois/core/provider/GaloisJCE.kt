@@ -17,6 +17,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.hasAnnotation
 import kotlin.reflect.full.memberProperties
+import kotlin.reflect.full.primaryConstructor
 
 object GaloisJCE : Provider(
     "GaloisJCE",
@@ -117,11 +118,10 @@ object GaloisJCE : Provider(
             else -> throw IllegalArgumentException("$algorithm not yet supported")
         }
 
-        description.parameters =
-            parameterClass?.memberProperties?.filter { f -> f.hasAnnotation<ParameterDescription>() }?.map { f ->
-                val annotation = f.findAnnotation<ParameterDescription>()!!
+        description.parameters = parameterClass?.memberProperties?.filter { param -> param.hasAnnotation<ParameterDescription>() }?.map { param ->
+                val annotation = param.findAnnotation<ParameterDescription>()!!
                 AlgorithmDescription.Parameter(
-                    f.name,
+                    param.name,
                     annotation.description,
                     annotation.conditionType,
                     annotation.condition,

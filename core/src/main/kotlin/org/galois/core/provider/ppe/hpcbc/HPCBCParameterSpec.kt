@@ -3,7 +3,14 @@ package org.galois.core.provider.ppe.hpcbc
 import org.galois.core.provider.description.ParameterDescription
 import java.security.spec.AlgorithmParameterSpec
 
-class HPCBCParameterSpec(blockSize: Int = 1, var integrityCheck: Boolean = false) : AlgorithmParameterSpec {
+class HPCBCParameterSpec(
+    blockSize: Int = 1,
+    @property:ParameterDescription(
+        "Specifies whether to add an integrity block at the end of the message",
+        ParameterDescription.ConditionType.BOOLEAN,
+        ""
+    ) var integrityCheck: Boolean = false
+) : AlgorithmParameterSpec {
 
     @ParameterDescription(
         "The size of the blocks in which input strings will be divided",
